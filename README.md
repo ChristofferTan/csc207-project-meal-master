@@ -2,6 +2,7 @@
 
 ## Problem domain
 **Food and Nutrition**
+
 A well-balanced meal is essential for a healthy life. However, choosing and preparing meals can often be a tedious task, and it can be challenging to make the right dietary decisions. People have varying dietary restrictions, allergies, and caloric needs, which further complicate the meal planning process. Our Meal Planner Application is designed to address these issues by automating the meal planning process and providing personalized meal plans based on individual preferences.
 
 ## Features
