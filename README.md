@@ -21,3 +21,18 @@ https://developer.edamam.com/edamam-docs-recipe-api
 
 ## Calling API Documentation
 ![calling_api.png](calling_api.png)
+We request the API by using this following code:
+```
+String requestUrl = API_URL + "?type=" + type + "&q=" + q + "&app_id=" + APP_ID + "&app_key=" + APP_KEY;
+        Request request = new Request.Builder()
+                .url(requestUrl)
+                .method("GET", null)
+                .addHeader("Content-Type", "application/json")
+                .build();
+```
+Then, we get the response given from API by using this following code:
+```
+Response response = client.newCall(request).execute();
+            JSONObject responseBody = new JSONObject(response.body().string());
+```
+The full documentation of this process can be seen in the [callingAPI.java](src%2Fmain%2Fjava%2Fapi%2FcallingAPI.java) file
