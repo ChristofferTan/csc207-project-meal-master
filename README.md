@@ -18,3 +18,6 @@ a meal plan and the groceries list for a week accordingly.
 
 ## API Documentation
 https://developer.edamam.com/edamam-docs-recipe-api
+
+## Calling API Documentation
+![calling_api.png](calling_api.png)
