@@ -12,6 +12,7 @@ public class callingAPI {
     private static final String API_URL = "https://api.edamam.com/api/recipes/v2";
     private static final String APP_ID = "97884852";
     private static final String APP_KEY = "29ec3f53238d1c6ec3c16c6412bc91ea";
+
     public static void main(String[] args) throws JSONException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         String type = "public";
