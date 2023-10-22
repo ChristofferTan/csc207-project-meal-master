@@ -12,10 +12,10 @@ import use_case.GenerateRecipeOutputData;
 public class GenerateRecipeFactory {
     private GenerateRecipeFactory() {}
 
-    public static GenerateRecipeController createGenerateUseCase(GenerateRecipeDataAccessInterface generateDataAccessObject) {
+    public static GenerateRecipeController createGenerateUseCase() {
         GenerateRecipeOutputBoundary generateRecipeOutputBoundary = new GenerateRecipePresenter();
 
-        GenerateRecipeInputBoundary generateInteractor = new GenerateRecipeInteractor(generateDataAccessObject, generateRecipeOutputBoundary);
+        GenerateRecipeInputBoundary generateInteractor = new GenerateRecipeInteractor(null, generateRecipeOutputBoundary);
         return new GenerateRecipeController(generateInteractor);
     }
 }

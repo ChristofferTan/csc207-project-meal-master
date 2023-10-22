@@ -29,5 +29,8 @@ public class Main {
         System.out.print("Your maximum calories needed? ");
         String maxCalories = in.nextLine();
 
+        GenerateRecipeController generateRecipeController = GenerateRecipeFactory.createGenerateUseCase();
+        generateRecipeController.execute(q, diet, health, cuisineType, mealType, minCalories, maxCalories);
+
     }
 }
