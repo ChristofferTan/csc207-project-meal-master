@@ -19,6 +19,7 @@ public class callingAPI {
         String q = "chicken";
         MediaType mediaType = MediaType.parse("application/json");
         String requestUrl = API_URL + "?type=" + type + "&q=" + q + "&app_id=" + APP_ID + "&app_key=" + APP_KEY;
+        System.out.println(requestUrl);
         Request request = new Request.Builder()
                 .url(requestUrl)
                 .method("GET", null)
