@@ -1,4 +1,4 @@
-package interface_adapter;
+package interface_adapters;
 
 import use_case.GenerateRecipeOutputBoundary;
 import use_case.GenerateRecipeOutputData;
