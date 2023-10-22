@@ -1,6 +1,6 @@
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class User {
     private final String username;
@@ -10,13 +10,13 @@ public class User {
     private double weight;
     private double height;
     private String activityLevel;
-    private List<String> dietLabels;
-    private List<String> healthLabels;
-    private List<Recipe> myRecipes;
+    private ArrayList<String> dietLabels;
+    private ArrayList<String> healthLabels;
+    private ArrayList<Recipe> myRecipes;
     private Planner planner;
 
     User(String username, String name, int age, String gender, double weight, double height, String activityLevel,
-         List<String> dietLabels, List<String> healthLabels, List<Recipe> myRecipes, Planner planner) {
+         ArrayList<String> dietLabels, ArrayList<String> healthLabels, ArrayList<Recipe> myRecipes, Planner planner) {
         this.username = username;
         this.name = name;
         this.age = age;
@@ -82,27 +82,27 @@ public class User {
         this.activityLevel = activityLevel;
     }
 
-    public List<String> getDietLabels() {
+    public ArrayList<String> getDietLabels() {
         return dietLabels;
     }
 
-    public void setDietLabels(List<String> dietLabels) {
+    public void setDietLabels(ArrayList<String> dietLabels) {
         this.dietLabels = dietLabels;
     }
 
-    public List<String> getHealthLabels() {
+    public ArrayList<String> getHealthLabels() {
         return healthLabels;
     }
 
-    public void setHealthLabels(List<String> healthLabels) {
+    public void setHealthLabels(ArrayList<String> healthLabels) {
         this.healthLabels = healthLabels;
     }
 
-    public List<Recipe> getMyRecipes() {
+    public ArrayList<Recipe> getMyRecipes() {
         return myRecipes;
     }
 
-    public void setMyRecipes(List<Recipe> myRecipes) {
+    public void setMyRecipes(ArrayList<Recipe> myRecipes) {
         this.myRecipes = myRecipes;
     }
 

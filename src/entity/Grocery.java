@@ -1,15 +1,19 @@
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Grocery {
-    public final List<Ingredient> ingredients;
+    private ArrayList<Ingredient> ingredients;
 
-    Grocery(List<Ingredient> ingredients) {
+    Grocery(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public List<Ingredient> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

@@ -1,16 +1,16 @@
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Recipe {
-    public final String name;
-    public final String url;
-    public final String imagePath;
-    public final double calories;
-    public final int totalTime;
-    public final List<Ingredient> ingredients;
+    private final String name;
+    private final String url;
+    private final String imagePath;
+    private final double calories;
+    private final int totalTime;
+    private final ArrayList<Ingredient> ingredients;
 
-    public Recipe(String name, String url, String imagePath, double calories, int totalTime, List<Ingredient> ingredients) {
+    public Recipe(String name, String url, String imagePath, double calories, int totalTime, ArrayList<Ingredient> ingredients) {
         this.name = name;
         this.url = url;
         this.imagePath = imagePath;
@@ -39,7 +39,7 @@ public class Recipe {
         return totalTime;
     }
 
-    public List<Ingredient> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 }

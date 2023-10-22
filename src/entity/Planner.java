@@ -1,16 +1,20 @@
 package entity;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Planner {
-    private final HashMap<String, List<Recipe>> planner;
+    private HashMap<String, ArrayList<Recipe>> planner;
 
-    public Planner(HashMap<String, List<Recipe>> planner) {
+    public Planner(HashMap<String, ArrayList<Recipe>> planner) {
         this.planner = planner;
     }
 
-    public HashMap<String, List<Recipe>> getPlanner() {
+    public HashMap<String, ArrayList<Recipe>> getPlanner() {
         return planner;
+    }
+
+    public void setPlanner(HashMap<String, ArrayList<Recipe>> planner) {
+        this.planner = planner;
     }
 }
