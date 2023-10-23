@@ -12,7 +12,7 @@ public class GenerateRecipeController {
     }
     public void execute(String q, String[] diet, String[] health, String[] cuisineType, String[] mealType, String minCalories, String maxCalories) {
         GenerateRecipeInputData generateRecipeInputData = new GenerateRecipeInputData(
-                q, diet, health, cuisineType, mealType, "calories=" + minCalories + "-" + maxCalories);
+                q, diet, health, cuisineType, mealType, minCalories + "-" + maxCalories);
 
         generateRecipeInteractor.execute(generateRecipeInputData);
     }
