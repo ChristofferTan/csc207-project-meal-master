@@ -37,3 +37,7 @@ Response response = client.newCall(request).execute();
             JSONObject responseBody = new JSONObject(response.body().string());
 ```
 The full documentation of this process can be seen in the [callingAPI.java](src%2Fmain%2Fjava%2Fapi%2FcallingAPI.java) file
+
+## UML Diagram
+The UML diagram of our project can be seen below:
+![umlDiagram.png](umlDiagram.png)
