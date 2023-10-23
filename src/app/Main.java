@@ -29,12 +29,12 @@ public class Main {
         System.out.print("Your maximum calories needed? ");
         String maxCalories = in.nextLine();
 
-        System.out.println("Max preparation time?");
-        String maxPrepTime = in.nextLine();
+        System.out.print("Max preparation time?");
+        String maxPreparationTime = in.nextLine();
 
 
         GenerateRecipeController generateRecipeController = GenerateRecipeFactory.createGenerateUseCase();
-        generateRecipeController.execute(q, diet, health, cuisineType, mealType, minCalories, maxCalories, maxPrepTime);
+        generateRecipeController.execute(q, diet, health, cuisineType, mealType, minCalories, maxCalories, maxPreparationTime);
 
     }
 }
