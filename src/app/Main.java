@@ -29,7 +29,7 @@ public class Main {
         System.out.print("Your maximum calories (per serving) needed? ");
         String maxCalories = in.nextLine();
 
-        System.out.print("Max preparation time?");
+        System.out.print("Max preparation time (in minutes)? ");
         String maxPreparationTime = in.nextLine();
 
 
