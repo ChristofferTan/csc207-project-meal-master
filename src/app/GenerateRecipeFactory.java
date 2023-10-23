@@ -1,13 +1,10 @@
 package app;
 
-import interface_adapter.GenerateRecipeController;
-import interface_adapter.GenerateRecipePresenter;
-import use_case.GenerateRecipeInputData;
+import interface_adapters.GenerateRecipeController;
+import interface_adapters.GenerateRecipePresenter;
 import use_case.GenerateRecipeInputBoundary;
 import use_case.GenerateRecipeInteractor;
-import use_case.GenerateRecipeDataAccessInterface;
 import use_case.GenerateRecipeOutputBoundary;
-import use_case.GenerateRecipeOutputData;
 
 public class GenerateRecipeFactory {
     private GenerateRecipeFactory() {}

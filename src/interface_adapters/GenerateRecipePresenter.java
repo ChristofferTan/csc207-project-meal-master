@@ -1,4 +1,4 @@
-package interface_adapter;
+package interface_adapters;
 
 import use_case.GenerateRecipeOutputBoundary;
 import use_case.GenerateRecipeOutputData;
@@ -19,7 +19,7 @@ public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
         System.out.println("Calories: " + calories);
         System.out.println("Ingredients:");
         for (String ingredient : ingredients) {
-            System.out.println(ingredient);
+            System.out.println('\t' + ingredient);
         }
         System.out.println("Recipe URL: " + recipeUrl);
         System.out.println("Preparation Time: " + preparationTime);
