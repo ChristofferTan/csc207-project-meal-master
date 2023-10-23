@@ -7,7 +7,7 @@ public class GenerateRecipeInputData {
     final private String[] cuisineType;
     final private String[] mealType;
     final private String calories;  // format: {MIN}-{MAX}
-    final private String prepTIme;  // format: 0-{MAX}
+    final private String preparationTime;  // format: 0-{MAX}
 
     public GenerateRecipeInputData(String q,
                                    String[] diet,
@@ -15,14 +15,14 @@ public class GenerateRecipeInputData {
                                    String[] cuisineType,
                                    String[] mealType,
                                    String calories,
-                                   String prepTime) {
+                                   String preparationTime) {
         this.q = q;
         this.diet = diet;
         this.health = health;
         this.cuisineType = cuisineType;
         this.mealType = mealType;
         this.calories = calories;
-        this.prepTIme = prepTime;
+        this.preparationTime = preparationTime;
     }
 
     public String getQ() {
@@ -49,7 +49,7 @@ public class GenerateRecipeInputData {
         return calories;
     }
 
-    public String getPrepTIme() {
-        return prepTIme;
+    public String getPreparationTime() {
+        return preparationTime;
     }
 }
