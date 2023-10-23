@@ -23,10 +23,10 @@ public class Main {
         System.out.print("One of your meal type preference? ");
         String[] mealType = {in.nextLine()};
 
-        System.out.print("Your minimum calories needed? ");
+        System.out.print("Your minimum calories (per serving) needed? ");
         String minCalories = in.nextLine();
 
-        System.out.print("Your maximum calories needed? ");
+        System.out.print("Your maximum calories (per serving) needed? ");
         String maxCalories = in.nextLine();
 
         System.out.print("Max preparation time?");
