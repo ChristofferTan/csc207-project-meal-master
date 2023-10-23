@@ -13,13 +13,15 @@ public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
         int calories = recipe.getCalories();
         String[] ingredients = recipe.getIngredients();
         String recipeUrl = recipe.getRecipeUrl();
+        int preparationTime = recipe.getPreparationTime();
 
         System.out.println("Label: " + label);
         System.out.println("Calories: " + calories);
         System.out.println("Ingredients:");
         for (String ingredient : ingredients) {
-            System.out.println(ingredient);
+            System.out.println('\t' + ingredient);
         }
         System.out.println("Recipe URL: " + recipeUrl);
+        System.out.println("Preparation Time: " + preparationTime);
     }
 }

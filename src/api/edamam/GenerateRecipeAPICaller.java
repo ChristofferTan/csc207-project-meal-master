@@ -35,6 +35,7 @@ public class GenerateRecipeAPICaller {
             requestUrl.append("&mealType=").append(item);
         }
         requestUrl.append("&calories=").append(inputData.getCalories());
+        requestUrl.append("&time=").append(inputData.getPreparationTime());
 
         Request request = new Request.Builder()
                 .url(requestUrl.toString())
@@ -59,7 +60,8 @@ public class GenerateRecipeAPICaller {
                         recipe.getString("label"),
                         recipe.getInt("calories"),
                         ingredientLines,
-                        recipe.getString("url"));
+                        recipe.getString("url"),
+                        recipe.getInt("totalTime"));
             } else {
                 throw new RuntimeException(responseBody.getString("message"));
             }
