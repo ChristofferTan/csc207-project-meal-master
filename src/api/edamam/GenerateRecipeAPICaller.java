@@ -61,7 +61,8 @@ public class GenerateRecipeAPICaller {
                         recipe.getInt("calories"),
                         ingredientLines,
                         recipe.getString("url"),
-                        recipe.getInt("totalTime"));
+                        recipe.getInt("totalTime"),
+                        recipe.getInt("yield"));
             } else {
                 throw new RuntimeException(responseBody.getString("message"));
             }
