@@ -1,6 +1,7 @@
 package interface_adapters.generate_recipe;
 
 import entity.Ingredient;
+import entity.Recipe;
 import use_case.generate_recipe.GenerateRecipeOutputBoundary;
 import use_case.generate_recipe.GenerateRecipeOutputData;
 
@@ -11,7 +12,8 @@ public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(GenerateRecipeOutputData recipe) {
+    public void prepareSuccessView(GenerateRecipeOutputData generateRecipeOutputData) {
+        Recipe recipe = generateRecipeOutputData.getRecipe();
         String label = recipe.getLabel();
         String recipeUrl = recipe.getRecipeUrl();
         String imagePath = recipe.getImagePath();
