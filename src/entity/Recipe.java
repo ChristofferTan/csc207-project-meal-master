@@ -3,43 +3,49 @@ package entity;
 import java.util.ArrayList;
 
 public class Recipe {
-    private final String name;
-    private final String url;
+    private final String label;
+    private final String recipeUrl;
     private final String imagePath;
-    private final double calories;
-    private final int totalTime;
+    private final int calories;
     private final ArrayList<Ingredient> ingredients;
+    private final int preparationTime;
+    private final int yield;
 
-    public Recipe(String name, String url, String imagePath, double calories, int totalTime, ArrayList<Ingredient> ingredients) {
-        this.name = name;
-        this.url = url;
+    public Recipe(String label, String recipeUrl, String imagePath, int calories, ArrayList<Ingredient> ingredients, int preparationTime, int yield) {
+        this.label = label;
+        this.recipeUrl = recipeUrl;
         this.imagePath = imagePath;
         this.calories = calories;
-        this.totalTime = totalTime;
         this.ingredients = ingredients;
+        this.preparationTime = preparationTime;
+        this.yield = yield;
     }
 
-    public String getName() {
-        return name;
+    public String getLabel() {
+        return label;
     }
 
-    public String getUrl() {
-        return url;
+    public String getRecipeUrl() {
+        return recipeUrl;
     }
 
     public String getImagePath() {
         return imagePath;
     }
 
-    public double getCalories() {
+    public int getCalories() {
         return calories;
-    }
-
-    public int getTotalTime() {
-        return totalTime;
     }
 
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public int getPreparationTime() {
+        return preparationTime;
+    }
+
+    public int getYield() {
+        return yield;
     }
 }
