@@ -40,7 +40,7 @@ public class GenerateRecipeAPICaller {
         }
         requestUrl.append("&calories=").append(inputData.getCalories());
         requestUrl.append("&time=").append(inputData.getPreparationTime());
-
+        System.out.println(requestUrl);
         Request request = new Request.Builder()
                 .url(requestUrl.toString())
                 .method("GET", null)
@@ -59,7 +59,8 @@ public class GenerateRecipeAPICaller {
                 ArrayList<Ingredient> ingredients = new ArrayList<>();
                 for (int i=0; i<ingredientsInJSON.length(); i++) {
                     JSONObject currentIngredient = ingredientsInJSON.getJSONObject(i);
-                    ingredients.add(IngredientFactory.create(currentIngredient.getString("text"),
+                    ingredients.add(IngredientFactory.create(
+                            currentIngredient.getString("text"),
                             currentIngredient.getString("food"),
                             currentIngredient.getDouble("quantity"),
                             currentIngredient.getString("measure"),
