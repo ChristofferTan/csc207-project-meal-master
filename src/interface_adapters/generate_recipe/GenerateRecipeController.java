@@ -1,7 +1,7 @@
-package interface_adapters;
+package interface_adapters.generate_recipe;
 
-import use_case.GenerateRecipeInputBoundary;
-import use_case.GenerateRecipeInputData;
+import use_case.generate_recipe.GenerateRecipeInputBoundary;
+import use_case.generate_recipe.GenerateRecipeInputData;
 
 public class GenerateRecipeController {
     final GenerateRecipeInputBoundary generateRecipeInteractor;

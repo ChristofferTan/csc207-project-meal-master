@@ -1,7 +1,7 @@
-package interface_adapters;
+package interface_adapters.generate_recipe;
 
-import use_case.GenerateRecipeOutputBoundary;
-import use_case.GenerateRecipeOutputData;
+import use_case.generate_recipe.GenerateRecipeOutputBoundary;
+import use_case.generate_recipe.GenerateRecipeOutputData;
 
 public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
     public GenerateRecipePresenter() {

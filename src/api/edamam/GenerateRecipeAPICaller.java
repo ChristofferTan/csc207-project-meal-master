@@ -4,7 +4,7 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import use_case.GenerateRecipeInputData;
+import use_case.generate_recipe.GenerateRecipeInputData;
 
 import java.io.IOException;
 

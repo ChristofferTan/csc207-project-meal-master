@@ -1,4 +1,4 @@
-package use_case;
+package use_case.generate_recipe;
 
 public class GenerateRecipeInputData {
     final private String q;

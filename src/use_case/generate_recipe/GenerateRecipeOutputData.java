@@ -1,4 +1,4 @@
-package use_case;
+package use_case.generate_recipe;
 
 import api.edamam.GenerateRecipeAPIData;
 

@@ -1,6 +1,6 @@
 package app;
 
-import interface_adapters.GenerateRecipeController;
+import interface_adapters.generate_recipe.GenerateRecipeController;
 
 import java.util.Scanner;
 
