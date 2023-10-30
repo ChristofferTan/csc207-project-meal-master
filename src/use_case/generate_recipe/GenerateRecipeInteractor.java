@@ -15,7 +15,7 @@ public class GenerateRecipeInteractor implements GenerateRecipeInputBoundary {
     @Override
     public void execute(GenerateRecipeInputData generateRecipeInputData) {
         GenerateRecipeOutputData generateRecipeOutputData = new GenerateRecipeOutputData(
-                GenerateRecipeAPICaller.call(generateRecipeInputData)
+                GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe()
         );
         generateRecipePresenter.prepareSuccessView(generateRecipeOutputData);
     }

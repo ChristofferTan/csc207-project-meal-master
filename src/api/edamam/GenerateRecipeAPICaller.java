@@ -1,5 +1,8 @@
 package api.edamam;
 
+import entity.Ingredient;
+import entity.IngredientFactory;
+import entity.RecipeFactory;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -7,6 +10,7 @@ import org.json.JSONObject;
 import use_case.generate_recipe.GenerateRecipeInputData;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GenerateRecipeAPICaller {
     private GenerateRecipeAPICaller() {}
@@ -51,18 +55,26 @@ public class GenerateRecipeAPICaller {
                         .getJSONArray("hits")
                         .getJSONObject(0)
                         .getJSONObject("recipe");
-                JSONArray ingredientLinesInJSON = recipe.getJSONArray("ingredientLines");
-                String[] ingredientLines = new String[ingredientLinesInJSON.length()];
-                for (int i=0; i<ingredientLinesInJSON.length(); i++) {
-                    ingredientLines[i] = ingredientLinesInJSON.get(i).toString();
+                JSONArray ingredientsInJSON = recipe.getJSONArray("ingredients");
+                ArrayList<Ingredient> ingredients = new ArrayList<>();
+                for (int i=0; i<ingredientsInJSON.length(); i++) {
+                    JSONObject currentIngredient = ingredientsInJSON.getJSONObject(i);
+                    ingredients.add(IngredientFactory.create(currentIngredient.getString("text"),
+                            currentIngredient.getString("food"),
+                            currentIngredient.getDouble("quantity"),
+                            currentIngredient.getString("measure"),
+                            currentIngredient.getDouble("weight")));
                 }
-                return new GenerateRecipeAPIData(
+
+                return new GenerateRecipeAPIData(RecipeFactory.create(
                         recipe.getString("label"),
-                        recipe.getInt("calories"),
-                        ingredientLines,
                         recipe.getString("url"),
+                        recipe.getString("image"),
+                        recipe.getInt("calories"),
+                        ingredients,
                         recipe.getInt("totalTime"),
-                        recipe.getInt("yield"));
+                        recipe.getInt("yield"))
+                );
             } else {
                 throw new RuntimeException(responseBody.getString("message"));
             }
