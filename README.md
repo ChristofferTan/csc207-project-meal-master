@@ -41,3 +41,24 @@ The full documentation of this process can be seen in the [callingAPI.java](src%
 ## UML Diagram
 The UML diagram of our project can be seen below:
 ![umlDiagram.png](umlDiagram.png)
+
+## Use Cases
+1. Generate recipe
+2. Save recipe to planner
+3. view planner
+4. Grocery list
+5. Calories tracker (?) -> where to put
+6. Sign up
+7. Log in
+8. edit profile
+9. add recipe to favorite list
+10. search username
+11. add friend
+12. view friend’s profile
+13. post recipe
+
+## Dividing Tasks
+1. Christoffer: use cases 6, 7, and 11
+2. Faraaz: use cases 4, 5 
+3. Janis: use cases 2, 3, 12
+4. Razan: use cases 8, 9
