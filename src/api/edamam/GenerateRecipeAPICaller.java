@@ -63,7 +63,6 @@ public class GenerateRecipeAPICaller {
                             currentIngredient.getString("text"),
                             currentIngredient.getString("food"),
                             currentIngredient.getDouble("quantity"),
-                            currentIngredient.getString("measure"),
                             currentIngredient.getDouble("weight")));
                 }
 
