@@ -1,9 +1,11 @@
 package use_case.calorie_tracker;
 
+import entity.MealType;
 import entity.Planner;
 import entity.Recipe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CalorieTrackerOutputData {
     private final Planner planner;
@@ -14,8 +16,8 @@ public class CalorieTrackerOutputData {
 
     public float getWeeklyCalories() {
         float calories = 0;
-        for (ArrayList<Recipe> recipes: planner.getPlanner().values()) {
-            for (Recipe recipe: recipes) {
+        for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
+            for (Recipe recipe: recipes.values()) {
                 calories += recipe.getCalories();
             }
         }
@@ -24,8 +26,8 @@ public class CalorieTrackerOutputData {
 
     public float getAverageDailyCalories() {
         float calories = 0;
-        for (ArrayList<Recipe> recipes: planner.getPlanner().values()) {
-            for (Recipe recipe: recipes) {
+        for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
+            for (Recipe recipe: recipes.values()) {
                 calories += recipe.getCalories();
             }
         }
