@@ -8,7 +8,7 @@ public class CommonUserFactory implements UserFactory{
         return new CommonUser(username, password);
     }
     public CommonUser create(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
-                             ArrayList<String> dietLabels, ArrayList<String> healthLabels, ArrayList<Recipe> myRecipes, Planner planner) {
-        return new CommonUser(username, password, name, age, gender, weight, height, activityLevel, dietLabels, healthLabels, myRecipes, planner);
+                             ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
+        return new CommonUser(username, password, name, age, gender, weight, height, activityLevel, dietLabels, healthLabels);
     }
 }
