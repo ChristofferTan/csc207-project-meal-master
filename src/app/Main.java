@@ -1,5 +1,7 @@
 package app;
 
+import entity.Planner;
+import interface_adapters.calorie_tracker.CalorieTrackerController;
 import interface_adapters.generate_recipe.GenerateRecipeController;
 
 import java.util.Scanner;
