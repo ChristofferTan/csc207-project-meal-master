@@ -21,6 +21,20 @@ public class CommonUser implements User{
         this.password = password;
     }
     CommonUser(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
+               ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.weight = weight;
+        this.height = height;
+        this.activityLevel = activityLevel;
+        this.dietLabels = dietLabels;
+        this.healthLabels = healthLabels;
+    }
+
+    CommonUser(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
                ArrayList<String> dietLabels, ArrayList<String> healthLabels, ArrayList<Recipe> myRecipes, Planner planner) {
         this.username = username;
         this.password = password;
