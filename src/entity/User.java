@@ -12,8 +12,8 @@ public class User {
     private String activityLevel;
     private ArrayList<String> dietLabels;
     private ArrayList<String> healthLabels;
-    private ArrayList<Recipe> myRecipes;
-    private Planner planner;
+    private final ArrayList<Recipe> myRecipes;
+    private final Planner planner;
 
     User(String username, String name, int age, String gender, double weight, double height, String activityLevel,
          ArrayList<String> dietLabels, ArrayList<String> healthLabels, ArrayList<Recipe> myRecipes, Planner planner) {
@@ -102,16 +102,8 @@ public class User {
         return myRecipes;
     }
 
-    public void setMyRecipes(ArrayList<Recipe> myRecipes) {
-        this.myRecipes = myRecipes;
-    }
-
     public Planner getPlanner() {
         return planner;
-    }
-
-    public void setPlanner(Planner planner) {
-        this.planner = planner;
     }
 
 }
