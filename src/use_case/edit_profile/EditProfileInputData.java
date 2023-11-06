@@ -1,10 +1,12 @@
 package use_case.edit_profile;
 
+import entity.User;
 import use_case.generate_recipe.GenerateRecipeInputData;
 
 import java.util.ArrayList;
 
 public class EditProfileInputData {
+    private final User user;
     private final String name;
     private final int age;
     private final String gender;
@@ -14,8 +16,9 @@ public class EditProfileInputData {
     private final ArrayList<String> dietLabels;
     private final ArrayList<String> healthLabels;
 
-    public EditProfileInputData(String name, int age, String gender, double weight, double height, String activityLevel,
-                                ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
+    public EditProfileInputData(User user, String name, int age, String gender, double weight, double height,
+                                String activityLevel, ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
+        this.user = user;
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -24,6 +27,10 @@ public class EditProfileInputData {
         this.activityLevel = activityLevel;
         this.dietLabels = dietLabels;
         this.healthLabels = healthLabels;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public String getName() {
