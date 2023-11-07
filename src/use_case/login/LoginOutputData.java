@@ -1,16 +1,15 @@
-package use_case.signup;
+package use_case.login;
 
-public class SignupOutputData {
+public class LoginOutputData {
     private final String username;
     private boolean useCaseFailed;
 
-    public SignupOutputData(String username, boolean useCaseFailed) {
+    public LoginOutputData(String username, boolean useCaseFailed) {
         this.username = username;
         this.useCaseFailed = useCaseFailed;
     }
-
-
     public String getUsername() {
         return username;
     }
+
 }
