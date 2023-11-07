@@ -2,6 +2,7 @@ package entity;
 
 import java.time.DayOfWeek;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Planner {
     private final HashMap<DayOfWeek, HashMap<MealType, Recipe>> weeklyRecipes;
@@ -24,4 +25,5 @@ public class Planner {
     public HashMap<MealType, Recipe> getRecipesByDay(DayOfWeek day) {
         return weeklyRecipes.get(day);
     }
+
 }
