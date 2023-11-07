@@ -1,7 +1,6 @@
 package use_case.edit_profile;
 
 import entity.User;
-import use_case.generate_recipe.GenerateRecipeInputData;
 
 import java.util.ArrayList;
 

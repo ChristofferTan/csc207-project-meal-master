@@ -24,7 +24,7 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
         double height = editProfileInputData.getHeight();
         String activityLevel = editProfileInputData.getActivityLevel();
         ArrayList<String> dietLabels = editProfileInputData.getDietLabels();
-        ArrayList<String> healthLabels = editProfileInputData.getDietLabels();
+        ArrayList<String> healthLabels = editProfileInputData.getHealthLabels();
 
         userDataAccessObject.editProfile(user, name, age, gender, weight, height, activityLevel, dietLabels, healthLabels);
 
