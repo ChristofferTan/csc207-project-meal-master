@@ -21,7 +21,7 @@ a meal plan and the groceries needed for a week accordingly.
 https://developer.edamam.com/edamam-docs-recipe-api
 
 ## Calling API Documentation
-![calling_api.png](calling_api.png)
+![calling_api.png](misc/img/calling_api.png)
 We request the API by using this following code:
 ```
 String requestUrl = API_URL + "?type=" + type + "&q=" + q + "&app_id=" + APP_ID + "&app_key=" + APP_KEY;
@@ -40,7 +40,7 @@ The full documentation of this process can be seen in the [GenerateRecipeAPICall
 
 ## UML Diagram
 The UML diagram of our project can be seen below:
-![umlDiagram.png](umlDiagram.png)
+![umlDiagram.png](misc/img/umlDiagram.png)
 
 ## Use Cases
 1. Generate recipe
