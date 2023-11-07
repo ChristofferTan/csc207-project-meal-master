@@ -1,22 +1,22 @@
 package data_access;
 
 import entity.MealType;
+import entity.Planner;
 import entity.Recipe;
-import entity.RecipeFactory;
-import use_case.generate_recipe.GenerateRecipeDataAccessInterface;
 import use_case.save_recipe.SaveRecipeDataAccessInterface;
 
 import java.time.DayOfWeek;
 
-public class FileRecipeDataAccessObject implements GenerateRecipeDataAccessInterface, SaveRecipeDataAccessInterface {
+public class InMemoryPlannerDataAccessObject implements SaveRecipeDataAccessInterface {
+    private final Planner planner = new Planner();
 
     @Override
     public void save(DayOfWeek day, MealType mealType, Recipe recipe) {
-
+        planner.getRecipesByDay(day).put(mealType, recipe);
     }
 
     @Override
     public Recipe get(DayOfWeek day, MealType mealType) {
-        return null;
+        return planner.getRecipesByDay(day).get(mealType);
     }
 }

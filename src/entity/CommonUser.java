@@ -2,7 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
-public class CommonUser implements User{
+public class CommonUser implements User {
     private final String username;
     private final String password;
     private String name;
@@ -13,15 +13,18 @@ public class CommonUser implements User{
     private String activityLevel;
     private ArrayList<String> dietLabels;
     private ArrayList<String> healthLabels;
-    private ArrayList<Recipe> myRecipes;
-    private Planner planner;
+    private final ArrayList<Recipe> myRecipes;
+    private final Planner planner;
 
     CommonUser(String username, String password) {
         this.username = username;
         this.password = password;
+        this.myRecipes = new ArrayList<Recipe>();
+        this.planner = new Planner();
     }
     CommonUser(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
                ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
+<<<<<<< HEAD
         this.username = username;
         this.password = password;
         this.name = name;
@@ -36,6 +39,8 @@ public class CommonUser implements User{
 
     CommonUser(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
                ArrayList<String> dietLabels, ArrayList<String> healthLabels, ArrayList<Recipe> myRecipes, Planner planner) {
+=======
+>>>>>>> 400a6f05739da68f5805878f83f6b93d9f43f9d9
         this.username = username;
         this.password = password;
         this.name = name;
@@ -46,8 +51,8 @@ public class CommonUser implements User{
         this.activityLevel = activityLevel;
         this.dietLabels = dietLabels;
         this.healthLabels = healthLabels;
-        this.myRecipes = myRecipes;
-        this.planner = planner;
+        this.myRecipes = new ArrayList<Recipe>();
+        this.planner = new Planner();
     }
 
     public String getUsername() {
@@ -124,15 +129,7 @@ public class CommonUser implements User{
         return myRecipes;
     }
 
-    public void setMyRecipes(ArrayList<Recipe> myRecipes) {
-        this.myRecipes = myRecipes;
-    }
-
     public Planner getPlanner() {
         return planner;
-    }
-
-    public void setPlanner(Planner planner) {
-        this.planner = planner;
     }
 }

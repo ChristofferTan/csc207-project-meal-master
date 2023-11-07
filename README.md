@@ -21,7 +21,7 @@ a meal plan and the groceries needed for a week accordingly.
 https://developer.edamam.com/edamam-docs-recipe-api
 
 ## Calling API Documentation
-![calling_api.png](calling_api.png)
+![calling_api.png](misc/img/calling_api.png)
 We request the API by using this following code:
 ```
 String requestUrl = API_URL + "?type=" + type + "&q=" + q + "&app_id=" + APP_ID + "&app_key=" + APP_KEY;
@@ -36,26 +36,26 @@ Then, we get the response given from API by using this following code:
 Response response = client.newCall(request).execute();
             JSONObject responseBody = new JSONObject(response.body().string());
 ```
-The full documentation of this process can be seen in the [callingAPI.java](src%2Fmain%2Fjava%2Fapi%2FcallingAPI.java) file
+The full documentation of this process can be seen in the [GenerateRecipeAPICaller.java]() file.
 
 ## UML Diagram
 The UML diagram of our project can be seen below:
-![umlDiagram.png](umlDiagram.png)
+![umlDiagram.png](misc/img/umlDiagram.png)
 
 ## Use Cases
 1. Generate recipe
 2. Save recipe to planner
-3. view planner
+3. View planner
 4. Grocery list
-5. Calories tracker (?) -> where to put
+5. Calories tracker
 6. Sign up
 7. Log in
-8. edit profile
-9. add recipe to favorite list
-10. search username
-11. add friend
-12. view friend’s profile
-13. post recipe
+8. Edit profile
+9. Add recipe to favorite list
+10. Search username
+11. Add friend
+12. View friend’s profile
+13. Post recipe
 
 ## Dividing Tasks
 1. Christoffer: use cases 6, 7, and 11

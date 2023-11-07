@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class CommonUserFactory implements UserFactory{
     @Override
-    public CommonUser create(String username, String password) {
+    public User create(String username, String password) {
         return new CommonUser(username, password);
     }
-    public CommonUser create(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
-                             ArrayList<String> dietLabels, ArrayList<String> healthLabels, ArrayList<Recipe> myRecipes, Planner planner) {
-        return new CommonUser(username, password, name, age, gender, weight, height, activityLevel, dietLabels, healthLabels, myRecipes, planner);
+
+    public User create(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
+                             ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
+        return new CommonUser(username, password, name, age, gender, weight, height, activityLevel, dietLabels, healthLabels);
     }
 }
