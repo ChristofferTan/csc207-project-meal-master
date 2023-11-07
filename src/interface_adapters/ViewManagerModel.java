@@ -1,8 +1,5 @@
 package interface_adapters;
 
-<<<<<<< HEAD
-public class ViewManagerModel {
-=======
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -29,5 +26,5 @@ public class ViewManagerModel {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
->>>>>>> 400a6f05739da68f5805878f83f6b93d9f43f9d9
+
 }

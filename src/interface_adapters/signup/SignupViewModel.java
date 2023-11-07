@@ -1,9 +1,5 @@
 package interface_adapters.signup;
 
-<<<<<<< HEAD
-public class SignupViewModel {
-}
-=======
 import interface_adapters.ViewModel;
 import view.SignupView;
 
@@ -48,4 +44,3 @@ public class SignupViewModel extends ViewModel {
     }
 }
 
->>>>>>> 400a6f05739da68f5805878f83f6b93d9f43f9d9

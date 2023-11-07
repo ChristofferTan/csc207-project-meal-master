@@ -24,23 +24,6 @@ public class CommonUser implements User {
     }
     CommonUser(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
                ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
-<<<<<<< HEAD
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
-        this.weight = weight;
-        this.height = height;
-        this.activityLevel = activityLevel;
-        this.dietLabels = dietLabels;
-        this.healthLabels = healthLabels;
-    }
-
-    CommonUser(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
-               ArrayList<String> dietLabels, ArrayList<String> healthLabels, ArrayList<Recipe> myRecipes, Planner planner) {
-=======
->>>>>>> 400a6f05739da68f5805878f83f6b93d9f43f9d9
         this.username = username;
         this.password = password;
         this.name = name;

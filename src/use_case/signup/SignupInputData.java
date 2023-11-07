@@ -18,11 +18,7 @@ public class SignupInputData {
     String getPassword() {
         return password;
     }
-<<<<<<< HEAD
-    String getRepeatPassword(){
-=======
     public String getRepeatPassword(){
->>>>>>> 400a6f05739da68f5805878f83f6b93d9f43f9d9
         return repeatPassword;
     }
 }

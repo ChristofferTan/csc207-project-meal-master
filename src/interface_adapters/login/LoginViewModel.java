@@ -1,8 +1,5 @@
 package interface_adapters.login;
 
-<<<<<<< HEAD
-public class LoginViewModel {
-=======
 import interface_adapters.ViewModel;
 
 import java.beans.PropertyChangeListener;
@@ -37,5 +34,4 @@ public class LoginViewModel extends ViewModel {
         return state;
     }
 
->>>>>>> 400a6f05739da68f5805878f83f6b93d9f43f9d9
 }
