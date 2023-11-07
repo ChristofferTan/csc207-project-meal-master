@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 
 import javax.swing.*;
@@ -41,11 +42,12 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        LoggedInState state = (LoggedInState) evt.getNewValue();
+        username.setText(state.getUsername());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        System.out.println("Click " + e.getActionCommand());
     }
 }

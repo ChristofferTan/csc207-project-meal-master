@@ -38,6 +38,7 @@ public class LoginUseCaseFactory {
     private static LoginController createLoginUseCase(ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, LoggedInViewModel loggedInViewModel, LoginUserDataAccessInterface userDataAccessObject) throws IOException {
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, loggedInViewModel, viewManagerModel);
         UserFactory userFactory = new CommonUserFactory();
+
         LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
 
         return new LoginController(loginInteractor);
