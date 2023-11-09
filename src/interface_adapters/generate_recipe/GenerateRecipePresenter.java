@@ -2,13 +2,19 @@ package interface_adapters.generate_recipe;
 
 import entity.Ingredient;
 import entity.Recipe;
+import interface_adapters.ViewManagerModel;
 import use_case.generate_recipe.GenerateRecipeOutputBoundary;
 import use_case.generate_recipe.GenerateRecipeOutputData;
 
 import java.util.ArrayList;
 
 public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
-    public GenerateRecipePresenter() {
+    private final GenerateRecipeViewModel generateRecipeViewModel;
+    private final ViewManagerModel viewManagerModel;
+
+    public GenerateRecipePresenter(GenerateRecipeViewModel generateRecipeViewModel, ViewManagerModel viewManagerModel) {
+        this.generateRecipeViewModel = generateRecipeViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
 
     @Override
