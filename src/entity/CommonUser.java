@@ -15,9 +15,8 @@ public class CommonUser implements User {
     private ArrayList<String> healthLabels;
     private final ArrayList<Recipe> myRecipes;
     private final Planner planner;
-    private ArrayList<User> myFriends;
 
-    public CommonUser(String username, String password) {
+    CommonUser(String username, String password) {
         this.username = username;
         this.password = password;
         this.myRecipes = new ArrayList<Recipe>();
