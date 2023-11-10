@@ -1,5 +1,6 @@
 package entity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CommonUser implements User {
@@ -15,6 +16,7 @@ public class CommonUser implements User {
     private ArrayList<String> healthLabels;
     private final ArrayList<Recipe> myRecipes;
     private final Planner planner;
+    private ArrayList<User> myFriends;
 
     CommonUser(String username, String password) {
         this.username = username;
