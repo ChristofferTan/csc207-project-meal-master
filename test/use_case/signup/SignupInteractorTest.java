@@ -2,8 +2,6 @@ package use_case.signup;
 
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
-import entity.User;
-import entity.UserFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
@@ -62,9 +60,7 @@ public class SignupInteractorTest {
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         // Add Paul to the repo so that when we check later they already exist
-        UserFactory factory = new CommonUserFactory();
-        User user = factory.create("Faraaz", "pwd");
-        userRepository.save(user);
+
 
         // This creates a presenter that tests whether the test case is as we expect.
         SignupOutputBoundary failurePresenter = new SignupOutputBoundary() {

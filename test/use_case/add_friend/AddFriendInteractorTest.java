@@ -1,11 +1,10 @@
-package add_friend;
+package use_case.add_friend;
 
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
 import entity.User;
 import entity.UserFactory;
 import org.junit.jupiter.api.Test;
-import use_case.add_friend.*;
 
 import static org.junit.Assert.*;
 
