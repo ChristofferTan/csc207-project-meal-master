@@ -3,7 +3,7 @@
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/src/.idea" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
   </component>
 </module>

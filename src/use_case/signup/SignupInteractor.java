@@ -1,6 +1,5 @@
 package use_case.signup;
 
-import entity.CommonUser;
 import entity.User;
 import entity.UserFactory;
 
@@ -21,7 +20,7 @@ public class SignupInteractor implements SignupInputBoundary{
             userPresenter.prepareFailView("User already exists.");
         }
         else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
-            userPresenter.prepareFailView("Passwords don't match");
+            userPresenter.prepareFailView("Passwords don't match.");
         }
         else {
             User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword());
