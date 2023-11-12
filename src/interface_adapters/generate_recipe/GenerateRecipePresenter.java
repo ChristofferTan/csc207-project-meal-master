@@ -1,6 +1,5 @@
 package interface_adapters.generate_recipe;
 
-import entity.Ingredient;
 import entity.Recipe;
 import use_case.generate_recipe.GenerateRecipeOutputBoundary;
 import use_case.generate_recipe.GenerateRecipeOutputData;
@@ -18,7 +17,7 @@ public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
         String recipeUrl = recipe.getRecipeUrl();
         String imagePath = recipe.getImagePath();
         int calories = recipe.getCalories();
-        ArrayList<Ingredient> ingredients = recipe.getIngredients();
+        ArrayList<String> ingredients = recipe.getIngredients();
         int preparationTime = recipe.getPreparationTime();
         int yield = recipe.getYield();
 
@@ -27,8 +26,8 @@ public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
         System.out.println("Number of serving(s): " + yield);
         System.out.println("Calories (per serving): " + calories);
         System.out.println("Ingredients:");
-        for (Ingredient ingredient : ingredients) {
-            System.out.println('\t' + ingredient.getText());
+        for (String ingredient : ingredients) {
+            System.out.println('\t' + ingredient);
         }
         System.out.println("Recipe URL: " + recipeUrl);
         System.out.println("Preparation Time: " + preparationTime);

@@ -7,11 +7,11 @@ public class Recipe {
     private final String recipeUrl;
     private final String imagePath;
     private final int calories;
-    private final ArrayList<Ingredient> ingredients;
+    private final ArrayList<String> ingredients;
     private final int preparationTime;
     private final int yield;
 
-    public Recipe(String label, String recipeUrl, String imagePath, int calories, ArrayList<Ingredient> ingredients, int preparationTime, int yield) {
+    public Recipe(String label, String recipeUrl, String imagePath, int calories, ArrayList<String> ingredients, int preparationTime, int yield) {
         this.label = label;
         this.recipeUrl = recipeUrl;
         this.imagePath = imagePath;
@@ -37,7 +37,7 @@ public class Recipe {
         return calories;
     }
 
-    public ArrayList<Ingredient> getIngredients() {
+    public ArrayList<String> getIngredients() {
         return ingredients;
     }
 
