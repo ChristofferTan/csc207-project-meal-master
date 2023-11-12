@@ -5,17 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Planner {
+    private final String username;
     private final HashMap<DayOfWeek, HashMap<MealType, Recipe>> weeklyRecipes;
 
-    public Planner() {
+    public Planner(String username) {
+        this.username = username;
         this.weeklyRecipes = new HashMap<>();
-        weeklyRecipes.put(DayOfWeek.MONDAY, new HashMap<>());
-        weeklyRecipes.put(DayOfWeek.TUESDAY, new HashMap<>());
-        weeklyRecipes.put(DayOfWeek.WEDNESDAY, new HashMap<>());
-        weeklyRecipes.put(DayOfWeek.THURSDAY, new HashMap<>());
-        weeklyRecipes.put(DayOfWeek.FRIDAY, new HashMap<>());
-        weeklyRecipes.put(DayOfWeek.SATURDAY, new HashMap<>());
-        weeklyRecipes.put(DayOfWeek.SUNDAY, new HashMap<>());
+        for (DayOfWeek day : DayOfWeek.values()) {
+            this.weeklyRecipes.put(day, new HashMap<>());
+        }
     }
 
     public HashMap<DayOfWeek, HashMap<MealType, Recipe>> getWeeklyRecipes() {
@@ -26,4 +24,7 @@ public class Planner {
         return weeklyRecipes.get(day);
     }
 
+    public String getUsername() {
+        return username;
+    }
 }

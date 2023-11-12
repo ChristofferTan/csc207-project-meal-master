@@ -6,6 +6,6 @@ import entity.Recipe;
 import java.time.DayOfWeek;
 
 public interface SaveRecipeDataAccessInterface {
-    void save(DayOfWeek day, MealType mealType, Recipe recipe);
-    Recipe get(DayOfWeek day, MealType mealType);
+    void save(String username, DayOfWeek day, MealType mealType, Recipe recipe);
+    Recipe get(String username, DayOfWeek day, MealType mealType);
 }
