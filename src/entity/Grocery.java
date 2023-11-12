@@ -3,17 +3,17 @@ package entity;
 import java.util.ArrayList;
 
 public class Grocery {
-    private ArrayList<Ingredient> ingredients;
+    private ArrayList<String> ingredients;
 
-    Grocery(ArrayList<Ingredient> ingredients) {
+    Grocery(ArrayList<String> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public ArrayList<Ingredient> getIngredients() {
+    public ArrayList<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
+    public void setIngredients(ArrayList<String> ingredients) {
         this.ingredients = ingredients;
     }
 }
