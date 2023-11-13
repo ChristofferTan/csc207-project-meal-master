@@ -98,6 +98,5 @@ public class Main {
             application.pack();
             application.setVisible(true);
 
-            System.out.println(generateRecipeViewModel.getState().toString());
     }
 }

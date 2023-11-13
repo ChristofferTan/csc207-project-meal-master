@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
 
 import interface_adapters.generate_recipe.GenerateRecipeController;
 import interface_adapters.generate_recipe.GenerateRecipeState;
@@ -132,6 +133,7 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
                         String[] text = {healthInputField.getText() + e.getKeyChar()};
                         currentState.setHealth(text);
                         generateRecipeViewModel.setState(currentState);
+
                     }
 
                     @Override
