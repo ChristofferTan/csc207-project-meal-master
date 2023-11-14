@@ -1,20 +1,19 @@
 package data_access;
 
-import app.SignupUseCaseFactory;
 import entity.User;
 import entity.UserFactory;
+import use_case.add_friend.AddFriendUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface {
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
+    private final Map<String, ArrayList<String>> friends = new HashMap<>();
     private UserFactory userFactory;
 
     public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
@@ -50,6 +49,21 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
     }
+
+    @Override
+    public boolean isFriend(String username, String friendUsername) {
+        return friends.get(username).contains(friendUsername);
+    }
+
+    @Override
+    public void addFriend(String username, String friendUsername) {
+        if (!friends.containsKey(username)) {
+            friends.put(username, new ArrayList<String>(Arrays.asList(friendUsername)));
+        }
+        friends.get(username).add(friendUsername);
+        // save friend into the csv file
+    }
+
 
     @Override
     public void save(User user) {
