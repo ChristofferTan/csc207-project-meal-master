@@ -1,5 +1,8 @@
 package data_access;
 
+import api.file.io.DownloadCSVFilesAPICaller;
+import api.file.io.GetListofCSVFilesAPICaller;
+import api.file.io.UploadCSVFilesAPICaller;
 import entity.User;
 import entity.UserFactory;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
@@ -10,16 +13,14 @@ import java.io.*;
 import java.util.*;
 
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface {
-    private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private final Map<String, ArrayList<String>> friends = new HashMap<>();
     private UserFactory userFactory;
 
-    public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
+    public FileUserDataAccessObject(UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;
 
-        csvFile = new File(csvPath);
         headers.put("username", 0);
         headers.put("password", 1);
         headers.put("name", 2);
@@ -27,32 +28,30 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         headers.put("gender", 4);
         headers.put("height", 5);
         headers.put("weight", 6);
-        headers.put("activity level", 7);
+        headers.put("activityLevel", 7);
 
-        if (csvFile.length() == 0) {
-            save();
-        }
-        else {
-            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
-                String header = reader.readLine();
+        HashMap<String, String> filesInDatabase = GetListofCSVFilesAPICaller.call();
+        if (filesInDatabase.containsKey("users.csv")) {
+            String usersData = DownloadCSVFilesAPICaller.call(filesInDatabase.get("users.csv"));
+            String[] rows = usersData.split("\n");
+            String header = rows[0];
 
-                assert headers.equals("username,password,name,age,gender,height,weight,activity level");
+            assert headers.equals("username,password,name,age,gender,height,weight,activity level");
 
-                String row;
-                while((row = reader.readLine()) != null) {
-                    String[] col = row.split(",");
-                    String username = String.valueOf(col[headers.get("username")]);
-                    String password = String.valueOf(col[headers.get("password")]);
-                    String name = String.valueOf(col[headers.get("name")]);
-                    int age = Integer.parseInt(col[headers.get("age")]);
-                    String gender = String.valueOf(col[headers.get("gender")]);
-                    int height = Integer.parseInt(col[headers.get("height")]);
-                    int weight = Integer.parseInt(col[headers.get("weight")]);
-                    String activityLevel = String.valueOf(col[headers.get("activity level")]);
+            for (int i=1;i<rows.length;i++) {
+                String row = rows[i];
+                String[] col = row.split(",");
+                String username = String.valueOf(col[headers.get("username")]);
+                String password = String.valueOf(col[headers.get("password")]);
+                String name = String.valueOf(col[headers.get("name")]);
+                int age = Integer.parseInt(col[headers.get("age")]);
+                String gender = String.valueOf(col[headers.get("gender")]);
+                int height = Integer.parseInt(col[headers.get("height")]);
+                int weight = Integer.parseInt(col[headers.get("weight")]);
+                String activityLevel = String.valueOf(col[headers.get("activityLevel")]);
 
-                    User user = userFactory.create(username, password, name, age, gender, height, weight, activityLevel);
-                    accounts.put(username, user);
-                }
+                User user = userFactory.create(username, password, name, age, gender, height, weight, activityLevel);
+                accounts.put(username, user);
             }
         }
     }
@@ -85,6 +84,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     private void save() {
         BufferedWriter writer;
         try {
+            File csvFile = new File("./users.csv");
             writer = new BufferedWriter(new FileWriter(csvFile));
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
@@ -95,6 +95,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 writer.newLine();
             }
             writer.close();
+            UploadCSVFilesAPICaller.call("./users.csv");
 
         } catch (IOException e) {
             throw new RuntimeException(e);
