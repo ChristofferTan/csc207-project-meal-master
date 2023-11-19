@@ -47,7 +47,7 @@ public class Main {
 
             FileUserDataAccessObject userDataAccessObject;
             try {
-                userDataAccessObject = new FileUserDataAccessObject("users.csv", new CommonUserFactory());
+                userDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

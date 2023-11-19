@@ -8,5 +8,4 @@ public interface User {
     String getGender();
     int getHeight();
     int getWeight();
-    String getActivityLevel();
 }

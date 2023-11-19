@@ -28,7 +28,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         headers.put("gender", 4);
         headers.put("height", 5);
         headers.put("weight", 6);
-        headers.put("activityLevel", 7);
 
         HashMap<String, String> filesInDatabase = GetListofCSVFilesAPICaller.call();
         if (filesInDatabase.containsKey("users.csv")) {
@@ -36,7 +35,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             String[] rows = usersData.split("\n");
             String header = rows[0];
 
-            assert headers.equals("username,password,name,age,gender,height,weight,activity level");
+            assert headers.equals("username,password,name,age,gender,height,weight");
 
             for (int i=1;i<rows.length;i++) {
                 String row = rows[i];
@@ -48,9 +47,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 String gender = String.valueOf(col[headers.get("gender")]);
                 int height = Integer.parseInt(col[headers.get("height")]);
                 int weight = Integer.parseInt(col[headers.get("weight")]);
-                String activityLevel = String.valueOf(col[headers.get("activityLevel")]);
 
-                User user = userFactory.create(username, password, name, age, gender, height, weight, activityLevel);
+                User user = userFactory.create(username, password, name, age, gender, height, weight);
                 accounts.put(username, user);
             }
         }
@@ -90,7 +88,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             writer.newLine();
 
             for (User user: accounts.values()) {
-                String line = String.format("%s,%s,%s,%d,%s,%d,%d,%s", user.getUsername(), user.getPassword(),user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), user.getActivityLevel());
+                String line = String.format("%s,%s,%s,%d,%s,%d,%d", user.getUsername(), user.getPassword(),user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight());
                 writer.write(line);
                 writer.newLine();
             }

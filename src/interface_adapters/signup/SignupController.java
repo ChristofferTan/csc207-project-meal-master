@@ -9,8 +9,8 @@ public class SignupController {
     public SignupController(SignupInputBoundary userSignupUseCaseInteractor) {
         this.userSignupUseCaseInteractor = userSignupUseCaseInteractor;
     }
-    public void execute(String username, String password, String repeatPassword, String name, int age, String gender, int height, int weight, String activityLevel) {
-        SignupInputData signupInputData = new SignupInputData(username, password, repeatPassword, name, age, gender, height, weight, activityLevel);
+    public void execute(String username, String password, String repeatPassword, String name, int age, String gender, int height, int weight) {
+        SignupInputData signupInputData = new SignupInputData(username, password, repeatPassword, name, age, gender, height, weight);
         userSignupUseCaseInteractor.execute(signupInputData);
     }
 }

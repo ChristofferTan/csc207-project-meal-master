@@ -10,7 +10,6 @@ public class CommonUser implements User {
     private String gender;
     private int weight;
     private int height;
-    private String activityLevel;
     private final ArrayList<Recipe> myRecipes;
     private final Planner planner;
 
@@ -20,7 +19,7 @@ public class CommonUser implements User {
         this.myRecipes = new ArrayList<Recipe>();
         this.planner = new Planner(username);
     }
-    CommonUser(String username, String password, String name, int age, String gender, int weight, int height, String activityLevel) {
+    CommonUser(String username, String password, String name, int age, String gender, int weight, int height) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -28,7 +27,6 @@ public class CommonUser implements User {
         this.gender = gender;
         this.weight = weight;
         this.height = height;
-        this.activityLevel = activityLevel;
         this.myRecipes = new ArrayList<Recipe>();
         this.planner = new Planner(username);
     }
@@ -79,13 +77,6 @@ public class CommonUser implements User {
         this.height = height;
     }
 
-    public String getActivityLevel() {
-        return activityLevel;
-    }
-
-    public void setActivityLevel(String activityLevel) {
-        this.activityLevel = activityLevel;
-    }
     public ArrayList<Recipe> getMyRecipes() {
         return myRecipes;
     }

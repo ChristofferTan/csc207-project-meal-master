@@ -9,9 +9,8 @@ public class SignupInputData {
     private String gender;
     private int height;
     private int weight;
-    private String activityLevel;
 
-    public SignupInputData(String username, String password, String repeatPassword, String name, int age, String gender, int height, int weight, String activityLevel) {
+    public SignupInputData(String username, String password, String repeatPassword, String name, int age, String gender, int height, int weight) {
         this.username = username;
         this.password = password;
         this.repeatPassword = repeatPassword;
@@ -20,7 +19,6 @@ public class SignupInputData {
         this.gender = gender;
         this.height = height;
         this.weight = weight;
-        this.activityLevel = activityLevel;
     }
     String getUsername() {
         return username;
@@ -72,11 +70,4 @@ public class SignupInputData {
         this.weight = weight;
     }
 
-    public String getActivityLevel() {
-        return activityLevel;
-    }
-
-    public void setActivityLevel(String activityLevel) {
-        this.activityLevel = activityLevel;
-    }
 }

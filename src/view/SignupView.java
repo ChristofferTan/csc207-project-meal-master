@@ -25,7 +25,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final JTextField genderInputField = new JTextField(15);
     private final JTextField heightInputField = new JTextField(15);
     private final JTextField weightInputField = new JTextField(15);
-    private final JTextField activityLevelInputField = new JTextField(15);
     private final SignupController signupController;
 
     private final JButton signUp;
@@ -55,8 +54,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 new JLabel(SignupViewModel.HEIGHT_LABEL), heightInputField);
         LabelTextPanel weightInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.WEIGHT_LABEL), weightInputField);
-        LabelTextPanel activityLevelInfo = new LabelTextPanel(
-                new JLabel(SignupViewModel.ACTIVITY_LEVEL), activityLevelInputField);
 
         JPanel buttons = new JPanel();
         signUp = new JButton(SignupViewModel.SIGNUP_BUTTON_LABEL);
@@ -78,8 +75,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                                     currentState.getAge(),
                                     currentState.getGender(),
                                     currentState.getHeight(),
-                                    currentState.getWeight(),
-                                    currentState.getActivityLevel()
+                                    currentState.getWeight()
                             );
                         }
                     }
@@ -240,25 +236,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                     }
                 });
 
-        activityLevelInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        SignupState currentState = signupViewModel.getState();
-                        String text = activityLevelInputField.getText() + e.getKeyChar();
-                        currentState.setActivityLevel(text);
-                        signupViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                    }
-                });
-
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
@@ -270,7 +247,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.add(genderInfo);
         this.add(heightInfo);
         this.add(weightInfo);
-        this.add(activityLevelInfo);
         this.add(buttons);
     }
 

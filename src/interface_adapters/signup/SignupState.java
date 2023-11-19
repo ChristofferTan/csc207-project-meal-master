@@ -12,7 +12,6 @@ public class SignupState {
     private String gender;
     private int height;
     private int weight;
-    private String activityLevel;
     public SignupState(SignupState copy) {
         username = copy.username;
         usernameError = copy.usernameError;
@@ -25,7 +24,6 @@ public class SignupState {
         gender = copy.gender;
         height = copy.height;
         weight = copy.weight;
-        activityLevel = copy.activityLevel;
     }
     public SignupState() {}
 
@@ -56,7 +54,6 @@ public class SignupState {
     public String getGender() {return gender;}
     public int getHeight() {return height;}
     public int getWeight() {return weight;}
-    public String getActivityLevel() {return activityLevel;}
 
     public void setUsername(String username) {
         this.username = username;
@@ -101,10 +98,6 @@ public class SignupState {
         this.weight = weight;
     }
 
-    public void setActivityLevel(String activityLevel) {
-        this.activityLevel = activityLevel;
-    }
-
     @Override
     public String toString() {
         return "SignupState{" +
@@ -116,7 +109,6 @@ public class SignupState {
                 ", gender='" + gender + '\'' +
                 ", height='" + height + '\'' +
                 ", weight='" + weight + '\'' +
-                ", activity level='" + activityLevel + '\'' +
                 '}';
     }
 
