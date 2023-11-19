@@ -8,11 +8,9 @@ public class CommonUser implements User {
     private String name;
     private int age;
     private String gender;
-    private double weight;
-    private double height;
+    private int weight;
+    private int height;
     private String activityLevel;
-    private ArrayList<String> dietLabels;
-    private ArrayList<String> healthLabels;
     private final ArrayList<Recipe> myRecipes;
     private final Planner planner;
 
@@ -20,10 +18,9 @@ public class CommonUser implements User {
         this.username = username;
         this.password = password;
         this.myRecipes = new ArrayList<Recipe>();
-        this.planner = new Planner();
+        this.planner = new Planner(username);
     }
-    CommonUser(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
-               ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
+    CommonUser(String username, String password, String name, int age, String gender, int weight, int height, String activityLevel) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -32,10 +29,8 @@ public class CommonUser implements User {
         this.weight = weight;
         this.height = height;
         this.activityLevel = activityLevel;
-        this.dietLabels = dietLabels;
-        this.healthLabels = healthLabels;
         this.myRecipes = new ArrayList<Recipe>();
-        this.planner = new Planner();
+        this.planner = new Planner(username);
     }
 
     public String getUsername() {
@@ -68,19 +63,19 @@ public class CommonUser implements User {
         this.gender = gender;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
@@ -91,23 +86,6 @@ public class CommonUser implements User {
     public void setActivityLevel(String activityLevel) {
         this.activityLevel = activityLevel;
     }
-
-    public ArrayList<String> getDietLabels() {
-        return dietLabels;
-    }
-
-    public void setDietLabels(ArrayList<String> dietLabels) {
-        this.dietLabels = dietLabels;
-    }
-
-    public ArrayList<String> getHealthLabels() {
-        return healthLabels;
-    }
-
-    public void setHealthLabels(ArrayList<String> healthLabels) {
-        this.healthLabels = healthLabels;
-    }
-
     public ArrayList<Recipe> getMyRecipes() {
         return myRecipes;
     }

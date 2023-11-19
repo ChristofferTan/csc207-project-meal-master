@@ -22,6 +22,12 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         csvFile = new File(csvPath);
         headers.put("username", 0);
         headers.put("password", 1);
+        headers.put("name", 2);
+        headers.put("age", 3);
+        headers.put("gender", 4);
+        headers.put("height", 5);
+        headers.put("weight", 6);
+        headers.put("activity level", 7);
 
         if (csvFile.length() == 0) {
             save();
@@ -30,15 +36,21 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
 
-                assert headers.equals("username,password");
+                assert headers.equals("username,password,name,age,gender,height,weight,activity level");
 
                 String row;
                 while((row = reader.readLine()) != null) {
                     String[] col = row.split(",");
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
+                    String name = String.valueOf(col[headers.get("name")]);
+                    int age = Integer.parseInt(col[headers.get("age")]);
+                    String gender = String.valueOf(col[headers.get("gender")]);
+                    int height = Integer.parseInt(col[headers.get("height")]);
+                    int weight = Integer.parseInt(col[headers.get("weight")]);
+                    String activityLevel = String.valueOf(col[headers.get("activity level")]);
 
-                    User user = userFactory.create(username, password);
+                    User user = userFactory.create(username, password, name, age, gender, height, weight, activityLevel);
                     accounts.put(username, user);
                 }
             }
@@ -78,7 +90,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             writer.newLine();
 
             for (User user: accounts.values()) {
-                String line = String.format("%s,%s", user.getUsername(), user.getPassword());
+                String line = String.format("%s,%s,%s,%d,%s,%d,%d,%s", user.getUsername(), user.getPassword(),user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), user.getActivityLevel());
                 writer.write(line);
                 writer.newLine();
             }
