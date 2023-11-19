@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class SignupInteractorTest {
     @Test
     void successTest() {
-        SignupInputData inputData = new SignupInputData("Faraaz", "Ahmed", "Ahmed", "Faraaz", 19, "Man", 168, 60, "medium");
+        SignupInputData inputData = new SignupInputData("Faraaz", "Ahmed", "Ahmed", "Faraaz", 19, "Man", 168, 60);
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
@@ -35,7 +35,7 @@ public class SignupInteractorTest {
 
     @Test
     void failurePasswordMismatchTest() {
-        SignupInputData inputData = new SignupInputData("Faraaz", "Ahmed", "wrong", "Faraaz", 19, "Man", 168, 60, "medium");
+        SignupInputData inputData = new SignupInputData("Faraaz", "Ahmed", "wrong", "Faraaz", 19, "Man", 168, 60);
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         // This creates a presenter that tests whether the test case is as we expect.
@@ -59,8 +59,8 @@ public class SignupInteractorTest {
     @Test
     void failureUserExistsTest() {
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Faraaz", "ganteng", "christoffer", 18, "Man", 170, 68, "medium");
-        SignupInputData inputData = new SignupInputData("Faraaz", "Ahmed", "Ahmed", "Faraaz", 19, "Man", 168, 60, "medium");
+        User user1 = factory.create("Faraaz", "ganteng", "christoffer", 18, "Man", 170, 68);
+        SignupInputData inputData = new SignupInputData("Faraaz", "Ahmed", "Ahmed", "Faraaz", 19, "Man", 168, 60);
 
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
         userRepository.save(user1);
