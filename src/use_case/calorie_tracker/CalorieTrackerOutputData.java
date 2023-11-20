@@ -14,23 +14,23 @@ public class CalorieTrackerOutputData {
         this.planner = planner;
     }
 
-    public float getWeeklyCalories() {
+    public int getWeeklyCalories() {
         float calories = 0;
         for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
             for (Recipe recipe: recipes.values()) {
                 calories += recipe.getCalories();
             }
         }
-        return calories;
+        return Math.round(calories);
     }
 
-    public float getAverageDailyCalories() {
+    public int getAverageDailyCalories() {
         float calories = 0;
         for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
             for (Recipe recipe: recipes.values()) {
                 calories += recipe.getCalories();
             }
         }
-        return calories / 7;
+        return Math.round(calories / 7);
     }
 }
