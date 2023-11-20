@@ -3,13 +3,11 @@ package app;
 import data_access.FileUserDataAccessObject;
 import entity.CommonUserFactory;
 import interface_adapters.ViewManagerModel;
+import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
 import interface_adapters.signup.SignupViewModel;
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,32 +38,32 @@ public class Main {
             // results from the use case. The ViewModels are observable, and will
             // be observed by the Views.
 
-//            GenerateRecipeViewModel generateRecipeViewModel = new GenerateRecipeViewModel();
-            LoginViewModel loginViewModel = new LoginViewModel();
-            LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
-            SignupViewModel signupViewModel = new SignupViewModel();
+            GenerateRecipeViewModel generateRecipeViewModel = new GenerateRecipeViewModel();
+//            LoginViewModel loginViewModel = new LoginViewModel();
+//            LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
+//            SignupViewModel signupViewModel = new SignupViewModel();
 
-            FileUserDataAccessObject userDataAccessObject;
-            try {
-                userDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+//            FileUserDataAccessObject userDataAccessObject;
+//            try {
+//                userDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
 
-            SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
-            views.add(signupView, signupView.viewName);
-
-            LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
-            views.add(loginView, loginView.viewName);
-
-            LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-            views.add(loggedInView, loggedInView.viewName);
-
-//            GenerateRecipeView generateRecipeView = GenerateRecipeFactory.create(viewManagerModel, generateRecipeViewModel);
-//            views.add(generateRecipeView, generateRecipeView.viewName);
+//            SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
+//            views.add(signupView, signupView.viewName);
 //
-//            viewManagerModel.setActiveView(generateRecipeView.viewName);
-//            viewManagerModel.firePropertyChanged();
+//            LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+//            views.add(loginView, loginView.viewName);
+//
+//            LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+//            views.add(loggedInView, loggedInView.viewName);
+
+            GenerateRecipeView generateRecipeView = GenerateRecipeFactory.create(viewManagerModel, generateRecipeViewModel);
+            views.add(generateRecipeView, generateRecipeView.viewName);
+
+            viewManagerModel.setActiveView(generateRecipeView.viewName);
+            viewManagerModel.firePropertyChanged();
 //
             application.pack();
             application.setVisible(true);
