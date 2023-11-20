@@ -3,6 +3,7 @@ package data_access;
 import entity.User;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.myprofile.MyProfileDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface {
+public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface, MyProfileDataAccessInterface {
     private final Map<String, User> accounts = new HashMap<>();
 
     private final Map<String, ArrayList<String>> friends = new HashMap<>();
