@@ -1,5 +1,5 @@
 import api.edamam.GenerateRecipeAPICaller;
-import app.SaveRecipeFactory;
+import app.SaveRecipeUseCaseFactory;
 import data_access.FilePlannerDataAccessObject;
 import data_access.FileRecipeDataAccessObject;
 import entity.MealType;
@@ -10,7 +10,6 @@ import interface_adapters.ViewManagerModel;
 import interface_adapters.save_recipe.SaveRecipeController;
 import interface_adapters.save_recipe.SaveRecipeViewModel;
 import use_case.generate_recipe.GenerateRecipeInputData;
-import use_case.save_recipe.SaveRecipeDataAccessInterface;
 import view.SaveRecipeView;
 
 import java.time.DayOfWeek;
@@ -19,7 +18,7 @@ public class SaveRecipeTest {
     @org.junit.Test
     public void testSaveRecipe() {
         FilePlannerDataAccessObject fpdao = new FilePlannerDataAccessObject(new PlannerFactory(), new FileRecipeDataAccessObject(new RecipeFactory()));
-        SaveRecipeView saveRecipeView = SaveRecipeFactory.create(
+        SaveRecipeView saveRecipeView = SaveRecipeUseCaseFactory.create(
                 new ViewManagerModel(),
                 new SaveRecipeViewModel(),
                 fpdao

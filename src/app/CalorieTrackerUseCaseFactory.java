@@ -6,8 +6,8 @@ import use_case.calorie_tracker.CalorieTrackerInputBoundary;
 import use_case.calorie_tracker.CalorieTrackerInteractor;
 import use_case.calorie_tracker.CalorieTrackerOutputBoundary;
 
-public class CalorieTrackerFactory {
-    private CalorieTrackerFactory() {}
+public class CalorieTrackerUseCaseFactory {
+    private CalorieTrackerUseCaseFactory() {}
 
     public static CalorieTrackerController createCalorieTrackerUseCase() {
         CalorieTrackerOutputBoundary calorieTrackerOutputBoundary = new CalorieTrackerPresenter();
