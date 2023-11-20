@@ -1,3 +1,6 @@
 .idea/
 document/
 target/
+csc207-project.iml
+users.csv
+.gitignore
