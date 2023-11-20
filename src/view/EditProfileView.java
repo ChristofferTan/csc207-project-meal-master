@@ -56,6 +56,7 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                             EditProfileState currentState = editProfileViewModel.getState();
 
                             editProfileController.execute(
+                                    currentState.getUsername(),
                                     currentState.getName(),
                                     currentState.getAge(),
                                     currentState.getGender(),

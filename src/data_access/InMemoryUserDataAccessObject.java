@@ -45,7 +45,7 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         }
 
         @Override
-        public void editProfile(String username, String name, int age, String gender, double weight, double height) {
+        public void editProfile(String username, String name, int age, String gender, int weight, int height) {
             User user = accounts.get(username);
             user.setName(name);
             user.setAge(age);

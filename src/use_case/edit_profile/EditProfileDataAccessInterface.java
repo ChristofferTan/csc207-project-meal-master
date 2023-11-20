@@ -5,5 +5,5 @@ import entity.User;
 import java.util.ArrayList;
 
 public interface EditProfileDataAccessInterface {
-    void editProfile(String username, String name, int age, String gender, double weight, double height);
+    void editProfile(String username, String name, int age, String gender, int weight, int height);
 }

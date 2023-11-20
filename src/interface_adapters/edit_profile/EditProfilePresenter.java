@@ -15,5 +15,10 @@ public class EditProfilePresenter implements EditProfileOutputBoundary{
 
     public void prepareSuccessView(EditProfileOutputData editProfileOutputData) {
         System.out.println("You have edited your profile successfully");
+        // TODO: implement with view
+    }
+
+    public void prepareFailView(String error) {
+        // TODO: implement with view
     }
 }

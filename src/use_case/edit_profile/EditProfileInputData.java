@@ -1,18 +1,14 @@
 package use_case.edit_profile;
 
-import entity.User;
-
-import java.util.ArrayList;
-
 public class EditProfileInputData {
     private final String username;
     private final String name;
     private final int age;
     private final String gender;
-    private final double weight;
-    private final double height;
+    private final int weight;
+    private final int height;
 
-    public EditProfileInputData(String username, String name, int age, String gender, double weight, double height) {
+    public EditProfileInputData(String username, String name, int age, String gender, int weight, int height) {
         this.username = username;
         this.name = name;
         this.age = age;
@@ -24,6 +20,7 @@ public class EditProfileInputData {
     public String getUsername() {
         return username;
     }
+
     public String getName() {
         return name;
     }
@@ -36,11 +33,11 @@ public class EditProfileInputData {
         return gender;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 }

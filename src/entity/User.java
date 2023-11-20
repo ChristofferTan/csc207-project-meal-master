@@ -18,7 +18,7 @@ public interface User {
 
     void setGender(String gender);
 
-    void setWeight(double weight);
+    void setWeight(int weight);
 
-    void setHeight(double height);
+    void setHeight(int height);
 }

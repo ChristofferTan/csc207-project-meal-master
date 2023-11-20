@@ -5,8 +5,8 @@ public class EditProfileState {
     private String name;
     private int age;
     private String gender;
-    private double weight;
-    private double height;
+    private int weight;
+    private int height;
 
     public EditProfileState(EditProfileState copy) {
         username = copy.username;
@@ -35,11 +35,11 @@ public class EditProfileState {
         return gender;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
@@ -59,11 +59,11 @@ public class EditProfileState {
         this.gender = gender;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 }

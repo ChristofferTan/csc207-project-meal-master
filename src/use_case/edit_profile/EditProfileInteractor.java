@@ -20,8 +20,8 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
         String name = editProfileInputData.getName();
         int age = editProfileInputData.getAge();
         String gender = editProfileInputData.getGender();
-        double weight = editProfileInputData.getWeight();
-        double height = editProfileInputData.getHeight();
+        int weight = editProfileInputData.getWeight();
+        int height = editProfileInputData.getHeight();
 
         userDataAccessObject.editProfile(username, name, age, gender, weight, height);
 
