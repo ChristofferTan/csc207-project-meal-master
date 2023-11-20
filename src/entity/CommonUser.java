@@ -28,9 +28,6 @@ public class CommonUser implements User {
         this.weight = weight;
         this.height = height;
         this.favoriteRecipes= new ArrayList<Recipe>();
-        this.activityLevel = activityLevel;
-        this.dietLabels = dietLabels;
-        this.healthLabels = healthLabels;
         this.planner = new Planner(username);
     }
 
