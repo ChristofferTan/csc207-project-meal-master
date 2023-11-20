@@ -6,13 +6,14 @@ import api.file.io.UploadCSVFilesAPICaller;
 import entity.User;
 import entity.UserFactory;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
+import use_case.edit_profile.EditProfileDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
 import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface, EditProfileDataAccessInterface {
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private final Map<String, ArrayList<String>> friends = new HashMap<>();
@@ -73,7 +74,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         // save friend into the csv file
     }
 
-
     @Override
     public void save(User user) {
         accounts.put(user.getUsername(), user);
@@ -98,6 +98,17 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void editProfile(String username, String name, int age, String gender, double weight, double height) {
+        User user = accounts.get(username);
+        user.setName(name);
+        user.setAge(age);
+        user.setGender(gender);
+        user.setWeight(weight);
+        user.setHeight(height);
+        this.save();
     }
 
     @Override

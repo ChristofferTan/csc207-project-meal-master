@@ -13,8 +13,8 @@ public class EditProfileController {
         this.editProfileInteractor = editProfileInteractor;
     }
 
-    public void execute(User user, String name, int age, String gender, double weight, double height) {
-        EditProfileInputData editProfileInputData = new EditProfileInputData(user, name, age, gender, weight, height);
+    public void execute(String username, String name, int age, String gender, double weight, double height) {
+        EditProfileInputData editProfileInputData = new EditProfileInputData(username, name, age, gender, weight, height);
 
         editProfileInteractor.execute(editProfileInputData);
     }

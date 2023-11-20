@@ -12,4 +12,13 @@ public interface User {
     int getWeight();
     public ArrayList<Recipe> getFavoriteRecipes();
 
+    void setName(String name);
+
+    void setAge(int age);
+
+    void setGender(String gender);
+
+    void setWeight(double weight);
+
+    void setHeight(double height);
 }
