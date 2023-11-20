@@ -15,12 +15,11 @@ public class FileRecipeDataAccessObject {
     private final LinkedHashMap<String, Integer> headers = new LinkedHashMap<>();
     private final HashMap<String, Recipe> recipes = new HashMap<>();  // label -> recipe
     private final RecipeFactory recipeFactory;
+    private final String FILE_NAME = "recipes.csv";
+    private final String FILE_PATH = "./" + FILE_NAME;
 
-    public static void main(String[] args) throws IOException {
-        FileRecipeDataAccessObject frdao = new FileRecipeDataAccessObject(new RecipeFactory());
-    }
 
-    public FileRecipeDataAccessObject(RecipeFactory recipeFactory) throws IOException {
+    public FileRecipeDataAccessObject(RecipeFactory recipeFactory) {
         this.recipeFactory = recipeFactory;
 
         headers.put("label", 0);
@@ -31,20 +30,27 @@ public class FileRecipeDataAccessObject {
         headers.put("yield", 5);
         headers.put("ingredients", 6);
 
+        fetch();
+    }
+
+    /**
+     * Fetch (pull) the latest version of recipes.csv from the database into recipes
+     */
+    public void fetch() {
         // check if recipes.csv exist in the database
-        HashMap<String, String> filesInDatabase = GetListofCSVFilesAPICaller.call();
-        if (filesInDatabase.containsKey("recipes.csv")) {
+        HashMap<String, String> filesNameInDatabase = GetListofCSVFilesAPICaller.call();
+        if (filesNameInDatabase.containsKey(FILE_NAME)) {
             // if exist, get the latest version of recipes.csv
             System.out.println("Downloading recipes.csv from database... (removing recipes.csv from the database)");
-            String recipesData = DownloadCSVFilesAPICaller.call(filesInDatabase.get("recipes.csv"));
+            String recipesData = DownloadCSVFilesAPICaller.call(filesNameInDatabase.get(FILE_NAME));
             String[] rows = recipesData.split("\n");
-            String header = rows[0];
+            String header = rows[0].trim();
 
             // For later: clean this up by creating a new Exception subclass and handling it in the UI.
             assert header.equals("label,recipeUrl,imagePath,calories,preparationTime,yield,ingredients");
 
             for (int i=1; i<rows.length; i++) {
-                String row = rows[i];
+                String row = rows[i].trim();
                 String[] col = row.split(",");
                 String label = String.valueOf(col[headers.get("label")]);
                 String recipeUrl = String.valueOf(col[headers.get("recipeUrl")]);
@@ -64,10 +70,10 @@ public class FileRecipeDataAccessObject {
         }
     }
 
-    private void save() {
+    public void save() {
         BufferedWriter writer;
         try {
-            File csvFile = new File("./recipes.csv");
+            File csvFile = new File(FILE_PATH);
             writer = new BufferedWriter(new FileWriter(csvFile));
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
@@ -83,19 +89,22 @@ public class FileRecipeDataAccessObject {
 
             writer.close();
             System.out.println("Uploading recipes.csv to database...");
-            UploadCSVFilesAPICaller.call("./recipes.csv");
-            System.out.println("Upload success! Download at " + GetListofCSVFilesAPICaller.call().get("recipes.csv"));
+            UploadCSVFilesAPICaller.call(FILE_PATH);
+            HashMap<String,String> listOfCSVFiles = GetListofCSVFilesAPICaller.call();
+            System.out.println("Upload success! Download at " + listOfCSVFiles.get(FILE_NAME) + ". There's currently " + listOfCSVFiles.size() + " files in the database.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void save (Recipe recipe) {
+    public void save (Recipe recipe) {
+        System.out.println("Downloading recipes.csv from database... (removing recipes.csv from the database)");
+        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
         recipes.put(recipe.getLabel(), recipe);
         this.save();
     }
 
-    public Recipe get(String label) {
+    public Recipe getRecipe(String label) {
         return recipes.get(label);
     }
 }

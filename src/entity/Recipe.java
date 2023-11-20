@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Recipe {
     private final String label;
@@ -47,5 +48,18 @@ public class Recipe {
 
     public int getYield() {
         return yield;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return calories == recipe.calories && preparationTime == recipe.preparationTime && yield == recipe.yield && Objects.equals(label, recipe.label) && Objects.equals(recipeUrl, recipe.recipeUrl) && Objects.equals(imagePath, recipe.imagePath) && Objects.equals(ingredients, recipe.ingredients);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(label, recipeUrl, imagePath, calories, ingredients, preparationTime, yield);
     }
 }

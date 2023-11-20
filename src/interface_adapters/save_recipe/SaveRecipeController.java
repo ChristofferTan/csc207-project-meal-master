@@ -15,8 +15,8 @@ public class SaveRecipeController {
         this.saveRecipeInteractor = saveRecipeInteractor;
     }
 
-    public void execute(String username, Recipe recipe, DayOfWeek day, MealType mealType) {
-        SaveRecipeInputData saveRecipeInputData = new SaveRecipeInputData(username, recipe, day, mealType);
+    public void execute(String username, DayOfWeek day, MealType mealType, Recipe recipe) {
+        SaveRecipeInputData saveRecipeInputData = new SaveRecipeInputData(username, day, mealType, recipe);
 
         saveRecipeInteractor.execute(saveRecipeInputData);
     }
