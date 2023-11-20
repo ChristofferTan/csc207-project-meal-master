@@ -5,7 +5,7 @@ public class SaveRecipeInteractor implements SaveRecipeInputBoundary {
     final SaveRecipeOutputBoundary saveRecipePresenter;
 
     public SaveRecipeInteractor(SaveRecipeDataAccessInterface dataAccessInterface,
-                                    SaveRecipeOutputBoundary saveRecipeOutputBoundary) {
+                                SaveRecipeOutputBoundary saveRecipeOutputBoundary) {
         this.dataAccessInterface = dataAccessInterface;
         this.saveRecipePresenter = saveRecipeOutputBoundary;
     }

@@ -11,13 +11,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class GetListofCSVFilesAPICaller {
-    public static void main(String[] args) {
-        HashMap<String, String> res = call();
-        for (String key : res.keySet()) {
-            System.out.println(key + " : " + res.get(key));
-        }
-    }
-
     private GetListofCSVFilesAPICaller() {};  // prevent instantiation
 
     /**
@@ -38,7 +31,6 @@ public class GetListofCSVFilesAPICaller {
             if (response.code() == 200) {
                 JSONObject responseBody = new JSONObject(response.body().string());
                 int filesCount = responseBody.getInt("count");
-                System.out.println("There are " + filesCount + " files in the server");
                 JSONArray filesInJSONArray = responseBody.getJSONArray("nodes");
                 HashMap<String, String> files = new HashMap<>();
                 for (int i=0; i<filesCount; i++) {

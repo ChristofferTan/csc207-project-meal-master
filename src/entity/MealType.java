@@ -16,4 +16,13 @@ public enum MealType {
     public String toString() {
         return stringValue;
     }
+
+    public static MealType fromString(String stringValue) {
+        for (MealType mealType : MealType.values()) {
+            if (mealType.stringValue.equals(stringValue)) {
+                return mealType;
+            }
+        }
+        return null;
+    }
 }

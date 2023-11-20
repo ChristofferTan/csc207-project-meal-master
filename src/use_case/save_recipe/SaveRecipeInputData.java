@@ -11,11 +11,11 @@ public class SaveRecipeInputData {
     final private DayOfWeek day;
     final private MealType mealType;
 
-    public SaveRecipeInputData(String username, Recipe recipe, DayOfWeek day, MealType mealType) {
+    public SaveRecipeInputData(String username, DayOfWeek day, MealType mealType, Recipe recipe) {
         this.username = username;
-        this.recipe = recipe;
         this.day = day;
         this.mealType = mealType;
+        this.recipe = recipe;
     }
 
     public Recipe getRecipe() {return recipe; }
