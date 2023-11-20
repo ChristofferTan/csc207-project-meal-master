@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface, EditProfileDataAccessInterface {
+public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface, EditProfileDataAccessInterface, MyProfileDataAccessInterface {
         private final Map<String, User> accounts = new HashMap<>();
 
         private final Map<String, ArrayList<String>> friends = new HashMap<>();
