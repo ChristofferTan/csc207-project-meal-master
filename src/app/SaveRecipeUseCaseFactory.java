@@ -10,11 +10,8 @@ import use_case.save_recipe.SaveRecipeInteractor;
 import use_case.save_recipe.SaveRecipeOutputBoundary;
 import view.SaveRecipeView;
 
-import javax.swing.*;
-import java.io.IOException;
-
-public class SaveRecipeFactory {
-    public SaveRecipeFactory() {}  // prevent instantiation
+public class SaveRecipeUseCaseFactory {
+    public SaveRecipeUseCaseFactory() {}  // prevent instantiation
 
     public static SaveRecipeView create(ViewManagerModel viewManagerModel,
                        SaveRecipeViewModel saveRecipeViewModel,
