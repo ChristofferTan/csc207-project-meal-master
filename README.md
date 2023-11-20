@@ -42,23 +42,5 @@ The full documentation of this process can be seen in the [GenerateRecipeAPICall
 The UML diagram of our project can be seen below:
 ![umlDiagram.png](misc/img/umlDiagram.png)
 
-## Use Cases
-1. Generate recipe
-2. Save recipe to planner
-3. View planner
-4. Grocery list
-5. Calories tracker
-6. Sign up
-7. Log in
-8. Edit profile
-9. Add recipe to favorite list
-10. Search username
-11. Add friend
-12. View friend’s profile
-13. Post recipe
-
-## Dividing Tasks
-1. Christoffer: use cases 6, 7, and 11
-2. Faraaz: use cases 4, 5 
-3. Janis: use cases 2, 3, 12
-4. Razan: use cases 8, 9
+## Work Progress
+https://docs.google.com/document/d/17-udWtudT_YHJD78HRxpyD37lXe3Hd1oKTVo7gR6KQI/edit 
