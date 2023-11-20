@@ -1,6 +1,5 @@
 package use_case.calorie_tracker;
 
-import data_access.InMemoryPlannerDataAccessObject;
 import entity.MealType;
 import entity.Planner;
 import entity.Recipe;
