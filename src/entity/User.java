@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.ArrayList;
+
 public interface User {
     String getUsername();
     String getPassword();
@@ -8,4 +10,6 @@ public interface User {
     String getGender();
     int getHeight();
     int getWeight();
+    public ArrayList<Recipe> getFavoriteRecipes();
+
 }
