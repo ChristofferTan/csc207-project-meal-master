@@ -13,7 +13,6 @@ public class EditProfileViewModel extends ViewModel {
     public static final String GENDER_LABEL = "Gender";
     public static final String WEIGHT_LABEL = "Weight";
     public static final String HEIGHT_LABEL = "Height";
-    public static final String ACTIVITY_LEVEL_LABEL = "Activity Level";
 
     public static final String EDIT_PROFILE_BUTTON_LABEL = "Edit Profile";
 

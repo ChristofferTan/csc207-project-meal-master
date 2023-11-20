@@ -45,16 +45,13 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         }
 
         @Override
-        public void editProfile(User user, String name, int age, String gender, double weight, double height,
-                                String activityLevel, ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
-            user.setName(name);
-            user.setAge(age);
-            user.setGender(gender);
-            user.setWeight(weight);
-            user.setHeight(height);
-            user.setActivityLevel(activityLevel);
-            user.setDietLabels(dietLabels);
-            user.setHealthLabels(healthLabels);
+        public void editProfile(User user, String name, int age, String gender, double weight, double height) {
+//            user.setName(name);
+//            user.setAge(age);
+//            user.setGender(gender);
+//            user.setWeight(weight);
+//            user.setHeight(height);
+//            TODO: Change edit method to directly edit csv file
         }
 
         @Override

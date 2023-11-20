@@ -5,6 +5,7 @@ import entity.User;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// TODO: To be implemented later
 public class EditProfileState {
 //`    private User user;
 //    private String name;
@@ -12,9 +13,6 @@ public class EditProfileState {
 //    private String gender;
 //    private double weight;
 //    private double height;
-//    private String activityLevel;
-//    private ArrayList<String> dietLabels;
-//    private ArrayList<String> healthLabels;
 //
 //    public EditProfileState(EditProfileState copy) {
 //        keyword = copy.keyword;

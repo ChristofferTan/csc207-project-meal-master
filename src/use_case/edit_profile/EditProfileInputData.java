@@ -11,21 +11,14 @@ public class EditProfileInputData {
     private final String gender;
     private final double weight;
     private final double height;
-    private final String activityLevel;
-    private final ArrayList<String> dietLabels;
-    private final ArrayList<String> healthLabels;
 
-    public EditProfileInputData(User user, String name, int age, String gender, double weight, double height,
-                                String activityLevel, ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
+    public EditProfileInputData(User user, String name, int age, String gender, double weight, double height) {
         this.user = user;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.weight = weight;
         this.height = height;
-        this.activityLevel = activityLevel;
-        this.dietLabels = dietLabels;
-        this.healthLabels = healthLabels;
     }
 
     public User getUser() {
@@ -50,17 +43,5 @@ public class EditProfileInputData {
 
     public double getHeight() {
         return height;
-    }
-
-    public String getActivityLevel() {
-        return activityLevel;
-    }
-
-    public ArrayList<String> getDietLabels() {
-        return dietLabels;
-    }
-
-    public ArrayList<String> getHealthLabels() {
-        return healthLabels;
     }
 }
