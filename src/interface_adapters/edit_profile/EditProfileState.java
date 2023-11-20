@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class EditProfileState {
-//    private User user;
+//`    private User user;
 //    private String name;
 //    private int age;
 //    private String gender;
@@ -104,5 +104,5 @@ public class EditProfileState {
 //                "maxCalories= " + maxCalories + "\n" +
 //                "maxPreparationTime= " + maxPreparationTime + "\n" +
 //                '}';
-//    }
+//    }`
 }

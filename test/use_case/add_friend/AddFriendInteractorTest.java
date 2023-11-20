@@ -15,8 +15,8 @@ public class AddFriendInteractorTest{
         AddFriendUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Christoffer", "ganteng");
-        User user2 = factory.create("Janis", "jelek");
+        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68);
+        User user2 = factory.create("Janis", "jelek", "janis", 19, "Woman", 175, 90);
         ((InMemoryUserDataAccessObject) userRepository).save(user1);
         ((InMemoryUserDataAccessObject) userRepository).save(user2);
         AddFriendOutputBoundary successPresenter = new AddFriendOutputBoundary() {
@@ -41,7 +41,7 @@ public class AddFriendInteractorTest{
         AddFriendUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Christoffer", "ganteng");
+        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68);
         ((InMemoryUserDataAccessObject) userRepository).save(user1);
         AddFriendOutputBoundary failurePresenter = new AddFriendOutputBoundary() {
 
@@ -65,8 +65,8 @@ public class AddFriendInteractorTest{
         AddFriendUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Christoffer", "ganteng");
-        User user2 = factory.create("Janis", "jelek");
+        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68);
+        User user2 = factory.create("Janis", "jelek", "janis", 19, "Woman", 175, 90);
         ((InMemoryUserDataAccessObject) userRepository).save(user1);
         ((InMemoryUserDataAccessObject) userRepository).save(user2);
         userRepository.addFriend("Christoffer", "Janis");

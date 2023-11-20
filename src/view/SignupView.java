@@ -20,6 +20,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final JTextField usernameInputField = new JTextField(15);
     private final JPasswordField passwordInputField = new JPasswordField(15);
     private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
+    private final JTextField nameInputField = new JTextField(15);
+    private final JTextField ageInputField = new JTextField(15);
+    private final JTextField genderInputField = new JTextField(15);
+    private final JTextField heightInputField = new JTextField(15);
+    private final JTextField weightInputField = new JTextField(15);
     private final SignupController signupController;
 
     private final JButton signUp;
@@ -39,6 +44,16 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 new JLabel(SignupViewModel.PASSWORD_LABEL), passwordInputField);
         LabelTextPanel repeatPasswordInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.REPEAT_PASSWORD_LABEL), repeatPasswordInputField);
+        LabelTextPanel nameInfo = new LabelTextPanel(
+                new JLabel(SignupViewModel.NAME_LABEL), nameInputField);
+        LabelTextPanel ageInfo = new LabelTextPanel(
+                new JLabel(SignupViewModel.AGE_LABEL), ageInputField);
+        LabelTextPanel genderInfo = new LabelTextPanel(
+                new JLabel(SignupViewModel.GENDER_LABEL), genderInputField);
+        LabelTextPanel heightInfo = new LabelTextPanel(
+                new JLabel(SignupViewModel.HEIGHT_LABEL), heightInputField);
+        LabelTextPanel weightInfo = new LabelTextPanel(
+                new JLabel(SignupViewModel.WEIGHT_LABEL), weightInputField);
 
         JPanel buttons = new JPanel();
         signUp = new JButton(SignupViewModel.SIGNUP_BUTTON_LABEL);
@@ -55,17 +70,17 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                             signupController.execute(
                                     currentState.getUsername(),
                                     currentState.getPassword(),
-                                    currentState.getRepeatPassword()
+                                    currentState.getRepeatPassword(),
+                                    currentState.getName(),
+                                    currentState.getAge(),
+                                    currentState.getGender(),
+                                    currentState.getHeight(),
+                                    currentState.getWeight()
                             );
                         }
                     }
                 }
         );
-
-        // This makes a new KeyListener implementing class, instantiates it, and
-        // makes it listen to keystrokes in the usernameInputField.
-        //
-        // Notice how it has access to instance variables in the enclosing class!
         usernameInputField.addKeyListener(
                 new KeyListener() {
                     @Override
@@ -126,6 +141,100 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                     }
                 }
         );
+        nameInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        SignupState currentState = signupViewModel.getState();
+                        String text = nameInputField.getText() + e.getKeyChar();
+                        currentState.setName(text);
+                        signupViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                });
+
+        ageInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        SignupState currentState = signupViewModel.getState();
+                        String text = ageInputField.getText() + e.getKeyChar();
+                        currentState.setAge(Integer.parseInt(text));
+                        signupViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                });
+
+        genderInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        SignupState currentState = signupViewModel.getState();
+                        String text = genderInputField.getText() + e.getKeyChar();
+                        currentState.setGender(text);
+                        signupViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                });
+
+        heightInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        SignupState currentState = signupViewModel.getState();
+                        String text = heightInputField.getText() + e.getKeyChar();
+                        currentState.setHeight(Integer.parseInt(text));
+                        signupViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                });
+
+        weightInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        SignupState currentState = signupViewModel.getState();
+                        String text = weightInputField.getText() + e.getKeyChar();
+                        currentState.setWeight(Integer.parseInt(text));
+                        signupViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -133,6 +242,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.add(usernameInfo);
         this.add(passwordInfo);
         this.add(repeatPasswordInfo);
+        this.add(nameInfo);
+        this.add(ageInfo);
+        this.add(genderInfo);
+        this.add(heightInfo);
+        this.add(weightInfo);
         this.add(buttons);
     }
 
