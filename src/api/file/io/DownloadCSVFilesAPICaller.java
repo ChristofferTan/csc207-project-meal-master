@@ -8,11 +8,6 @@ import org.json.JSONException;
 import java.io.IOException;
 
 public class DownloadCSVFilesAPICaller {
-
-    public static void main(String[] args) {
-        System.out.println(call("https://file.io/n3Wr0u8mKUgz"));
-    }
-
     private DownloadCSVFilesAPICaller() {};  // prevent instantiation
 
     /**

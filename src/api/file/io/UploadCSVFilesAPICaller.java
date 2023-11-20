@@ -13,9 +13,6 @@ public class UploadCSVFilesAPICaller {
     protected static final String API_AUTHORIZATION = "Bearer " + API_KEY;
     private static final String API_EXPIRATION_DATE = "2024-11-10";
 
-    public static void main(String[] args) {
-        System.out.println(call("src/api/file/io/playground.csv"));
-    }
 
     private UploadCSVFilesAPICaller() {}    // prevent instantiation
 

@@ -5,6 +5,8 @@ import use_case.edit_profile.EditProfileDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.myprofile.MyProfileDataAccessInterface;
+import use_case.signup.SignupUserDataAccessInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -3,23 +3,30 @@ package data_access;
 import api.file.io.DownloadCSVFilesAPICaller;
 import api.file.io.GetListofCSVFilesAPICaller;
 import api.file.io.UploadCSVFilesAPICaller;
+import entity.Recipe;
 import entity.User;
 import entity.UserFactory;
+import use_case.add_favorite_recipe.AddFavoriteRecipeUserDataAccessInterface;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
 import use_case.edit_profile.EditProfileDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface, EditProfileDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface, AddFavoriteRecipeUserDataAccessInterface, EditProfileDataAccessInterface {
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private final Map<String, ArrayList<String>> friends = new HashMap<>();
     private UserFactory userFactory;
+    private final String FILE_NAME = "users.csv";
+    private final String FILE_PATH = "./" + FILE_NAME;
 
-    public FileUserDataAccessObject(UserFactory userFactory) throws IOException {
+    public FileUserDataAccessObject(UserFactory userFactory, FileRecipeDataAccessObject fileRecipeDataAccessObject) throws IOException {
         this.userFactory = userFactory;
 
         headers.put("username", 0);
@@ -29,17 +36,21 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         headers.put("gender", 4);
         headers.put("height", 5);
         headers.put("weight", 6);
+        headers.put("favoriteRecipes", 7);
 
-        HashMap<String, String> filesInDatabase = GetListofCSVFilesAPICaller.call();
-        if (filesInDatabase.containsKey("users.csv")) {
-            String usersData = DownloadCSVFilesAPICaller.call(filesInDatabase.get("users.csv"));
+        HashMap<String, String> filesNameInDatabase = GetListofCSVFilesAPICaller.call();
+        if (filesNameInDatabase.containsKey(FILE_NAME)) {
+            System.out.println("Downloading users.csv from database...");
+            String usersData = DownloadCSVFilesAPICaller.call(filesNameInDatabase.get(FILE_NAME));
             String[] rows = usersData.split("\n");
-            String header = rows[0];
+            String header = rows[0].trim();
+            // System.out.println("anak anjing: " + header);
 
-            assert headers.equals("username,password,name,age,gender,height,weight");
+            assert header.equals("username,password,name,age,gender,height,weight,favoriteRecipes");
 
             for (int i=1;i<rows.length;i++) {
-                String row = rows[i];
+                String row = rows[i].trim();
+                System.out.println(row);
                 String[] col = row.split(",");
                 String username = String.valueOf(col[headers.get("username")]);
                 String password = String.valueOf(col[headers.get("password")]);
@@ -50,8 +61,20 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 int weight = Integer.parseInt(col[headers.get("weight")]);
 
                 User user = userFactory.create(username, password, name, age, gender, height, weight);
+                ArrayList<Recipe> favoriteRecipes = user.getFavoriteRecipes();
+                int idx = headers.get("favoriteRecipes");
+                while(idx < col.length) {
+                    Recipe recipe = fileRecipeDataAccessObject.getRecipe(col[idx]);
+                    favoriteRecipes.add(recipe);
+                    idx++;
+                }
                 accounts.put(username, user);
             }
+            this.save();
+        }
+        else {
+            // if not exist, create a new users.csv
+            this.save();
         }
     }
 
@@ -76,24 +99,41 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public void save(User user) {
+        System.out.println("Downloadin users.csv from database... (removing users.csv from the database)");
+        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
         accounts.put(user.getUsername(), user);
         this.save();
     }
     private void save() {
         BufferedWriter writer;
         try {
-            File csvFile = new File("./users.csv");
+            File csvFile = new File(FILE_PATH);
             writer = new BufferedWriter(new FileWriter(csvFile));
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
             for (User user: accounts.values()) {
-                String line = String.format("%s,%s,%s,%d,%s,%d,%d", user.getUsername(), user.getPassword(),user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight());
+                String favoriteRecipes = "";
+                for (Recipe recipe: user.getFavoriteRecipes()) {
+                    if (favoriteRecipes == "") {
+                        favoriteRecipes += recipe.getLabel();
+                    }
+                    else {
+                        favoriteRecipes += "," + recipe.getLabel();
+                    }
+                }
+                System.out.println("Resep favorit: " + favoriteRecipes);
+
+                String line = String.format("%s,%s,%s,%d,%s,%d,%d,%s", user.getUsername(), user.getPassword(),user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), favoriteRecipes);
                 writer.write(line);
                 writer.newLine();
             }
             writer.close();
-            UploadCSVFilesAPICaller.call("./users.csv");
+            System.out.println("Uploading users.csv to database...");
+            UploadCSVFilesAPICaller.call(FILE_PATH);
+            HashMap<String,String> listOfCSVFiles = GetListofCSVFilesAPICaller.call();
+            System.out.println("Upload success! Download at " + listOfCSVFiles.get(FILE_NAME) + ". There's currently " + listOfCSVFiles.size() + " files in the database.");
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -114,5 +154,24 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     @Override
     public User get(String username) {
         return accounts.get(username);
+    }
+
+    @Override
+    public boolean isExists(String username, Recipe recipe) {
+        if (accounts.containsKey(username)) {
+            User user  = accounts.get(username);
+            return user.getFavoriteRecipes().contains(recipe);
+        }
+        return false;
+    }
+
+    @Override
+    public void saveFavoriteRecipe(String username, Recipe recipe) {
+        if (accounts.containsKey(username)) {
+            User user = accounts.get(username);
+            DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+            user.getFavoriteRecipes().add(recipe);
+            this.save();
+        }
     }
 }

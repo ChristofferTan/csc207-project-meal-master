@@ -9,8 +9,8 @@ import use_case.generate_recipe.GenerateRecipeInteractor;
 import use_case.generate_recipe.GenerateRecipeOutputBoundary;
 import view.GenerateRecipeView;
 
-public class GenerateRecipeFactory {
-    private GenerateRecipeFactory() {}
+public class GenerateRecipeUseCaseFactory {
+    private GenerateRecipeUseCaseFactory() {}
 
     public static GenerateRecipeView create(ViewManagerModel viewManagerModel, GenerateRecipeViewModel generateRecipeViewModel) {
         GenerateRecipeController generateRecipeController = createGenerateUseCase(viewManagerModel, generateRecipeViewModel);
