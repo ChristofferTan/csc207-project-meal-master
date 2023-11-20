@@ -20,7 +20,7 @@ public class CommonUser implements User {
         this.username = username;
         this.password = password;
         this.myRecipes = new ArrayList<Recipe>();
-        this.planner = new Planner();
+        this.planner = new Planner(username);
     }
     CommonUser(String username, String password, String name, int age, String gender, double weight, double height, String activityLevel,
                ArrayList<String> dietLabels, ArrayList<String> healthLabels) {
@@ -35,7 +35,7 @@ public class CommonUser implements User {
         this.dietLabels = dietLabels;
         this.healthLabels = healthLabels;
         this.myRecipes = new ArrayList<Recipe>();
-        this.planner = new Planner();
+        this.planner = new Planner(username);
     }
 
     public String getUsername() {
