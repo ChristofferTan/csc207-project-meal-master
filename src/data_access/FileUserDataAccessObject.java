@@ -10,6 +10,8 @@ import use_case.add_favorite_recipe.AddFavoriteRecipeUserDataAccessInterface;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
 import use_case.edit_profile.EditProfileDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.my_favorite_recipes.MyFavoriteRecipeDataAccessInterface;
+import use_case.myprofile.MyProfileDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.BufferedWriter;
@@ -18,7 +20,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFriendUserDataAccessInterface, AddFavoriteRecipeUserDataAccessInterface, EditProfileDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface,
+        AddFriendUserDataAccessInterface, AddFavoriteRecipeUserDataAccessInterface, EditProfileDataAccessInterface,
+        MyProfileDataAccessInterface, MyFavoriteRecipeDataAccessInterface {
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private final Map<String, ArrayList<String>> friends = new HashMap<>();
