@@ -2,12 +2,9 @@ package use_case.my_favorite_recipe;
 
 import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
-import data_access.InMemoryUserDataAccessObject;
 import entity.*;
 import org.junit.jupiter.api.Test;
-import use_case.add_favorite_recipe.*;
 import use_case.my_favorite_recipes.*;
-import use_case.myprofile.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
