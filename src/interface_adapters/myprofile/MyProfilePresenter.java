@@ -16,6 +16,5 @@ public class MyProfilePresenter implements MyProfileOutputBoundary{
         System.out.println("Height: " + myProfileOutputData.getHeight());
         System.out.println("Weight: " + myProfileOutputData.getWeight());
         System.out.println("Gender: " + myProfileOutputData.getGender());
-        System.out.println("Favorite Recipes: " + myProfileOutputData.getFavoriteRecipes());
     }
 }

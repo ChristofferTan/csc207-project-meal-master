@@ -40,8 +40,4 @@ public class MyProfileOutputData {
         return user.getWeight();
     }
 
-    public ArrayList<Recipe> getFavoriteRecipes() {
-        return user.getFavoriteRecipes();
-    }
-
 }
