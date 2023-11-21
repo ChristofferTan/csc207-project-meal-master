@@ -1,27 +1,25 @@
-package interface_adapters.my_planner;
+package interface_adapters.show_planner;
 
 import interface_adapters.ViewModel;
-import org.json.Property;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class MyPlannerViewModel extends ViewModel {
-    public final String TITLE_LABEL = "My Planner View";
-
-    private MyPlannerState state = new MyPlannerState();
+public class ShowPlannerViewModel extends ViewModel {
+    public final String TITLE_LABEL = "Show Planner View";
+    private ShowPlannerState state = new ShowPlannerState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
 
-    public MyPlannerViewModel() {
-        super("my planner");
+    public ShowPlannerViewModel() {
+        super("show planner");
     }
 
-    public MyPlannerState getState() {
+    public ShowPlannerState getState() {
         return state;
     }
 
-    public void setState(MyPlannerState state) {
+    public void setState(ShowPlannerState state) {
         this.state = state;
     }
 

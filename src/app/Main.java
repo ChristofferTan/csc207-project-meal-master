@@ -59,7 +59,7 @@ public class Main {
 //            LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
 //            views.add(loggedInView, loggedInView.viewName);
 
-            GenerateRecipeView generateRecipeView = GenerateRecipeFactory.create(viewManagerModel, generateRecipeViewModel);
+            GenerateRecipeView generateRecipeView = GenerateRecipeUseCaseFactory.create(viewManagerModel, generateRecipeViewModel);
             views.add(generateRecipeView, generateRecipeView.viewName);
 
             viewManagerModel.setActiveView(generateRecipeView.viewName);
