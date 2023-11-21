@@ -4,6 +4,7 @@ import api.file.io.DownloadCSVFilesAPICaller;
 import api.file.io.GetListofCSVFilesAPICaller;
 import api.file.io.UploadCSVFilesAPICaller;
 import entity.*;
+import use_case.my_planner.MyPlannerDataAccessInterface;
 import use_case.save_recipe.SaveRecipeDataAccessInterface;
 
 import java.io.*;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterface {
+public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterface, MyPlannerDataAccessInterface {
     private final LinkedHashMap<String, Integer> headers = new LinkedHashMap<>();
     private final HashMap<String, Planner> planners = new HashMap<>();  // username -> planner
     private final PlannerFactory plannerFactory;
