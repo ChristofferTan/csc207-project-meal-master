@@ -1,6 +1,5 @@
 package use_case.grocery_list;
 
-import entity.Grocery;
 import entity.MealType;
 import entity.Planner;
 import entity.Recipe;
