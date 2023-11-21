@@ -4,19 +4,19 @@ import entity.Recipe;
 import entity.User;
 
 public class AddFavoriteRecipeState {
-    private final User user;
-    private final Recipe recipe;
+    private final String username;
+    private final String label;
 
     public AddFavoriteRecipeState(AddFavoriteRecipeState copy) {
-        user = copy.user;
-        recipe = copy.recipe;
+        username = copy.username;
+        label = copy.label;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    public String getLabel() {
+        return label;
     }
 }

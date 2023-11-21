@@ -7,10 +7,12 @@ import use_case.add_favorite_recipe.AddFavoriteRecipeOutputData;
 
 public class AddFavoriteRecipePresenter implements AddFavoriteRecipeOutputBoundary {
     private final GenerateRecipeViewModel generateRecipeViewModel;
+    private final AddFavoriteRecipeViewModel addFavoriteRecipeViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public AddFavoriteRecipePresenter(GenerateRecipeViewModel generateRecipeViewModel, ViewManagerModel viewManagerModel) {
+    public AddFavoriteRecipePresenter(GenerateRecipeViewModel generateRecipeViewModel, AddFavoriteRecipeViewModel addFavoriteRecipeViewModel, ViewManagerModel viewManagerModel) {
         this.generateRecipeViewModel = generateRecipeViewModel;
+        this.addFavoriteRecipeViewModel = addFavoriteRecipeViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 

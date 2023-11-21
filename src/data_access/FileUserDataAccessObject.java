@@ -8,6 +8,7 @@ import entity.User;
 import entity.UserFactory;
 import use_case.add_favorite_recipe.AddFavoriteRecipeUserDataAccessInterface;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
+import use_case.delete_favorite_recipe.DeleteFavoriteRecipeDataAccessInterface;
 import use_case.edit_profile.EditProfileDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.my_favorite_recipes.MyFavoriteRecipeDataAccessInterface;
@@ -22,7 +23,7 @@ import java.util.*;
 
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface,
         AddFriendUserDataAccessInterface, AddFavoriteRecipeUserDataAccessInterface, EditProfileDataAccessInterface,
-        MyProfileDataAccessInterface, MyFavoriteRecipeDataAccessInterface {
+        MyProfileDataAccessInterface, MyFavoriteRecipeDataAccessInterface, DeleteFavoriteRecipeDataAccessInterface {
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private final Map<String, ArrayList<String>> friends = new HashMap<>();
@@ -167,6 +168,16 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             return user.getFavoriteRecipes().contains(recipe);
         }
         return false;
+    }
+
+    @Override
+    public void deleteFavoriteRecipe(String username, Recipe recipe) {
+        if (accounts.containsKey(username)) {
+            User user = accounts.get(username);
+            DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+            user.getFavoriteRecipes().remove(recipe);
+            this.save();
+        }
     }
 
     @Override
