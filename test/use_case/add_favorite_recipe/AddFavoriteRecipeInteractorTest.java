@@ -21,7 +21,7 @@ public class AddFavoriteRecipeInteractorTest {
 
         recipeDAO = new FileRecipeDataAccessObject(recipeFactory);
         try {
-            userDAO = new FileUserDataAccessObject(userFactory, recipeDAO);
+            userDAO = new FileUserDataAccessObject(userFactory);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -42,7 +42,7 @@ public class AddFavoriteRecipeInteractorTest {
         AddFavoriteRecipeOutputBoundary successPresenter = new AddFavoriteRecipeOutputBoundary() {
             @Override
             public void prepareSuccessView(AddFavoriteRecipeOutputData addFavoriteRecipeOutputData) {
-                assertTrue(userDAO.isExists("Christoffer", recipe));
+                assertTrue(userDAO.isExists("Christoffer", addFavoriteRecipeOutputData.getLabel()));
             }
 
             @Override
@@ -61,7 +61,7 @@ public class AddFavoriteRecipeInteractorTest {
 
         recipeDAO = new FileRecipeDataAccessObject(recipeFactory);
         try {
-            userDAO = new FileUserDataAccessObject(userFactory, recipeDAO);
+            userDAO = new FileUserDataAccessObject(userFactory);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -75,7 +75,7 @@ public class AddFavoriteRecipeInteractorTest {
                 new ArrayList<String>(Arrays.asList("2 tablespoons olive oil","4 bone-in", "skin-on chicken thighs (about 1 pound)","Salt and pepper","4 scallions", "white and green parts separated and thinly sliced","2 tablespoons finely chopped peeled fresh ginger","3 garlic cloves", "minced","2 ounces shiitake mushroom caps (about 3/4 cups)", "thinly sliced","1 1/2 cups Arborio rice","3 2/3 cups chicken broth,Fresh cilantro", "for serving")),
                 50,10);
         recipeDAO.save(recipe);
-        userDAO.saveFavoriteRecipe(user1.getUsername(), recipe);
+        userDAO.saveFavoriteRecipe(user1.getUsername(), recipe.getLabel());
 
         AddFavoriteRecipeInputData addFavoriteRecipeInputData = new AddFavoriteRecipeInputData(user1.getUsername(), recipe.getLabel());
         AddFavoriteRecipeOutputBoundary failPresenter = new AddFavoriteRecipeOutputBoundary() {

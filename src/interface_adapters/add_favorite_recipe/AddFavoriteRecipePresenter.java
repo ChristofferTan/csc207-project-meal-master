@@ -18,7 +18,7 @@ public class AddFavoriteRecipePresenter implements AddFavoriteRecipeOutputBounda
 
     @Override
     public void prepareSuccessView(AddFavoriteRecipeOutputData addFavoriteRecipeOutputData) {
-        System.out.println("You have successfully added " + addFavoriteRecipeOutputData.getRecipe().getLabel() + " to your favourite list");
+        System.out.println("You have successfully added " + addFavoriteRecipeOutputData.getLabel() + " to your favourite list");
     }
 
     @Override

@@ -22,7 +22,7 @@ public class DeleteFavoriteRecipeInteractorTest {
 
         recipeDataAccessObject = new FileRecipeDataAccessObject(recipeFactory);
         try {
-            userDataAccessObject = new FileUserDataAccessObject(userFactory, recipeDataAccessObject);
+            userDataAccessObject = new FileUserDataAccessObject(userFactory);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -36,13 +36,13 @@ public class DeleteFavoriteRecipeInteractorTest {
                 new ArrayList<String>(Arrays.asList("2 tablespoons olive oil","4 bone-in", "skin-on chicken thighs (about 1 pound)","Salt and pepper","4 scallions", "white and green parts separated and thinly sliced","2 tablespoons finely chopped peeled fresh ginger","3 garlic cloves", "minced","2 ounces shiitake mushroom caps (about 3/4 cups)", "thinly sliced","1 1/2 cups Arborio rice","3 2/3 cups chicken broth,Fresh cilantro", "for serving")),
                 50,10);
         recipeDataAccessObject.save(recipe);
-        userDataAccessObject.saveFavoriteRecipe(user1.getUsername(), recipe);
+        userDataAccessObject.saveFavoriteRecipe(user1.getUsername(), recipe.getLabel());
 
         DeleteFavoriteRecipeInputData deleteFavoriteRecipeInputData = new DeleteFavoriteRecipeInputData("Janis", recipe.getLabel());
         DeleteFavoriteRecipeOutputBoundary successPresenter = new DeleteFavoriteRecipeOutputBoundary() {
             @Override
             public void prepareSuccessView(DeleteFavoriteRecipeOutputData deleteFavoriteRecipeOutputData) {
-                assertFalse(userDataAccessObject.isExists("Janis", recipe));
+                assertFalse(userDataAccessObject.isExists("Janis", recipe.getLabel()));
             }
 
             @Override
@@ -62,7 +62,7 @@ public class DeleteFavoriteRecipeInteractorTest {
 
         recipeDataAccessObject = new FileRecipeDataAccessObject(recipeFactory);
         try {
-            userDataAccessObject = new FileUserDataAccessObject(userFactory, recipeDataAccessObject);
+            userDataAccessObject = new FileUserDataAccessObject(userFactory);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

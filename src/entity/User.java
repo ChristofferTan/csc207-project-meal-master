@@ -10,7 +10,7 @@ public interface User {
     String getGender();
     int getHeight();
     int getWeight();
-    public ArrayList<Recipe> getFavoriteRecipes();
+    public ArrayList<String> getFavoriteRecipes();
 
     void setName(String name);
 

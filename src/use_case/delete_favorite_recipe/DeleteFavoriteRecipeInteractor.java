@@ -17,12 +17,11 @@ public class DeleteFavoriteRecipeInteractor implements DeleteFavoriteRecipeInput
 
     @Override
     public void execute(DeleteFavoriteRecipeInputData deleteFavoriteRecipeInputData) {
-        Recipe recipe = fileRecipeDataAccessObject.getRecipe(deleteFavoriteRecipeInputData.getLabel());
-        if (!userDataAccessObject.isExists(deleteFavoriteRecipeInputData.getUsername(), recipe)) {
+        if (!userDataAccessObject.isExists(deleteFavoriteRecipeInputData.getUsername(), deleteFavoriteRecipeInputData.getLabel())) {
             presenter.prepareFailView("You do not have this recipe in My Favorite Recipe");
         }
         else {
-            userDataAccessObject.deleteFavoriteRecipe(deleteFavoriteRecipeInputData.getUsername(), recipe);
+            userDataAccessObject.deleteFavoriteRecipe(deleteFavoriteRecipeInputData.getUsername(), deleteFavoriteRecipeInputData.getLabel());
 
             DeleteFavoriteRecipeOutputData deleteFavoriteRecipeOutputData = new DeleteFavoriteRecipeOutputData(deleteFavoriteRecipeInputData.getLabel());
             presenter.prepareSuccessView(deleteFavoriteRecipeOutputData);

@@ -3,13 +3,19 @@ package use_case.add_favorite_recipe;
 import entity.Recipe;
 
 public class AddFavoriteRecipeOutputData {
-    private final Recipe recipe;
+    private final String label;
+    private final String url;
 
-    public AddFavoriteRecipeOutputData(Recipe recipe) {
-        this.recipe = recipe;
+    public AddFavoriteRecipeOutputData(String label, String url) {
+        this.label = label;
+        this.url = url;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    public String getLabel() {
+        return label;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

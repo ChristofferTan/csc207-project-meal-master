@@ -31,7 +31,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     private final String FILE_NAME = "users.csv";
     private final String FILE_PATH = "./" + FILE_NAME;
 
-    public FileUserDataAccessObject(UserFactory userFactory, FileRecipeDataAccessObject fileRecipeDataAccessObject) throws IOException {
+    public FileUserDataAccessObject(UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;
 
         headers.put("username", 0);
@@ -66,11 +66,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 int weight = Integer.parseInt(col[headers.get("weight")]);
 
                 User user = userFactory.create(username, password, name, age, gender, height, weight);
-                ArrayList<Recipe> favoriteRecipes = user.getFavoriteRecipes();
+                ArrayList<String> favoriteRecipes = user.getFavoriteRecipes();
                 int idx = headers.get("favoriteRecipes");
                 while(idx < col.length) {
-                    Recipe recipe = fileRecipeDataAccessObject.getRecipe(col[idx]);
-                    favoriteRecipes.add(recipe);
+                    String label = String.valueOf(col[idx]);
+                    favoriteRecipes.add(label);
                     idx++;
                 }
                 accounts.put(username, user);
@@ -119,12 +119,12 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
             for (User user: accounts.values()) {
                 String favoriteRecipes = "";
-                for (Recipe recipe: user.getFavoriteRecipes()) {
+                for (String label: user.getFavoriteRecipes()) {
                     if (favoriteRecipes == "") {
-                        favoriteRecipes += recipe.getLabel();
+                        favoriteRecipes += label;
                     }
                     else {
-                        favoriteRecipes += "," + recipe.getLabel();
+                        favoriteRecipes += "," + label;
                     }
                 }
                 System.out.println("Resep favorit: " + favoriteRecipes);
@@ -162,30 +162,30 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     }
 
     @Override
-    public boolean isExists(String username, Recipe recipe) {
+    public boolean isExists(String username, String label) {
         if (accounts.containsKey(username)) {
             User user  = accounts.get(username);
-            return user.getFavoriteRecipes().contains(recipe);
+            return user.getFavoriteRecipes().contains(label);
         }
         return false;
     }
 
     @Override
-    public void deleteFavoriteRecipe(String username, Recipe recipe) {
+    public void deleteFavoriteRecipe(String username, String label) {
         if (accounts.containsKey(username)) {
             User user = accounts.get(username);
             DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
-            user.getFavoriteRecipes().remove(recipe);
+            user.getFavoriteRecipes().remove(label);
             this.save();
         }
     }
 
     @Override
-    public void saveFavoriteRecipe(String username, Recipe recipe) {
+    public void saveFavoriteRecipe(String username, String label) {
         if (accounts.containsKey(username)) {
             User user = accounts.get(username);
             DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
-            user.getFavoriteRecipes().add(recipe);
+            user.getFavoriteRecipes().add(label);
             this.save();
         }
     }
