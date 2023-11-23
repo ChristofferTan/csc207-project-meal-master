@@ -53,6 +53,7 @@ public class AddFavoriteRecipeInteractorTest {
         AddFavoriteRecipeInputBoundary interactor = new AddFavoriteRecipeInteractor(userDAO, recipeDAO, successPresenter);
         interactor.execute(inputData);
     }
+    @Test
     void FailureRecipeHasAlreadyInTheList() {
         UserFactory userFactory = new CommonUserFactory();
         RecipeFactory recipeFactory = new RecipeFactory();

@@ -3,7 +3,7 @@ package use_case.delete_favorite_recipe;
 import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
 import entity.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import use_case.add_favorite_recipe.*;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class DeleteFavoriteRecipeInteractorTest {
     @Test
-    public void SuccessTest() {
+    void successTest() {
         UserFactory userFactory = new CommonUserFactory();
         RecipeFactory recipeFactory = new RecipeFactory();
         FileRecipeDataAccessObject recipeDataAccessObject;
@@ -54,7 +54,7 @@ public class DeleteFavoriteRecipeInteractorTest {
         interactor.execute(deleteFavoriteRecipeInputData);
     }
     @Test
-    public void FailureRecipeIsNotInFavoriteRecipe() {
+    void FailureRecipeIsNotInFavoriteRecipe() {
         UserFactory userFactory = new CommonUserFactory();
         RecipeFactory recipeFactory = new RecipeFactory();
         FileRecipeDataAccessObject recipeDataAccessObject;
