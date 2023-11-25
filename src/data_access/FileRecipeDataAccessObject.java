@@ -4,6 +4,7 @@ import api.file.io.DownloadCSVFilesAPICaller;
 import api.file.io.GetListofCSVFilesAPICaller;
 import api.file.io.UploadCSVFilesAPICaller;
 import entity.*;
+import use_case.generate_recipe.GenerateRecipeDataAccessInterface;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class FileRecipeDataAccessObject {
+public class FileRecipeDataAccessObject implements GenerateRecipeDataAccessInterface {
     private final LinkedHashMap<String, Integer> headers = new LinkedHashMap<>();
     private final HashMap<String, Recipe> recipes = new HashMap<>();  // label -> recipe
     private final RecipeFactory recipeFactory;

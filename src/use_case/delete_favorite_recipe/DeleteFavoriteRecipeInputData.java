@@ -1,12 +1,10 @@
-package use_case.add_favorite_recipe;
+package use_case.delete_favorite_recipe;
 
-import entity.Recipe;
-
-public class AddFavoriteRecipeInputData {
+public class DeleteFavoriteRecipeInputData {
     final private String username;
     final private String label;
 
-    public AddFavoriteRecipeInputData(String username, String label) {
+    public DeleteFavoriteRecipeInputData(String username, String label) {
         this.username = username;
         this.label = label;
     }

@@ -10,13 +10,13 @@ public class CommonUser implements User {
     private String gender;
     private int weight;
     private int height;
-    private final ArrayList<Recipe> favoriteRecipes;
+    private final ArrayList<String> favoriteRecipes;
     private final Planner planner;
 
     CommonUser(String username, String password) {
         this.username = username;
         this.password = password;
-        this.favoriteRecipes = new ArrayList<Recipe>();
+        this.favoriteRecipes = new ArrayList<String>();
         this.planner = new Planner(username);
     }
     CommonUser(String username, String password, String name, int age, String gender, int weight, int height) {
@@ -27,7 +27,7 @@ public class CommonUser implements User {
         this.gender = gender;
         this.weight = weight;
         this.height = height;
-        this.favoriteRecipes= new ArrayList<Recipe>();
+        this.favoriteRecipes= new ArrayList<String>();
         this.planner = new Planner(username);
     }
 
@@ -77,7 +77,7 @@ public class CommonUser implements User {
         this.height = height;
     }
 
-    public ArrayList<Recipe> getFavoriteRecipes() {
+    public ArrayList<String> getFavoriteRecipes() {
         return favoriteRecipes;
     }
 

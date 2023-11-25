@@ -7,16 +7,18 @@ import use_case.add_favorite_recipe.AddFavoriteRecipeOutputData;
 
 public class AddFavoriteRecipePresenter implements AddFavoriteRecipeOutputBoundary {
     private final GenerateRecipeViewModel generateRecipeViewModel;
+    private final AddFavoriteRecipeViewModel addFavoriteRecipeViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public AddFavoriteRecipePresenter(GenerateRecipeViewModel generateRecipeViewModel, ViewManagerModel viewManagerModel) {
+    public AddFavoriteRecipePresenter(GenerateRecipeViewModel generateRecipeViewModel, AddFavoriteRecipeViewModel addFavoriteRecipeViewModel, ViewManagerModel viewManagerModel) {
         this.generateRecipeViewModel = generateRecipeViewModel;
+        this.addFavoriteRecipeViewModel = addFavoriteRecipeViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
     public void prepareSuccessView(AddFavoriteRecipeOutputData addFavoriteRecipeOutputData) {
-        System.out.println("You have successfully added " + addFavoriteRecipeOutputData.getRecipe().getLabel() + " to your favourite list");
+        System.out.println("You have successfully added " + addFavoriteRecipeOutputData.getLabel() + " to your favourite list");
     }
 
     @Override

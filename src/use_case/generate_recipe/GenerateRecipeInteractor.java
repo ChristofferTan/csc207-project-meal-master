@@ -1,6 +1,7 @@
 package use_case.generate_recipe;
 
 import api.edamam.GenerateRecipeAPICaller;
+import entity.Recipe;
 
 public class GenerateRecipeInteractor implements GenerateRecipeInputBoundary {
     final GenerateRecipeDataAccessInterface dataAccessInterface;
@@ -14,9 +15,9 @@ public class GenerateRecipeInteractor implements GenerateRecipeInputBoundary {
 
     @Override
     public void execute(GenerateRecipeInputData generateRecipeInputData) {
-        GenerateRecipeOutputData generateRecipeOutputData = new GenerateRecipeOutputData(
-                GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe()
-        );
+        Recipe generatedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
+        GenerateRecipeOutputData generateRecipeOutputData = new GenerateRecipeOutputData(generatedRecipe);
+        dataAccessInterface.save(generatedRecipe);
         generateRecipePresenter.prepareSuccessView(generateRecipeOutputData);
     }
 }

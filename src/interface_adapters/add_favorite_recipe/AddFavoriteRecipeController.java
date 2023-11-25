@@ -10,8 +10,8 @@ public class AddFavoriteRecipeController {
     public AddFavoriteRecipeController(AddFavoriteRecipeInputBoundary addFavoriteRecipeInteractor) {
         this.addFavoriteRecipeInteractor = addFavoriteRecipeInteractor;
     }
-    public void execute(String username, Recipe recipe) {
-        AddFavoriteRecipeInputData addFavoriteRecipeInputData = new AddFavoriteRecipeInputData(username, recipe);
+    public void execute(String username, String label) {
+        AddFavoriteRecipeInputData addFavoriteRecipeInputData = new AddFavoriteRecipeInputData(username, label);
         addFavoriteRecipeInteractor.execute(addFavoriteRecipeInputData);
     }
 }
