@@ -1,7 +1,9 @@
 package view;
 
 import entity.Recipe;
-import interface_adapters.generate_recipe.GenerateRecipeState;
+import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeController;
+import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeState;
+import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeViewModel;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeController;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeState;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
@@ -11,18 +13,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
 public class MyFavoriteRecipeView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "my favorite recipe";
     private final MyFavoriteRecipeViewModel myFavoriteRecipeViewModel;
     private final MyFavoriteRecipeController myFavoriteRecipeController;
+    private final DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel;
+    private final DeleteFavoriteRecipeController deleteFavoriteRecipeController;
     private final JList favoriteRecipes;
     private final JButton delete;
 
-    public MyFavoriteRecipeView(MyFavoriteRecipeController myFavoriteRecipeController, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel) {
+    public MyFavoriteRecipeView(MyFavoriteRecipeController myFavoriteRecipeController, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel,
+                                DeleteFavoriteRecipeController deleteFavoriteRecipeController, DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel) {
         this.myFavoriteRecipeController = myFavoriteRecipeController;
         this.myFavoriteRecipeViewModel = myFavoriteRecipeViewModel;
+        this.deleteFavoriteRecipeController = deleteFavoriteRecipeController;
+        this.deleteFavoriteRecipeViewModel = deleteFavoriteRecipeViewModel;
         myFavoriteRecipeViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(myFavoriteRecipeViewModel.TITLE_LABEL);
@@ -42,7 +48,8 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(delete)) {
                             if (favoriteRecipes.getSelectedIndex() != -1) {
-
+                                DeleteFavoriteRecipeState currentState = deleteFavoriteRecipeViewModel.getState();
+                                deleteFavoriteRecipeController.execute(currentState.getUsername(), (String)favoriteRecipes.getSelectedValue());
                             }
                         }
                     }
@@ -62,11 +69,6 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         MyFavoriteRecipeState state = (MyFavoriteRecipeState) evt.getNewValue();
-        ArrayList<Recipe> favoriteRecipeData = state.getFavoriteRecipes();
-        ArrayList<String> favoriteLabel = new ArrayList<>();
-        for (Recipe recipe : favoriteRecipeData) {
-            favoriteLabel.add(recipe.getLabel());
-        }
-        favoriteRecipes.setListData(favoriteLabel.toArray());
+        favoriteRecipes.setListData(state.getFavoriteRecipes().toArray());
     }
 }
