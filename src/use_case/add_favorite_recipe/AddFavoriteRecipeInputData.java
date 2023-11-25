@@ -4,18 +4,18 @@ import entity.Recipe;
 
 public class AddFavoriteRecipeInputData {
     final private String username;
-    final private Recipe recipe;
+    final private String label;
 
-    public AddFavoriteRecipeInputData(String username, Recipe recipe) {
+    public AddFavoriteRecipeInputData(String username, String label) {
         this.username = username;
-        this.recipe = recipe;
+        this.label = label;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    public String getLabel() {
+        return label;
     }
 }
