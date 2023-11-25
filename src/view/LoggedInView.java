@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 
 import javax.swing.*;
@@ -12,9 +13,14 @@ import java.beans.PropertyChangeListener;
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "logged in";
     private final LoggedInViewModel loggedInViewModel;
+
     JLabel username;
+
     final JButton logOut;
 
+    /**
+     * A window with a title and a JButton.
+     */
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
@@ -25,6 +31,10 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         JLabel usernameInfo = new JLabel("Currently logged in: ");
         username = new JLabel();
 
+        JPanel usernamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        usernamePanel.add(usernameInfo);
+        usernamePanel.add(username);
+
         JPanel buttons = new JPanel();
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logOut);
@@ -34,18 +44,20 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(usernameInfo);
-        this.add(username);
+        this.add(usernamePanel);
         this.add(buttons);
+    }
+
+    /**
+     * React to a button click that results in evt.
+     */
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
+        LoggedInState state = (LoggedInState) evt.getNewValue();
+        username.setText(state.getUsername());
     }
 }
