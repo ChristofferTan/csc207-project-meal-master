@@ -1,7 +1,6 @@
 package use_case.add_favorite_recipe;
 
 import data_access.FileRecipeDataAccessObject;
-import entity.Recipe;
 
 public class AddFavoriteRecipeInteractor implements AddFavoriteRecipeInputBoundary{
     final AddFavoriteRecipeUserDataAccessInterface userDataAccessObject;
@@ -16,14 +15,13 @@ public class AddFavoriteRecipeInteractor implements AddFavoriteRecipeInputBounda
 
     @Override
     public void execute(AddFavoriteRecipeInputData addFavoriteRecipeInputData) {
-        Recipe recipe = fileRecipeDataAccessObject.getRecipe(addFavoriteRecipeInputData.getLabel());
-        if (userDataAccessObject.isExists(addFavoriteRecipeInputData.getUsername(), recipe)) {
+        if (userDataAccessObject.isExists(addFavoriteRecipeInputData.getUsername(), addFavoriteRecipeInputData.getLabel())) {
             presenter.prepareFailView("Sorry, this recipe has already been in your list");
         }
         else {
-            userDataAccessObject.saveFavoriteRecipe(addFavoriteRecipeInputData.getUsername(), recipe);
+            userDataAccessObject.saveFavoriteRecipe(addFavoriteRecipeInputData.getUsername(), addFavoriteRecipeInputData.getLabel());
 
-            AddFavoriteRecipeOutputData addFavoriteRecipeOutputData = new AddFavoriteRecipeOutputData(recipe);
+            AddFavoriteRecipeOutputData addFavoriteRecipeOutputData = new AddFavoriteRecipeOutputData(addFavoriteRecipeInputData.getLabel(), fileRecipeDataAccessObject.getRecipe(addFavoriteRecipeInputData.getLabel()).getRecipeUrl());
             presenter.prepareSuccessView(addFavoriteRecipeOutputData);
         }
     }

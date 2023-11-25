@@ -4,7 +4,7 @@ import entity.Recipe;
 import entity.User;
 
 public interface AddFavoriteRecipeUserDataAccessInterface {
-    boolean isExists(String username, Recipe recipe);
-    void saveFavoriteRecipe(String username, Recipe recipe);
+    boolean isExists(String username, String label);
+    void saveFavoriteRecipe(String username, String label);
     void save(User user);
 }

@@ -1,13 +1,12 @@
-package interface_adapters.add_favorite_recipe;
+package interface_adapters.delete_favorite_recipe;
 
-import entity.Recipe;
-import entity.User;
+import interface_adapters.add_favorite_recipe.AddFavoriteRecipeState;
 
-public class AddFavoriteRecipeState {
+public class DeleteFavoriteRecipeState {
     private final String username;
     private final String label;
 
-    public AddFavoriteRecipeState(AddFavoriteRecipeState copy) {
+    public DeleteFavoriteRecipeState(DeleteFavoriteRecipeState copy) {
         username = copy.username;
         label = copy.label;
     }
