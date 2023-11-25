@@ -4,6 +4,7 @@ import entity.Recipe;
 import entity.User;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MyProfileOutputData {
     private final User user;
@@ -40,4 +41,16 @@ public class MyProfileOutputData {
         return user.getWeight();
     }
 
+    public int getRecommendedCalories() {
+        int weight = user.getWeight();
+        int height = user.getHeight();
+        String gender = user.getGender();
+        int age = user.getAge();
+
+        if (gender.equals("Man")) {
+            return (int) Math.round(66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age));
+        } else {
+            return (int) Math.round(655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age));
+        }
+    }
 }

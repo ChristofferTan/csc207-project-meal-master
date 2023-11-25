@@ -133,7 +133,7 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
         return planners.get(username);
     }
 
-    public boolean isPlannerExistsbyUsername(String username) {
+    public boolean isPlannerExistsByUsername(String username) {
         return planners.containsKey(username);
     }
 }
