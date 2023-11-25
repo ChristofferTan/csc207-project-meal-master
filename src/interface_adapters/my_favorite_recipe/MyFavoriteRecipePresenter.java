@@ -54,6 +54,4 @@ public class MyFavoriteRecipePresenter implements MyFavoriteRecipeOutputBoundary
     public void prepareFailView(String error) {
         System.out.println(error);
     }
-
-
 }

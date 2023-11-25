@@ -22,4 +22,12 @@ public class DeleteFavoriteRecipeState {
     public String getLabel() {
         return label;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
 }
