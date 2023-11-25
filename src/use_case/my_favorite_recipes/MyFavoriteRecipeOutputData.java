@@ -12,7 +12,7 @@ public class MyFavoriteRecipeOutputData {
         this.user = user;
     }
 
-    public ArrayList<Recipe> getFavoriteRecipes() {
+    public ArrayList<String> getFavoriteRecipes() {
         return user.getFavoriteRecipes();
     }
 }

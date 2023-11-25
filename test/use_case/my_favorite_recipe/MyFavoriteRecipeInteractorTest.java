@@ -24,7 +24,7 @@ public class MyFavoriteRecipeInteractorTest {
 
         try {
             recipeDAO = new FileRecipeDataAccessObject(recipeFactory);
-            userDAO = new FileUserDataAccessObject(userFactory, recipeDAO);
+            userDAO = new FileUserDataAccessObject(userFactory);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -35,15 +35,15 @@ public class MyFavoriteRecipeInteractorTest {
                 "github.com/elidle", 350, new ArrayList<String>(Arrays.asList("1 bungkus Indomie Goreng")),
                 5, 1);
         recipeDAO.save(recipe);
-        ((FileUserDataAccessObject) userDAO).saveFavoriteRecipe("RazanAr", recipe);
+        ((FileUserDataAccessObject) userDAO).saveFavoriteRecipe("RazanAr", recipe.getLabel());
 
         MyFavoriteRecipeInputData inputData = new MyFavoriteRecipeInputData("RazanAr");
         MyFavoriteRecipeOutputBoundary successPresenter = new MyFavoriteRecipeOutputBoundary() {
             @Override
             public void prepareSuccessView(MyFavoriteRecipeOutputData myFavoriteRecipeOutputData) {
-                assertTrue(((FileUserDataAccessObject) userDAO).isExists("RazanAr", recipe));
-                ArrayList<Recipe> favoriteRecipes = myFavoriteRecipeOutputData.getFavoriteRecipes();
-                assertEquals(new ArrayList<Recipe>(Arrays.asList(recipe)), favoriteRecipes);
+                assertTrue(((FileUserDataAccessObject) userDAO).isExists("RazanAr", recipe.getLabel()));
+                ArrayList<String> favoriteRecipes = myFavoriteRecipeOutputData.getFavoriteRecipes();
+                assertEquals(new ArrayList<String>(Arrays.asList(recipe.getLabel())), favoriteRecipes);
             }
 
             @Override

@@ -1,3 +1,5 @@
+package view;
+
 import api.edamam.GenerateRecipeAPICaller;
 import app.SaveRecipeUseCaseFactory;
 import data_access.FilePlannerDataAccessObject;

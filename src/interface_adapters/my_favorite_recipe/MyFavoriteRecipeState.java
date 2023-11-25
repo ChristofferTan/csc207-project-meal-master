@@ -5,7 +5,7 @@ import entity.Recipe;
 import java.util.ArrayList;
 
 public class MyFavoriteRecipeState {
-    private ArrayList<Recipe> favoriteRecipes;
+    private ArrayList<String> favoriteRecipes;
 
     public MyFavoriteRecipeState(MyFavoriteRecipeState copy) {
         favoriteRecipes = copy.favoriteRecipes;
@@ -13,11 +13,11 @@ public class MyFavoriteRecipeState {
 
     public MyFavoriteRecipeState() {}
 
-    public ArrayList<Recipe> getFavoriteRecipes() {
+    public ArrayList<String> getFavoriteRecipes() {
         return favoriteRecipes;
     }
 
-    public void setFavoriteRecipes(ArrayList<Recipe> favoriteRecipes) {
+    public void setFavoriteRecipes(ArrayList<String> favoriteRecipes) {
         this.favoriteRecipes = favoriteRecipes;
     }
 }
