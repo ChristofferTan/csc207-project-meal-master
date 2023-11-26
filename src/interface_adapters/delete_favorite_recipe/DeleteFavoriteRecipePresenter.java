@@ -1,8 +1,6 @@
 package interface_adapters.delete_favorite_recipe;
 
 import interface_adapters.ViewManagerModel;
-import interface_adapters.generate_recipe.GenerateRecipeViewModel;
-import interface_adapters.my_favorite_recipe.MyFavoriteRecipeState;
 import use_case.delete_favorite_recipe.DeleteFavoriteRecipeOutputBoundary;
 import use_case.delete_favorite_recipe.DeleteFavoriteRecipeOutputData;
 

@@ -1,7 +1,5 @@
 package interface_adapters.delete_favorite_recipe;
 
-import interface_adapters.add_favorite_recipe.AddFavoriteRecipeState;
-
 public class DeleteFavoriteRecipeState {
     private String username;
     private String label;

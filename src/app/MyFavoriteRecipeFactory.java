@@ -34,7 +34,6 @@ public class MyFavoriteRecipeFactory {
     private static MyFavoriteRecipeController createMyFavoriteRecipeUseCase(ViewManagerModel viewManagerModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, MyFavoriteRecipeDataAccessInterface dataAccessInterface) {
         MyFavoriteRecipeOutputBoundary myFavoriteRecipeOutputBoundary = new MyFavoriteRecipePresenter(viewManagerModel, myFavoriteRecipeViewModel);
 
-
         MyFavoriteRecipeInputBoundary myFavoriteRecipeInteractor = new MyFavoriteRecipeInteractor(dataAccessInterface, myFavoriteRecipeOutputBoundary);
         return new MyFavoriteRecipeController(myFavoriteRecipeInteractor);
     }
