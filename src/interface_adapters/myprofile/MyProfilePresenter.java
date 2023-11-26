@@ -24,6 +24,7 @@ public class MyProfilePresenter implements MyProfileOutputBoundary{
         myProfileState.setGender(myProfileOutputData.getGender());
         myProfileState.setWeight(myProfileOutputData.getWeight());
         myProfileState.setHeight(myProfileOutputData.getHeight());
+        myProfileState.setCalories(myProfileOutputData.getRecommendedCalories());
         this.myProfileViewModel.setState(myProfileState);
         this.myProfileViewModel.firePropertyChanged();
     }
