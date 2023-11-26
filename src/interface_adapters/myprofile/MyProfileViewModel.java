@@ -18,6 +18,7 @@ public class MyProfileViewModel extends ViewModel {
     public static String WEIGHT_UNIT = "kg";
     public static String CALORIES_LABEL = "Estimated calories needed: ";
     public static String CALORIES_UNIT = "kcal";
+    public static String EDIT_PROFILE_BUTTON = "Edit Profile";
     private MyProfileState state = new MyProfileState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     public MyProfileViewModel() {super("my profile");}

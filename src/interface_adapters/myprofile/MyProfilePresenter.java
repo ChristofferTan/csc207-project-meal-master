@@ -16,6 +16,7 @@ public class MyProfilePresenter implements MyProfileOutputBoundary{
 
     @Override
     public void prepareSuccessView(MyProfileOutputData myProfileOutputData) {
+        System.out.println("Output data " +  myProfileOutputData.getUsername());
         MyProfileState myProfileState = myProfileViewModel.getState();
         myProfileState.setUsername(myProfileOutputData.getUsername());
         myProfileState.setName(myProfileOutputData.getName());
@@ -23,7 +24,6 @@ public class MyProfilePresenter implements MyProfileOutputBoundary{
         myProfileState.setGender(myProfileOutputData.getGender());
         myProfileState.setWeight(myProfileOutputData.getWeight());
         myProfileState.setHeight(myProfileOutputData.getHeight());
-        System.out.println(myProfileState.getAge());
         this.myProfileViewModel.setState(myProfileState);
         this.myProfileViewModel.firePropertyChanged();
     }

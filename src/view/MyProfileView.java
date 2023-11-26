@@ -39,6 +39,7 @@ public class MyProfileView extends JPanel implements ActionListener, PropertyCha
         this.myProfileController = myProfileController;
         this.editProfileController = editProfileController;
         this.viewManagerModel = viewManagerModel;
+        this.myProfileViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(MyProfileViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -99,7 +100,7 @@ public class MyProfileView extends JPanel implements ActionListener, PropertyCha
         caloriesPanel.add(caloriesUnit);
 
         JPanel buttons = new JPanel();
-        editProfile = new JButton(editProfileViewModel.EDIT_PROFILE_BUTTON_LABEL);
+        editProfile = new JButton(MyProfileViewModel.EDIT_PROFILE_BUTTON);
         buttons.add(editProfile);
 
         back = new JButton("Back");
@@ -112,6 +113,7 @@ public class MyProfileView extends JPanel implements ActionListener, PropertyCha
                         if (e.getSource().equals(editProfile)) {
                             EditProfileState editProfileState = editProfileViewModel.getState();
                             MyProfileState myProfileState = myProfileViewModel.getState();
+                            editProfileState.setUsername(myProfileState.getUsername());
                             editProfileState.setName(myProfileState.getName());
                             editProfileState.setAge(myProfileState.getAge());
                             editProfileState.setGender(myProfileState.getGender());

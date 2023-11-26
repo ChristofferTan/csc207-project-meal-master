@@ -49,7 +49,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             String usersData = DownloadCSVFilesAPICaller.call(filesNameInDatabase.get(FILE_NAME));
             String[] rows = usersData.split("\n");
             String header = rows[0].trim();
-            // System.out.println("anak anjing: " + header);
 
             assert header.equals("username,password,name,age,gender,height,weight,favoriteRecipes");
 
@@ -65,7 +64,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 int height = Integer.parseInt(col[headers.get("height")]);
                 int weight = Integer.parseInt(col[headers.get("weight")]);
 
-                User user = userFactory.create(username, password, name, age, gender, height, weight);
+                User user = userFactory.create(username, password, name, age, gender, weight, height);
                 ArrayList<String> favoriteRecipes = user.getFavoriteRecipes();
                 int idx = headers.get("favoriteRecipes");
                 while(idx < col.length) {
@@ -85,6 +84,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public boolean existsByName(String identifier) {
+
         return accounts.containsKey(identifier);
     }
 
@@ -104,7 +104,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public void save(User user) {
-        System.out.println("Downloadin users.csv from database... (removing users.csv from the database)");
+        System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
         DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
         accounts.put(user.getUsername(), user);
         this.save();
@@ -129,7 +129,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 }
                 System.out.println("Resep favorit: " + favoriteRecipes);
 
-                String line = String.format("%s,%s,%s,%d,%s,%d,%d,%s", user.getUsername(), user.getPassword(),user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), favoriteRecipes);
+                String line = String.format("%s,%s,%s,%d,%s,%d,%d,%s", user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), favoriteRecipes);
+                System.out.println("Tulis: " + line);
                 writer.write(line);
                 writer.newLine();
             }
@@ -147,12 +148,15 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public void editProfile(String username, String name, int age, String gender, int weight, int height) {
-        User user = accounts.get(username);
-        user.setName(name);
-        user.setAge(age);
-        user.setGender(gender);
-        user.setWeight(weight);
-        user.setHeight(height);
+        System.out.println(username + " " +  existsByName(username));
+        if (existsByName(username)) {
+            User user = accounts.get(username);
+            user.setName(name);
+            user.setAge(age);
+            user.setGender(gender);
+            user.setWeight(weight);
+            user.setHeight(height);
+        }
         this.save();
     }
 
