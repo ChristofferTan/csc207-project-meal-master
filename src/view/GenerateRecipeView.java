@@ -9,6 +9,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 
+import interface_adapters.after_generated_recipe.AfterGeneratedRecipeState;
+import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
 import interface_adapters.generate_recipe.GenerateRecipeController;
 import interface_adapters.generate_recipe.GenerateRecipeState;
 import interface_adapters.generate_recipe.GenerateRecipeViewModel;
@@ -17,6 +19,7 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
 
     public final String viewName = "generate recipe";
     private final GenerateRecipeViewModel generateRecipeViewModel;
+    private final AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel;
     private final JTextField keywordInputField = new JTextField(15);
     private final JTextField dietInputField = new JTextField(15);
     private final JTextField healthInputField = new JTextField(15);
@@ -31,9 +34,10 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
 
     private final JButton generateRecipe;
 
-    public GenerateRecipeView(GenerateRecipeController generateRecipeController, GenerateRecipeViewModel generateRecipeViewModel) {
+    public GenerateRecipeView(GenerateRecipeController generateRecipeController, GenerateRecipeViewModel generateRecipeViewModel, AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel) {
         this.generateRecipeController = generateRecipeController;
         this.generateRecipeViewModel = generateRecipeViewModel;
+        this.afterGeneratedRecipeViewModel = afterGeneratedRecipeViewModel;
         generateRecipeViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(GenerateRecipeViewModel.TITLE_LABEL);
@@ -65,6 +69,7 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(generateRecipe)) {
                             GenerateRecipeState currentState = generateRecipeViewModel.getState();
+                            System.out.println("Generate state: " + currentState.getUsername());
 
                             generateRecipeController.execute(
                                     currentState.getKeyword(),
@@ -76,6 +81,11 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
                                     currentState.getMaxCalories(),
                                     currentState.getMaxPreparationTime()
                             );
+
+                            AfterGeneratedRecipeState afterGeneratedRecipeState = afterGeneratedRecipeViewModel.getState();
+                            afterGeneratedRecipeState.setUsername(currentState.getUsername());
+                            afterGeneratedRecipeViewModel.setState(afterGeneratedRecipeState);
+                            afterGeneratedRecipeViewModel.firePropertyChanged();
                         }
                     }
                 }
@@ -281,6 +291,10 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         GenerateRecipeState state = (GenerateRecipeState) evt.getNewValue();
+    }
+
+    public GenerateRecipeController getGenerateRecipeController() {
+        return generateRecipeController;
     }
 }
 
