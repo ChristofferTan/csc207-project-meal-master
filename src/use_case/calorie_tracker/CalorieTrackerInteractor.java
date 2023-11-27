@@ -12,7 +12,11 @@ public class CalorieTrackerInteractor implements CalorieTrackerInputBoundary{
 
     @Override
     public void execute(CalorieTrackerInputData calorieTrackerInputData) {
-        CalorieTrackerOutputData calorieTrackerOutputData = new CalorieTrackerOutputData(calorieTrackerInputData.getPlanner());
-        calorieTrackerPresenter.prepareSuccessView(calorieTrackerOutputData);
+        try {
+            CalorieTrackerOutputData calorieTrackerOutputData = new CalorieTrackerOutputData(calorieTrackerInputData.getPlanner());
+            calorieTrackerPresenter.prepareSuccessView(calorieTrackerOutputData);
+        } catch (Exception e) {
+            calorieTrackerPresenter.prepareFailView(e.getMessage());
+        }
     }
 }

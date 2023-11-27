@@ -24,6 +24,18 @@ public class Planner {
         return weeklyRecipes.get(day);
     }
 
+    public Recipe get(DayOfWeek day, MealType mealType) {
+        if (isExistsByDayAndMealType(day, mealType)) {
+            return weeklyRecipes.get(day).get(mealType);
+        } else {
+            return null;
+        }
+    }
+
+    private boolean isExistsByDayAndMealType(DayOfWeek day, MealType mealType) {
+        return weeklyRecipes.containsKey(day) && weeklyRecipes.get(day).containsKey(mealType);
+    }
+
     public String getUsername() {
         return username;
     }
