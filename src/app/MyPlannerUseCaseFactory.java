@@ -18,22 +18,19 @@ public class MyPlannerUseCaseFactory {
     public static MyPlannerView create(
             ViewManagerModel viewManagerModel,
             MyPlannerViewModel myPlannerViewModel,
-            ShowPlannerViewModel showPlannerViewModel,
             MyPlannerDataAccessInterface myPlannerDataAccessObject) {
         MyPlannerController myPlannerController = createMyPlannerUseCase(
                 viewManagerModel,
                 myPlannerViewModel,
-                showPlannerViewModel,
                 myPlannerDataAccessObject);
-        return new MyPlannerView(myPlannerViewModel, myPlannerController);
+        return new MyPlannerView(viewManagerModel, myPlannerViewModel, myPlannerController);
     }
 
     private static MyPlannerController createMyPlannerUseCase(
             ViewManagerModel viewManagerModel,
             MyPlannerViewModel myPlannerViewModel,
-            ShowPlannerViewModel showPlannerViewModel,
             MyPlannerDataAccessInterface myPlannerDataAccessObject) {
-        MyPlannerOutputBoundary myPlannerPresenter = new MyPlannerPresenter(viewManagerModel, myPlannerViewModel, showPlannerViewModel);
+        MyPlannerOutputBoundary myPlannerPresenter = new MyPlannerPresenter(viewManagerModel, myPlannerViewModel);
         MyPlannerInputBoundary myPlannerInteractor = new MyPlannerInteractor(myPlannerDataAccessObject, myPlannerPresenter);
         return new MyPlannerController(myPlannerInteractor);
     }
