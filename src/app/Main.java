@@ -66,28 +66,28 @@ public class Main {
                     "0-100"
             );
             Recipe expectedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
-            saveRecipeController.execute("budi", DayOfWeek.MONDAY, MealType.LUNCH, expectedRecipe);
-            Recipe actualRecipe = fpdao.getPlanner("budi").getRecipesByDay(DayOfWeek.MONDAY).get(MealType.LUNCH);
+            saveRecipeController.execute("bob", DayOfWeek.MONDAY, MealType.LUNCH, expectedRecipe);
+            Recipe actualRecipe = fpdao.getPlanner("bob").getRecipesByDay(DayOfWeek.MONDAY).get(MealType.LUNCH);
 
 //            GenerateRecipeViewModel generateRecipeViewModel = new GenerateRecipeViewModel();
-//            LoginViewModel loginViewModel = new LoginViewModel();
-//            LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
-//            SignupViewModel signupViewModel = new SignupViewModel();
+            LoginViewModel loginViewModel = new LoginViewModel();
+            LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
+            SignupViewModel signupViewModel = new SignupViewModel();
 
-//            FileUserDataAccessObject userDataAccessObject;
-//            try {
-//                userDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
+            FileUserDataAccessObject userDataAccessObject;
+            try {
+                userDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-//            SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
-//            views.add(signupView, signupView.viewName);
+            SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
+            views.add(signupView, signupView.viewName);
 //
-//            LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
-//            views.add(loginView, loginView.viewName);
+            LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+            views.add(loginView, loginView.viewName);
 //
-//            LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+//            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListViewModel, new GroceryListController(groceryListViewModel)
 //            views.add(loggedInView, loggedInView.viewName);
 
 //            GenerateRecipeView generateRecipeView = GenerateRecipeUseCaseFactory.create(viewManagerModel, generateRecipeViewModel);
@@ -95,14 +95,18 @@ public class Main {
 
             GroceryListView groceryListView = GroceryListUseCaseFactory.create(viewManagerModel, groceryListViewModel, fpdao);
             views.add(groceryListView, groceryListView.viewName);
-
             GroceryListController groceryListController = groceryListView.getGroceryListController();
-            groceryListController.execute("budi");
+
+            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListViewModel, groceryListController);
+            views.add(loggedInView, loggedInView.viewName);
+
+//            GroceryListController groceryListController = groceryListView.getGroceryListController();
+//            groceryListController.execute("budi");
 
 //            viewManagerModel.setActiveView(generateRecipeView.viewName);
 //            viewManagerModel.firePropertyChanged();
 
-            viewManagerModel.setActiveView(groceryListView.viewName);
+            viewManagerModel.setActiveView(signupView.viewName);
             viewManagerModel.firePropertyChanged();
 
             application.pack();
