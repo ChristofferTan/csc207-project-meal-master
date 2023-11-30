@@ -16,7 +16,7 @@ public class GenerateRecipeUseCaseFactory {
 
     public static GenerateRecipeView create(ViewManagerModel viewManagerModel, GenerateRecipeViewModel generateRecipeViewModel, AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel, GenerateRecipeDataAccessInterface recipeDAO) {
         GenerateRecipeController generateRecipeController = createGenerateUseCase(viewManagerModel, afterGeneratedRecipeViewModel, generateRecipeViewModel, recipeDAO);
-        return new GenerateRecipeView(generateRecipeController, generateRecipeViewModel, afterGeneratedRecipeViewModel);
+        return new GenerateRecipeView(generateRecipeController, generateRecipeViewModel, afterGeneratedRecipeViewModel, viewManagerModel);
     }
 
     public static GenerateRecipeController createGenerateUseCase(ViewManagerModel viewManagerModel, AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel, GenerateRecipeViewModel generateRecipeViewModel, GenerateRecipeDataAccessInterface recipeDAO) {

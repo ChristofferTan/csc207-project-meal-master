@@ -129,6 +129,17 @@ public class MyProfileView extends JPanel implements ActionListener, PropertyCha
                 }
         );
 
+        back.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(back)) {
+                            viewManagerModel.setActiveView("logged in");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);

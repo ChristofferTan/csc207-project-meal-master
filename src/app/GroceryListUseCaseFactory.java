@@ -15,7 +15,7 @@ public class GroceryListUseCaseFactory {
 
     public static GroceryListView create(ViewManagerModel viewManagerModel, GroceryListViewModel groceryListViewModel, GroceryListDataAccessInterface groceryListDataAccessInterface) {
         GroceryListController groceryListController = createGroceryListUseCase(viewManagerModel, groceryListViewModel, groceryListDataAccessInterface);
-        return new GroceryListView(groceryListController, groceryListViewModel);
+        return new GroceryListView(groceryListController, groceryListViewModel, viewManagerModel);
     }
     public static GroceryListController createGroceryListUseCase(ViewManagerModel viewManagerModel, GroceryListViewModel groceryListViewModel, GroceryListDataAccessInterface dataAccessInterface) {
         GroceryListOutputBoundary groceryListOutputBoundary = new GroceryListPresenter(groceryListViewModel, viewManagerModel);
