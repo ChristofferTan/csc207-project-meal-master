@@ -20,8 +20,7 @@ public class DeleteFavoriteRecipeInteractor implements DeleteFavoriteRecipeInput
         } else {
             userDataAccessObject.deleteFavoriteRecipe(deleteFavoriteRecipeInputData.getUsername(), deleteFavoriteRecipeInputData.getLabel());
 
-            DeleteFavoriteRecipeOutputData deleteFavoriteRecipeOutputData = new DeleteFavoriteRecipeOutputData(deleteFavoriteRecipeInputData.getLabel());
-            presenter.prepareSuccessView(deleteFavoriteRecipeOutputData);
+            presenter.prepareSuccessView(new DeleteFavoriteRecipeOutputData());
         }
     }
 }
