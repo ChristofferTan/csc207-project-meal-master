@@ -4,4 +4,5 @@ import entity.Recipe;
 
 public interface GenerateRecipeDataAccessInterface {
     public void save(Recipe recipe);
+    public Recipe getRecipe(String label);
 }

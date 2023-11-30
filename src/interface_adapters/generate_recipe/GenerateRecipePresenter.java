@@ -2,6 +2,8 @@ package interface_adapters.generate_recipe;
 
 import entity.Recipe;
 import interface_adapters.ViewManagerModel;
+import interface_adapters.after_generated_recipe.AfterGeneratedRecipeState;
+import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
 import use_case.generate_recipe.GenerateRecipeOutputBoundary;
 import use_case.generate_recipe.GenerateRecipeOutputData;
 
@@ -9,10 +11,12 @@ import java.util.ArrayList;
 
 public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
     private final GenerateRecipeViewModel generateRecipeViewModel;
+    private final AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public GenerateRecipePresenter(GenerateRecipeViewModel generateRecipeViewModel, ViewManagerModel viewManagerModel) {
+    public GenerateRecipePresenter(GenerateRecipeViewModel generateRecipeViewModel, AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel, ViewManagerModel viewManagerModel) {
         this.generateRecipeViewModel = generateRecipeViewModel;
+        this.afterGeneratedRecipeViewModel = afterGeneratedRecipeViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
@@ -37,5 +41,14 @@ public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
         }
         System.out.println("Recipe URL: " + recipeUrl);
         System.out.println("Preparation Time: " + preparationTime);
+
+        AfterGeneratedRecipeState afterGeneratedRecipeState = afterGeneratedRecipeViewModel.getState();
+        afterGeneratedRecipeState.setRecipe(recipe);
+        // System.out.println("Presenter: " + afterGeneratedRecipeState.getRecipe().getLabel());
+        afterGeneratedRecipeViewModel.setState(afterGeneratedRecipeState);
+        afterGeneratedRecipeViewModel.firePropertyChanged();
+
+        viewManagerModel.setActiveView(afterGeneratedRecipeViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }

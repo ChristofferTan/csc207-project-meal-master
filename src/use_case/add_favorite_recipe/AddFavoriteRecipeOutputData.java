@@ -4,18 +4,18 @@ import entity.Recipe;
 
 public class AddFavoriteRecipeOutputData {
     private final String label;
-    private final String url;
+    private final String username;
 
-    public AddFavoriteRecipeOutputData(String label, String url) {
+    public AddFavoriteRecipeOutputData(String label, String username) {
         this.label = label;
-        this.url = url;
+        this.username = username;
     }
 
     public String getLabel() {
         return label;
     }
 
-    public String getUrl() {
-        return url;
+    public String getUsername() {
+        return username;
     }
 }

@@ -3,9 +3,7 @@ package data_access;
 import api.file.io.DownloadCSVFilesAPICaller;
 import api.file.io.GetListofCSVFilesAPICaller;
 import api.file.io.UploadCSVFilesAPICaller;
-import entity.Recipe;
-import entity.User;
-import entity.UserFactory;
+import entity.*;
 import use_case.add_favorite_recipe.AddFavoriteRecipeUserDataAccessInterface;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
 import use_case.delete_favorite_recipe.DeleteFavoriteRecipeDataAccessInterface;
@@ -22,9 +20,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface,
-        AddFriendUserDataAccessInterface, AddFavoriteRecipeUserDataAccessInterface, EditProfileDataAccessInterface,
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFavoriteRecipeUserDataAccessInterface, EditProfileDataAccessInterface,
         MyProfileDataAccessInterface, MyFavoriteRecipeDataAccessInterface, DeleteFavoriteRecipeDataAccessInterface {
+    private final PlannerFactory plannerFactory = new PlannerFactory();
+    private final FilePlannerDataAccessObject plannerDataAccessObject = new FilePlannerDataAccessObject(plannerFactory, new FileRecipeDataAccessObject(new RecipeFactory()));
+
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private final Map<String, ArrayList<String>> friends = new HashMap<>();
@@ -50,7 +50,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             String usersData = DownloadCSVFilesAPICaller.call(filesNameInDatabase.get(FILE_NAME));
             String[] rows = usersData.split("\n");
             String header = rows[0].trim();
-            // System.out.println("anak anjing: " + header);
 
             assert header.equals("username,password,name,age,gender,height,weight,favoriteRecipes");
 
@@ -66,7 +65,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 int height = Integer.parseInt(col[headers.get("height")]);
                 int weight = Integer.parseInt(col[headers.get("weight")]);
 
-                User user = userFactory.create(username, password, name, age, gender, height, weight);
+                User user = userFactory.create(username, password, name, age, gender, weight, height);
                 ArrayList<String> favoriteRecipes = user.getFavoriteRecipes();
                 int idx = headers.get("favoriteRecipes");
                 while(idx < col.length) {
@@ -90,22 +89,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     }
 
     @Override
-    public boolean isFriend(String username, String friendUsername) {
-        return friends.get(username).contains(friendUsername);
-    }
-
-    @Override
-    public void addFriend(String username, String friendUsername) {
-        if (!friends.containsKey(username)) {
-            friends.put(username, new ArrayList<String>(Arrays.asList(friendUsername)));
-        }
-        friends.get(username).add(friendUsername);
-        // save friend into the csv file
-    }
-
-    @Override
     public void save(User user) {
-        System.out.println("Downloadin users.csv from database... (removing users.csv from the database)");
+        System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
         DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
         accounts.put(user.getUsername(), user);
         this.save();
@@ -130,7 +115,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 }
                 System.out.println("Resep favorit: " + favoriteRecipes);
 
-                String line = String.format("%s,%s,%s,%d,%s,%d,%d,%s", user.getUsername(), user.getPassword(),user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), favoriteRecipes);
+                String line = String.format("%s,%s,%s,%d,%s,%d,%d,%s", user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), favoriteRecipes);
+                System.out.println("Tulis: " + line);
                 writer.write(line);
                 writer.newLine();
             }
@@ -148,12 +134,17 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public void editProfile(String username, String name, int age, String gender, int weight, int height) {
-        User user = accounts.get(username);
-        user.setName(name);
-        user.setAge(age);
-        user.setGender(gender);
-        user.setWeight(weight);
-        user.setHeight(height);
+        System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
+        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+        if (existsByName(username)) {
+            User user = accounts.get(username);
+            DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+            user.setName(name);
+            user.setAge(age);
+            user.setGender(gender);
+            user.setWeight(weight);
+            user.setHeight(height);
+        }
         this.save();
     }
 
@@ -173,21 +164,27 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public void deleteFavoriteRecipe(String username, String label) {
-        if (accounts.containsKey(username)) {
+        System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
+        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+        if (existsByName(username)) {
             User user = accounts.get(username);
-            DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
-            user.getFavoriteRecipes().remove(label);
-            this.save();
+            if (user.getFavoriteRecipes().contains(label)) {
+                user.getFavoriteRecipes().remove(label);
+            }
         }
+        this.save();
     }
 
     @Override
     public void saveFavoriteRecipe(String username, String label) {
-        if (accounts.containsKey(username)) {
+        System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
+        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+        if (existsByName(username)) {
             User user = accounts.get(username);
-            DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
-            user.getFavoriteRecipes().add(label);
-            this.save();
+            if (!user.getFavoriteRecipes().contains(label)) {
+                user.getFavoriteRecipes().add(label);
+            }
         }
+        this.save();
     }
 }

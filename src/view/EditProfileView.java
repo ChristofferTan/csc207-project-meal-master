@@ -8,9 +8,12 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import interface_adapters.ViewManagerModel;
 import interface_adapters.edit_profile.EditProfileController;
 import interface_adapters.edit_profile.EditProfileState;
 import interface_adapters.edit_profile.EditProfileViewModel;
+import interface_adapters.myprofile.MyProfileController;
+import interface_adapters.myprofile.MyProfileViewModel;
 
 public class EditProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -24,12 +27,19 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
     private final JTextArea editedProfileOutputField = new JTextArea(15, 15);
 
     private final EditProfileController editProfileController;
+    private final MyProfileController myProfileController;
+    private final MyProfileViewModel myProfileViewModel;
+    private final ViewManagerModel viewManagerModel;
 
     private final JButton editProfile;
 
-    public EditProfileView(EditProfileController editProfileController, EditProfileViewModel editProfileViewModel) {
+    public EditProfileView(EditProfileController editProfileController, EditProfileViewModel editProfileViewModel, MyProfileController myProfileController, MyProfileViewModel myProfileViewModel, ViewManagerModel viewManagerModel) {
         this.editProfileController = editProfileController;
         this.editProfileViewModel = editProfileViewModel;
+        this.myProfileController = myProfileController;
+        this.myProfileViewModel = myProfileViewModel;
+        this.viewManagerModel = viewManagerModel;
+
         editProfileViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(editProfileViewModel.TITLE_LABEL);
@@ -54,6 +64,7 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(editProfile)) {
                             EditProfileState currentState = editProfileViewModel.getState();
+                            // System.out.println("state: " + currentState.getUsername());
 
                             editProfileController.execute(
                                     currentState.getUsername(),
@@ -63,6 +74,14 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                                     currentState.getWeight(),
                                     currentState.getHeight()
                             );
+//                            currentState = editProfileViewModel.getState();
+//
+//                            System.out.println(currentState.getUsername());
+                            myProfileController.execute(currentState.getUsername());
+                            myProfileViewModel.firePropertyChanged();
+//
+                            viewManagerModel.setActiveView(myProfileViewModel.getViewName());
+                            viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
@@ -73,7 +92,15 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void keyTyped(KeyEvent e) {
                         EditProfileState currentState = editProfileViewModel.getState();
-                        String text = nameInputField.getText() + e.getKeyChar();
+                        String text = nameInputField.getText();
+                        if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                            if (!text.isEmpty()) {
+                                text = text.substring(0, text.length() - 1);
+                            }
+                        }
+                        else {
+                            text += e.getKeyChar();
+                        }
                         currentState.setName(text);
                         editProfileViewModel.setState(currentState);
                     }
@@ -95,8 +122,7 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void keyTyped(KeyEvent e) {
                         EditProfileState currentState = editProfileViewModel.getState();
-                        int text = Integer.parseInt(ageInputField.getText() + e.getKeyChar());
-                        currentState.setAge(text);
+                        currentState.setAge(Integer.parseInt(ageInputField.getText() + e.getKeyChar()));
                         editProfileViewModel.setState(currentState);
                     }
 
@@ -117,7 +143,15 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void keyTyped(KeyEvent e) {
                         EditProfileState currentState = editProfileViewModel.getState();
-                        String text = genderInputField.getText() + e.getKeyChar();
+                        String text = genderInputField.getText();
+                        if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                            if (!text.isEmpty()) {
+                                text = text.substring(0, text.length() - 1);
+                            }
+                        }
+                        else {
+                            text += e.getKeyChar();
+                        }
                         currentState.setGender(text);
                         editProfileViewModel.setState(currentState);
                     }
@@ -139,8 +173,7 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void keyTyped(KeyEvent e) {
                         EditProfileState currentState = editProfileViewModel.getState();
-                        int text = Integer.parseInt(weightInputField.getText() + e.getKeyChar());
-                        currentState.setAge(text);
+                        currentState.setWeight(Integer.parseInt(weightInputField.getText() + e.getKeyChar()));
                         editProfileViewModel.setState(currentState);
                     }
 
@@ -161,8 +194,7 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void keyTyped(KeyEvent e) {
                         EditProfileState currentState = editProfileViewModel.getState();
-                        int text = Integer.parseInt(heightInputField.getText() + e.getKeyChar());
-                        currentState.setAge(text);
+                        currentState.setHeight(Integer.parseInt(heightInputField.getText() + e.getKeyChar()));
                         editProfileViewModel.setState(currentState);
                     }
 
@@ -198,5 +230,11 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         EditProfileState state = (EditProfileState) evt.getNewValue();
+        // System.out.println("Property berubah " + state.getName());
+        setFields(state);
+    }
+    private void setFields(EditProfileState state) {
+        nameInputField.setText(state.getName());
+        genderInputField.setText(state.getGender());
     }
 }
