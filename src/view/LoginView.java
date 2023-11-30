@@ -1,10 +1,13 @@
 package view;
 
+import interface_adapters.ViewManagerModel;
 import interface_adapters.login.LoginController;
 import interface_adapters.login.LoginState;
 import interface_adapters.login.LoginViewModel;
+import interface_adapters.signup.SignupViewModel;
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +19,8 @@ import java.beans.PropertyChangeListener;
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "log in";
     private final LoginViewModel loginViewModel;
+    private final SignupViewModel signupViewModel;
+    private final ViewManagerModel viewManagerModel;
 
     final JTextField usernameInputField = new JTextField(15);
     private final JLabel usernameErrorField = new JLabel();
@@ -24,13 +29,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final JLabel passwordErrorField = new JLabel();
 
     final JButton logIn;
-    final JButton cancel;
+    final JButton signUp;
     private final LoginController loginController;
 
-    public LoginView(LoginViewModel loginViewModel, LoginController controller) {
+    public LoginView(LoginViewModel loginViewModel, LoginController controller, SignupViewModel signupViewModel, ViewManagerModel viewManagerModel) {
 
         this.loginController = controller;
         this.loginViewModel = loginViewModel;
+        this.signupViewModel = signupViewModel;
+        this.viewManagerModel = viewManagerModel;
         this.loginViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel("Login Screen");
@@ -43,9 +50,9 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         JPanel buttons = new JPanel();
         logIn = new JButton(loginViewModel.LOGIN_BUTTON_LABEL);
+        signUp = new JButton(loginViewModel.SIGNUP_BUTTON_LABEL);
+        buttons.add(signUp);
         buttons.add(logIn);
-        cancel = new JButton(loginViewModel.CANCEL_BUTTON_LABEL);
-        buttons.add(cancel);
 
         logIn.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
@@ -62,7 +69,17 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 }
         );
 
-        cancel.addActionListener(this);
+        signUp.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(signUp)) {
+                            viewManagerModel.setActiveView(signupViewModel.getViewName());
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
 
         usernameInputField.addKeyListener(new KeyListener() {
             @Override

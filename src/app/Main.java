@@ -83,7 +83,7 @@ public class Main {
             LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
             SignupViewModel signupViewModel = new SignupViewModel();
             SaveRecipeViewModel saveRecipeViewModel = new SaveRecipeViewModel();
-            AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel1 = new AfterGeneratedRecipeViewModel();
+            // AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel1 = new AfterGeneratedRecipeViewModel();
             AddFavoriteRecipeViewModel addFavoriteRecipeViewModel = new AddFavoriteRecipeViewModel();
             MyProfileViewModel myProfileViewModel = new MyProfileViewModel();
             EditProfileViewModel editProfileViewModel = new EditProfileViewModel();
@@ -100,7 +100,7 @@ public class Main {
             SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
             views.add(signupView, signupView.viewName);
 //
-            LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+            LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, signupViewModel, userDataAccessObject);
             views.add(loginView, loginView.viewName);
 //
 //            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListViewModel, new GroceryListController(groceryListViewModel)

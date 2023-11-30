@@ -30,7 +30,7 @@ public class SignupUseCaseFactory {
             ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, SignupViewModel signupViewModel, SignupUserDataAccessInterface userDataAccessObject) {
 
         SignupController signupController = createUserSignupUseCase(viewManagerModel, signupViewModel, loginViewModel, userDataAccessObject);
-        return new SignupView(signupController, signupViewModel);
+        return new SignupView(signupController, signupViewModel, loginViewModel, viewManagerModel);
     }
 
     private static SignupController createUserSignupUseCase(ViewManagerModel viewManagerModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel, SignupUserDataAccessInterface userDataAccessObject) {
