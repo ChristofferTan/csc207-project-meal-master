@@ -78,7 +78,8 @@ public class MyPlannerView extends JPanel implements ActionListener, PropertyCha
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(back)) {
-            // TODO viewManagerModel.setActiveView(<back to previous view (should be the dashboard)>);
+                viewManagerModel.setActiveView("logged in");
+                viewManagerModel.firePropertyChanged();
         }
     }
 

@@ -24,6 +24,7 @@ public class GenerateRecipeViewModel extends ViewModel {
     public static final String MAX_PREPARATION_TIME_LABEL = "Max Preparation Time";
 
     public static final String GENERATE_RECIPE_BUTTON_LABEL = "Generate Recipe";
+    public static final String BACK_BUTTON_LABEL = "Back";
 
     private GenerateRecipeState state = new GenerateRecipeState();
 

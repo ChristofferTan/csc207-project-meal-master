@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapters.ViewManagerModel;
 import interface_adapters.generate_recipe.GenerateRecipeController;
 import interface_adapters.generate_recipe.GenerateRecipeState;
 import interface_adapters.generate_recipe.GenerateRecipeViewModel;
@@ -25,6 +26,7 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
     public final String viewName = "generate recipe";
     private final GenerateRecipeViewModel generateRecipeViewModel;
     private final AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel;
+    private final ViewManagerModel viewManagerModel;
     private final JTextField keywordInputField = new JTextField(15);
 
     // Replace input fields with MultiSelectDropdownPanels
@@ -42,10 +44,13 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
 
     private final JButton generateRecipe;
 
-    public GenerateRecipeView(GenerateRecipeController generateRecipeController, GenerateRecipeViewModel generateRecipeViewModel, AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel) {
+    private final JButton back;
+
+    public GenerateRecipeView(GenerateRecipeController generateRecipeController, GenerateRecipeViewModel generateRecipeViewModel, AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel, ViewManagerModel viewManagerModel) {
         this.generateRecipeController = generateRecipeController;
         this.generateRecipeViewModel = generateRecipeViewModel;
         this.afterGeneratedRecipeViewModel = afterGeneratedRecipeViewModel;
+        this.viewManagerModel = viewManagerModel;
 
         dietPanel = new MultiSelectDropdownPanel("Diet", GenerateRecipeViewModel.DIET_OPTIONS, generateRecipeViewModel.getState(), GenerateRecipeViewModel.DIET_LABEL);
         healthPanel = new MultiSelectDropdownPanel("Health", GenerateRecipeViewModel.HEALTH_OPTIONS, generateRecipeViewModel.getState(), GenerateRecipeViewModel.HEALTH_LABEL);
@@ -68,7 +73,9 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
 
         JPanel buttons = new JPanel();
         generateRecipe = new JButton(GenerateRecipeViewModel.GENERATE_RECIPE_BUTTON_LABEL);
+        back = new JButton(GenerateRecipeViewModel.BACK_BUTTON_LABEL);
         buttons.add(generateRecipe);
+        buttons.add(back);
 
         generateRecipe.addActionListener(
                 new ActionListener() {
@@ -92,6 +99,17 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
                             afterGeneratedRecipeState.setUsername(currentState.getUsername());
                             afterGeneratedRecipeViewModel.setState(afterGeneratedRecipeState);
                             afterGeneratedRecipeViewModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
+
+        back.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(back)) {
+                            viewManagerModel.setActiveView("logged in");
+                            viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
