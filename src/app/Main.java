@@ -6,11 +6,18 @@ import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
 import entity.*;
 import interface_adapters.ViewManagerModel;
+import interface_adapters.add_favorite_recipe.AddFavoriteRecipeViewModel;
+import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
+import interface_adapters.edit_profile.EditProfileViewModel;
 import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 import interface_adapters.grocery_list.GroceryListController;
 import interface_adapters.grocery_list.GroceryListViewModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
+import interface_adapters.my_planner.MyPlannerController;
+import interface_adapters.my_planner.MyPlannerViewModel;
+import interface_adapters.myprofile.MyProfileController;
+import interface_adapters.myprofile.MyProfileViewModel;
 import interface_adapters.save_recipe.SaveRecipeController;
 import interface_adapters.save_recipe.SaveRecipeViewModel;
 import interface_adapters.signup.SignupViewModel;
@@ -29,7 +36,7 @@ public class Main {
 
             // The main application window.
 
-            JFrame application = new JFrame("Login Example");
+            JFrame application = new JFrame("Meal Master");
             application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
             CardLayout cardLayout = new CardLayout();
@@ -47,7 +54,7 @@ public class Main {
             // results from the use case. The ViewModels are observable, and will
             // be observed by the Views.
 
-            GroceryListViewModel groceryListViewModel = new GroceryListViewModel();
+//            GroceryListViewModel groceryListViewModel = new GroceryListViewModel();
 
             FilePlannerDataAccessObject fpdao = new FilePlannerDataAccessObject(new PlannerFactory(), new FileRecipeDataAccessObject(new RecipeFactory()));
             SaveRecipeView saveRecipeView = SaveRecipeUseCaseFactory.create(
@@ -55,6 +62,9 @@ public class Main {
                     new SaveRecipeViewModel(),
                     fpdao
             );
+
+
+            FileRecipeDataAccessObject frdao = new FileRecipeDataAccessObject(new RecipeFactory());
             SaveRecipeController saveRecipeController = saveRecipeView.getSaveRecipeController();
             GenerateRecipeInputData generateRecipeInputData = new GenerateRecipeInputData(
                     "chicken",
@@ -66,13 +76,23 @@ public class Main {
                     "0-100"
             );
             Recipe expectedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
-            saveRecipeController.execute("bob", DayOfWeek.MONDAY, MealType.LUNCH, expectedRecipe);
-            Recipe actualRecipe = fpdao.getPlanner("bob").getRecipesByDay(DayOfWeek.MONDAY).get(MealType.LUNCH);
+            saveRecipeController.execute("bb", DayOfWeek.MONDAY, MealType.LUNCH, expectedRecipe);
+//            Recipe actualRecipe = fpdao.getPlanner("bob").getRecipesByDay(DayOfWeek.MONDAY).get(MealType.LUNCH);
 
-//            GenerateRecipeViewModel generateRecipeViewModel = new GenerateRecipeViewModel();
+
+            GroceryListViewModel groceryListViewModel = new GroceryListViewModel();
+            GenerateRecipeViewModel generateRecipeViewModel = new GenerateRecipeViewModel();
+            AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel = new AfterGeneratedRecipeViewModel();
             LoginViewModel loginViewModel = new LoginViewModel();
             LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
             SignupViewModel signupViewModel = new SignupViewModel();
+            SaveRecipeViewModel saveRecipeViewModel = new SaveRecipeViewModel();
+            AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel1 = new AfterGeneratedRecipeViewModel();
+            AddFavoriteRecipeViewModel addFavoriteRecipeViewModel = new AddFavoriteRecipeViewModel();
+            MyProfileViewModel myProfileViewModel = new MyProfileViewModel();
+            EditProfileViewModel editProfileViewModel = new EditProfileViewModel();
+            MyPlannerViewModel myPlannerViewModel = new MyPlannerViewModel();
+
 
             FileUserDataAccessObject userDataAccessObject;
             try {
@@ -90,15 +110,27 @@ public class Main {
 //            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListViewModel, new GroceryListController(groceryListViewModel)
 //            views.add(loggedInView, loggedInView.viewName);
 
-//            GenerateRecipeView generateRecipeView = GenerateRecipeUseCaseFactory.create(viewManagerModel, generateRecipeViewModel);
-//            views.add(generateRecipeView, generateRecipeView.viewName);
+            GenerateRecipeView generateRecipeView = GenerateRecipeUseCaseFactory.create(viewManagerModel, generateRecipeViewModel, afterGeneratedRecipeViewModel, frdao);
+            views.add(generateRecipeView, generateRecipeView.viewName);
+
+            AfterGeneratedRecipeView afterGeneratedRecipeView = AfterGeneratedRecipeFactory.create(viewManagerModel, afterGeneratedRecipeViewModel, generateRecipeViewModel, saveRecipeViewModel, addFavoriteRecipeViewModel, fpdao, userDataAccessObject, frdao);
+            views.add(afterGeneratedRecipeView, afterGeneratedRecipeView.viewName);
 
             GroceryListView groceryListView = GroceryListUseCaseFactory.create(viewManagerModel, groceryListViewModel, fpdao);
             views.add(groceryListView, groceryListView.viewName);
             GroceryListController groceryListController = groceryListView.getGroceryListController();
 
-            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListViewModel, groceryListController);
+            MyProfileView myProfileView = MyProfileFactory.create(viewManagerModel, myProfileViewModel, editProfileViewModel, userDataAccessObject);
+            views.add(myProfileView, myProfileView.viewName);
+            MyProfileController myProfileController = myProfileView.getMyProfileController();
+
+            MyPlannerView myPlannerView = MyPlannerUseCaseFactory.create(viewManagerModel, myPlannerViewModel, fpdao);
+            views.add(myPlannerView, myPlannerView.viewName);
+            MyPlannerController myPlannerController = myPlannerView.getMyPlannerController();
+
+            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListController, myProfileController, myPlannerController);
             views.add(loggedInView, loggedInView.viewName);
+
 
 //            GroceryListController groceryListController = groceryListView.getGroceryListController();
 //            groceryListController.execute("budi");
