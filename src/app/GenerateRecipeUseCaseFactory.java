@@ -1,6 +1,7 @@
 package app;
 
 import interface_adapters.ViewManagerModel;
+import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
 import interface_adapters.generate_recipe.GenerateRecipeController;
 import interface_adapters.generate_recipe.GenerateRecipePresenter;
 import interface_adapters.generate_recipe.GenerateRecipeViewModel;
@@ -13,15 +14,15 @@ import view.GenerateRecipeView;
 public class GenerateRecipeUseCaseFactory {
     private GenerateRecipeUseCaseFactory() {}
 
-    public static GenerateRecipeView create(ViewManagerModel viewManagerModel, GenerateRecipeViewModel generateRecipeViewModel, GenerateRecipeDataAccessInterface generateRecipeDataAccessObject) {
-        GenerateRecipeController generateRecipeController = createGenerateUseCase(viewManagerModel, generateRecipeViewModel, generateRecipeDataAccessObject);
-        return new GenerateRecipeView(generateRecipeController, generateRecipeViewModel);
+    public static GenerateRecipeView create(ViewManagerModel viewManagerModel, GenerateRecipeViewModel generateRecipeViewModel, AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel, GenerateRecipeDataAccessInterface recipeDAO) {
+        GenerateRecipeController generateRecipeController = createGenerateUseCase(viewManagerModel, afterGeneratedRecipeViewModel, generateRecipeViewModel, recipeDAO);
+        return new GenerateRecipeView(generateRecipeController, generateRecipeViewModel, afterGeneratedRecipeViewModel);
     }
 
-    public static GenerateRecipeController createGenerateUseCase(ViewManagerModel viewManagerModel, GenerateRecipeViewModel generateRecipeViewModel, GenerateRecipeDataAccessInterface generateRecipeDataAccessObject) {
-        GenerateRecipeOutputBoundary generateRecipeOutputBoundary = new GenerateRecipePresenter(generateRecipeViewModel, viewManagerModel);
+    public static GenerateRecipeController createGenerateUseCase(ViewManagerModel viewManagerModel, AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel, GenerateRecipeViewModel generateRecipeViewModel, GenerateRecipeDataAccessInterface recipeDAO) {
+        GenerateRecipeOutputBoundary generateRecipeOutputBoundary = new GenerateRecipePresenter(generateRecipeViewModel, afterGeneratedRecipeViewModel, viewManagerModel);
 
-        GenerateRecipeInputBoundary generateInteractor = new GenerateRecipeInteractor(generateRecipeDataAccessObject, generateRecipeOutputBoundary);
+        GenerateRecipeInputBoundary generateInteractor = new GenerateRecipeInteractor(recipeDAO, generateRecipeOutputBoundary);
         return new GenerateRecipeController(generateInteractor);
     }
 }

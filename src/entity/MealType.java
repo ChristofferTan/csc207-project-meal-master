@@ -18,6 +18,7 @@ public enum MealType {
     }
 
     public static MealType fromString(String stringValue) {
+        System.out.println("Hasil " + stringValue);
         for (MealType mealType : MealType.values()) {
             if (mealType.stringValue.equals(stringValue)) {
                 return mealType;

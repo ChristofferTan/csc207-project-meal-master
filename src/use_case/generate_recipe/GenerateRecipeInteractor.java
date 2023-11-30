@@ -4,12 +4,12 @@ import api.edamam.GenerateRecipeAPICaller;
 import entity.Recipe;
 
 public class GenerateRecipeInteractor implements GenerateRecipeInputBoundary {
-    final GenerateRecipeDataAccessInterface dataAccessInterface;
+    final GenerateRecipeDataAccessInterface recipeDAO;
     final GenerateRecipeOutputBoundary generateRecipePresenter;
 
-    public GenerateRecipeInteractor(GenerateRecipeDataAccessInterface dataAccessInterface,
+    public GenerateRecipeInteractor(GenerateRecipeDataAccessInterface recipeDAO,
                                     GenerateRecipeOutputBoundary generateRecipeOutputBoundary) {
-        this.dataAccessInterface = dataAccessInterface;
+        this.recipeDAO = recipeDAO;
         this.generateRecipePresenter = generateRecipeOutputBoundary;
     }
 
@@ -17,7 +17,7 @@ public class GenerateRecipeInteractor implements GenerateRecipeInputBoundary {
     public void execute(GenerateRecipeInputData generateRecipeInputData) {
         Recipe generatedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
         GenerateRecipeOutputData generateRecipeOutputData = new GenerateRecipeOutputData(generatedRecipe);
-        dataAccessInterface.save(generatedRecipe);
+        recipeDAO.save(generatedRecipe);
         generateRecipePresenter.prepareSuccessView(generateRecipeOutputData);
     }
 }

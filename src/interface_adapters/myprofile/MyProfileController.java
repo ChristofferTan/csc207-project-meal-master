@@ -6,6 +6,7 @@ import use_case.myprofile.MyProfileInputData;
 public class MyProfileController {
     final MyProfileInputBoundary myProfileInteractor;
 
+
     public MyProfileController(MyProfileInputBoundary myProfileInteractor) {
         this.myProfileInteractor = myProfileInteractor;
     }
