@@ -1,6 +1,6 @@
 package use_case.my_favorite_recipes;
 
-import entity.User;
+import java.util.ArrayList;
 
 public class MyFavoriteRecipeInteractor implements MyFavoriteRecipeInputBoundary {
     final MyFavoriteRecipeDataAccessInterface dataAccessInterface;
@@ -12,8 +12,8 @@ public class MyFavoriteRecipeInteractor implements MyFavoriteRecipeInputBoundary
     }
 
     public void execute(MyFavoriteRecipeInputData myFavoriteRecipeInputData) {
-        User user = dataAccessInterface.get(myFavoriteRecipeInputData.getUsername());
-        MyFavoriteRecipeOutputData myFavoriteRecipeOutputData = new MyFavoriteRecipeOutputData(user);
+        ArrayList<String> favoriteRecipes = dataAccessInterface.get(myFavoriteRecipeInputData.getUsername()).getFavoriteRecipes();
+        MyFavoriteRecipeOutputData myFavoriteRecipeOutputData = new MyFavoriteRecipeOutputData(favoriteRecipes);
         myFavoriteRecipePresenter.prepareSuccessView(myFavoriteRecipeOutputData);
     }
 }
