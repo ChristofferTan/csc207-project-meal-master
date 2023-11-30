@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class MyFavoriteRecipeState {
     private ArrayList<String> favoriteRecipes;
+    private String username;
 
     public MyFavoriteRecipeState(MyFavoriteRecipeState copy) {
         favoriteRecipes = copy.favoriteRecipes;
@@ -19,5 +20,13 @@ public class MyFavoriteRecipeState {
 
     public void setFavoriteRecipes(ArrayList<String> favoriteRecipes) {
         this.favoriteRecipes = favoriteRecipes;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

@@ -1,8 +1,8 @@
 package view;
 
 import entity.Recipe;
+import interface_adapters.ViewManagerModel;
 import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeController;
-import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeState;
 import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeViewModel;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeController;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeState;
@@ -20,21 +20,24 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
     private final MyFavoriteRecipeController myFavoriteRecipeController;
     private final DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel;
     private final DeleteFavoriteRecipeController deleteFavoriteRecipeController;
+    private final ViewManagerModel viewManagerModel;
     private final JList favoriteRecipes;
     private final JButton delete;
 
     public MyFavoriteRecipeView(MyFavoriteRecipeController myFavoriteRecipeController, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel,
-                                DeleteFavoriteRecipeController deleteFavoriteRecipeController, DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel) {
+                                DeleteFavoriteRecipeController deleteFavoriteRecipeController, DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel,
+                                ViewManagerModel viewManagerModel) {
         this.myFavoriteRecipeController = myFavoriteRecipeController;
         this.myFavoriteRecipeViewModel = myFavoriteRecipeViewModel;
         this.deleteFavoriteRecipeController = deleteFavoriteRecipeController;
         this.deleteFavoriteRecipeViewModel = deleteFavoriteRecipeViewModel;
+        this.viewManagerModel = viewManagerModel;
         myFavoriteRecipeViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(myFavoriteRecipeViewModel.TITLE_LABEL);
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 
-        favoriteRecipes = new JList();
+        favoriteRecipes = new JList(myFavoriteRecipeViewModel.getState().getFavoriteRecipes().toArray());
 
         JPanel buttons = new JPanel();
         delete = new JButton(MyFavoriteRecipeViewModel.DELETE_LABEL);
@@ -48,8 +51,15 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(delete)) {
                             if (favoriteRecipes.getSelectedIndex() != -1) {
-                                DeleteFavoriteRecipeState currentState = deleteFavoriteRecipeViewModel.getState();
-                                deleteFavoriteRecipeController.execute(currentState.getUsername(), (String)favoriteRecipes.getSelectedValue());
+                                String username = myFavoriteRecipeViewModel.getState().getUsername();
+                                deleteFavoriteRecipeController.execute(username, (String)favoriteRecipes.getSelectedValue());
+                                deleteFavoriteRecipeViewModel.firePropertyChanged();
+                                myFavoriteRecipeController.execute(username);
+                                myFavoriteRecipeViewModel.firePropertyChanged();
+                                viewManagerModel.setActiveView(myFavoriteRecipeViewModel.getViewName());
+                                viewManagerModel.firePropertyChanged();
+                            } else {
+                                JOptionPane.showMessageDialog(MyFavoriteRecipeView.this, "Please select a recipe");
                             }
                         }
                     }
@@ -57,7 +67,7 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
         );
 
         this.add(title);
-        this.add(favoriteRecipes);
+        this.add(new JScrollPane(favoriteRecipes));
         this.add(buttons);
     }
 
@@ -68,7 +78,9 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        MyFavoriteRecipeState state = (MyFavoriteRecipeState) evt.getNewValue();
-        favoriteRecipes.setListData(state.getFavoriteRecipes().toArray());
+//        MyFavoriteRecipeState state = (MyFavoriteRecipeState) evt.getNewValue();
+//        if (state.getUsernameError() != null) {
+//            JOptionPane.showMessageDialog(this, state.getUsernameError());
+//        }
     }
 }
