@@ -1,6 +1,5 @@
 package app;
 
-import api.edamam.GenerateRecipeAPICaller;
 import data_access.FilePlannerDataAccessObject;
 import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
@@ -18,16 +17,13 @@ import interface_adapters.my_planner.MyPlannerController;
 import interface_adapters.my_planner.MyPlannerViewModel;
 import interface_adapters.myprofile.MyProfileController;
 import interface_adapters.myprofile.MyProfileViewModel;
-import interface_adapters.save_recipe.SaveRecipeController;
 import interface_adapters.save_recipe.SaveRecipeViewModel;
 import interface_adapters.signup.SignupViewModel;
-import use_case.generate_recipe.GenerateRecipeInputData;
 import view.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.time.DayOfWeek;
 
 public class Main {
     public static void main(String[] args) {
@@ -65,18 +61,18 @@ public class Main {
 
 
             FileRecipeDataAccessObject frdao = new FileRecipeDataAccessObject(new RecipeFactory());
-            SaveRecipeController saveRecipeController = saveRecipeView.getSaveRecipeController();
-            GenerateRecipeInputData generateRecipeInputData = new GenerateRecipeInputData(
-                    "chicken",
-                    new String[]{"balanced"},
-                    new String[]{"alcohol-free"},
-                    new String[]{"Asian"},
-                    new String[]{"Lunch"},
-                    "100-1000",
-                    "0-100"
-            );
-            Recipe expectedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
-            saveRecipeController.execute("bb", DayOfWeek.MONDAY, MealType.LUNCH, expectedRecipe);
+//            SaveRecipeController saveRecipeController = saveRecipeView.getSaveRecipeController();
+//            GenerateRecipeInputData generateRecipeInputData = new GenerateRecipeInputData(
+//                    "chicken",
+//                    new String[]{"balanced"},
+//                    new String[]{"alcohol-free"},
+//                    new String[]{"Asian"},
+//                    new String[]{"Lunch"},
+//                    "100-1000",
+//                    "0-100"
+//            );
+//            Recipe expectedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
+//            saveRecipeController.execute("bb", DayOfWeek.MONDAY, MealType.LUNCH, expectedRecipe);
 //            Recipe actualRecipe = fpdao.getPlanner("bob").getRecipesByDay(DayOfWeek.MONDAY).get(MealType.LUNCH);
 
 
@@ -128,7 +124,7 @@ public class Main {
             views.add(myPlannerView, myPlannerView.viewName);
             MyPlannerController myPlannerController = myPlannerView.getMyPlannerController();
 
-            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListController, myProfileController, myPlannerController);
+            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListController, myProfileController, myPlannerController, generateRecipeViewModel);
             views.add(loggedInView, loggedInView.viewName);
 
 
