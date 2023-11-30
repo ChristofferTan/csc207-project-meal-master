@@ -1,13 +1,14 @@
 package use_case.add_favorite_recipe;
 
 import data_access.FileRecipeDataAccessObject;
+import use_case.generate_recipe.GenerateRecipeDataAccessInterface;
 
 public class AddFavoriteRecipeInteractor implements AddFavoriteRecipeInputBoundary{
     final AddFavoriteRecipeUserDataAccessInterface userDataAccessObject;
-    final FileRecipeDataAccessObject fileRecipeDataAccessObject;
+    final GenerateRecipeDataAccessInterface fileRecipeDataAccessObject;
     final AddFavoriteRecipeOutputBoundary presenter;
 
-    public AddFavoriteRecipeInteractor(AddFavoriteRecipeUserDataAccessInterface userDataAccessObject, FileRecipeDataAccessObject fileRecipeDataAccessObject, AddFavoriteRecipeOutputBoundary presenter) {
+    public AddFavoriteRecipeInteractor(AddFavoriteRecipeUserDataAccessInterface userDataAccessObject, GenerateRecipeDataAccessInterface fileRecipeDataAccessObject, AddFavoriteRecipeOutputBoundary presenter) {
         this.userDataAccessObject = userDataAccessObject;
         this.fileRecipeDataAccessObject = fileRecipeDataAccessObject;
         this.presenter = presenter;
@@ -21,7 +22,7 @@ public class AddFavoriteRecipeInteractor implements AddFavoriteRecipeInputBounda
         else {
             userDataAccessObject.saveFavoriteRecipe(addFavoriteRecipeInputData.getUsername(), addFavoriteRecipeInputData.getLabel());
 
-            AddFavoriteRecipeOutputData addFavoriteRecipeOutputData = new AddFavoriteRecipeOutputData(addFavoriteRecipeInputData.getLabel(), fileRecipeDataAccessObject.getRecipe(addFavoriteRecipeInputData.getLabel()).getRecipeUrl());
+            AddFavoriteRecipeOutputData addFavoriteRecipeOutputData = new AddFavoriteRecipeOutputData(addFavoriteRecipeInputData.getLabel(), addFavoriteRecipeInputData.getUsername());
             presenter.prepareSuccessView(addFavoriteRecipeOutputData);
         }
     }

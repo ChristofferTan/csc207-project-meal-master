@@ -9,7 +9,7 @@ public class SignupState {
     private String repeatPasswordError = null;
     private String name = "";
     private int age;
-    private String gender;
+    private String gender = "";
     private int height;
     private int weight;
     public SignupState(SignupState copy) {

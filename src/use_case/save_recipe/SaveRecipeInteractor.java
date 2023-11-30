@@ -13,7 +13,7 @@ public class SaveRecipeInteractor implements SaveRecipeInputBoundary {
     @Override
     public void execute(SaveRecipeInputData saveRecipeInputData) {
         dataAccessInterface.save(saveRecipeInputData.getUsername(), saveRecipeInputData.getDay(), saveRecipeInputData.getMealType(), saveRecipeInputData.getRecipe());
-        SaveRecipeOutputData saveRecipeOutputData = new SaveRecipeOutputData();
+        SaveRecipeOutputData saveRecipeOutputData = new SaveRecipeOutputData(saveRecipeInputData.getUsername(), saveRecipeInputData.getRecipe());
         saveRecipePresenter.prepareSuccessView(saveRecipeOutputData);
     }
 }

@@ -3,6 +3,7 @@ package interface_adapters.generate_recipe;
 import java.util.Arrays;
 
 public class GenerateRecipeState {
+    private String username = "";
     private String keyword = "";
     private String[] diet = new String[1];
     private String[] health = new String[1];
@@ -13,6 +14,7 @@ public class GenerateRecipeState {
     private String maxPreparationTime = "";
 
     public GenerateRecipeState(GenerateRecipeState copy) {
+        username = copy.username;
         keyword = copy.keyword;
         diet = copy.diet;
         health = copy.health;
@@ -24,6 +26,14 @@ public class GenerateRecipeState {
     }
 
     public GenerateRecipeState() {}
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getKeyword() {
         return keyword;

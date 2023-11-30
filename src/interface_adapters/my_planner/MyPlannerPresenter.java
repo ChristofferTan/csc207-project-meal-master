@@ -1,33 +1,28 @@
 package interface_adapters.my_planner;
 
-import interface_adapters.show_planner.ShowPlannerState;
-import interface_adapters.show_planner.ShowPlannerViewModel;
 import use_case.my_planner.MyPlannerOutputBoundary;
 import interface_adapters.ViewManagerModel;
 import use_case.my_planner.MyPlannerOutputData;
 
 public class MyPlannerPresenter implements MyPlannerOutputBoundary {
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
     private final MyPlannerViewModel myPlannerViewModel;
-    private final ShowPlannerViewModel showPlannerViewModel;
 
     public MyPlannerPresenter(ViewManagerModel viewManagerModel,
-                              MyPlannerViewModel myPlannerViewModel,
-                              ShowPlannerViewModel showPlannerViewModel) {
+                              MyPlannerViewModel myPlannerViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.myPlannerViewModel = myPlannerViewModel;
-        this.showPlannerViewModel = showPlannerViewModel;
     }
 
     @Override
     public void prepareSuccessView(MyPlannerOutputData response) {
         // On success,switch to the show planner view
-        ShowPlannerState showPlannerState = showPlannerViewModel.getState();
+        MyPlannerState showPlannerState = myPlannerViewModel.getState();
         showPlannerState.setPlanner(response.getPlanner());
-        this.showPlannerViewModel.setState(showPlannerState);
-        this.showPlannerViewModel.firePropertyChanged();
+        this.myPlannerViewModel.setState(showPlannerState);
+        this.myPlannerViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setActiveView(showPlannerViewModel.getViewName());
+        this.viewManagerModel.setActiveView(myPlannerViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 

@@ -1,9 +1,5 @@
 package use_case.edit_profile;
 
-import entity.User;
-
-import java.util.ArrayList;
-
 public class EditProfileInteractor implements EditProfileInputBoundary {
     final EditProfileDataAccessInterface userDataAccessObject;
     final EditProfileOutputBoundary editProfilePresenter;
@@ -25,7 +21,7 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
 
         userDataAccessObject.editProfile(username, name, age, gender, weight, height);
 
-        EditProfileOutputData editProfileOutputData = new EditProfileOutputData();
+        EditProfileOutputData editProfileOutputData = new EditProfileOutputData(name, age, gender, height, weight);
         editProfilePresenter.prepareSuccessView(editProfileOutputData);
     }
 }

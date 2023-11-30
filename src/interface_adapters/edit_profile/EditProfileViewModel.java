@@ -14,7 +14,7 @@ public class EditProfileViewModel extends ViewModel {
     public static final String WEIGHT_LABEL = "Weight";
     public static final String HEIGHT_LABEL = "Height";
 
-    public static final String EDIT_PROFILE_BUTTON_LABEL = "Edit Profile";
+    public static final String EDIT_PROFILE_BUTTON_LABEL = "Save";
 
     private EditProfileState state = new EditProfileState();
 

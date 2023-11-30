@@ -14,6 +14,6 @@ public class SaveRecipePresenter implements SaveRecipeOutputBoundary {
     }
 
     public void prepareSuccessView(SaveRecipeOutputData saveRecipeOutputData) {
-        System.out.println("You have added the recipe to the planner successfully");
+        System.out.println(saveRecipeOutputData.getUsername() + " have added the " +  saveRecipeOutputData.getRecipe().getLabel() + " to the planner successfully");
     }
 }

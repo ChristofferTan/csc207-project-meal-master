@@ -1,1 +1,3 @@
-username,password
+username,password,name,age,gender,height,weight,favoriteRecipes
+Janis,joplin,Jantod,38,Man,168,90,
+Budi,pekerti,Budiman,58,Man,91,150,
