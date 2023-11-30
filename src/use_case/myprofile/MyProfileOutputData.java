@@ -49,8 +49,10 @@ public class MyProfileOutputData {
 
         if (gender.equals("Man")) {
             return (int) Math.round(66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age));
-        } else {
+        } else if (gender.equals("Woman")){
             return (int) Math.round(655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age));
+        } else {
+            return (int) (Math.round(66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age)) + Math.round(655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age)) / 2);
         }
     }
 }

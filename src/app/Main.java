@@ -127,6 +127,9 @@ public class Main {
             LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListController, myProfileController, myPlannerController, generateRecipeViewModel);
             views.add(loggedInView, loggedInView.viewName);
 
+            EditProfileView editProfileView = EditProfileFactory.create(viewManagerModel, editProfileViewModel,userDataAccessObject, myProfileViewModel);
+            views.add(editProfileView, editProfileView.viewName);
+
 
 //            GroceryListController groceryListController = groceryListView.getGroceryListController();
 //            groceryListController.execute("budi");
