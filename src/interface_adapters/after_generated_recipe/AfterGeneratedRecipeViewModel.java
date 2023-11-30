@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class AfterGeneratedRecipeViewModel extends ViewModel {
-    public static final String SUBMIT_BUTTON_LABEL = "Submit";
+    public static final String SUBMIT_BUTTON_LABEL = "Save to planner";
     public static final String SERVINGS_LABEL = "Number of servings: ";
     public static final String CALORIES_INFO_LABEL = "Calories: ";
     public static final String PREPARATION_LABEL = "Preparation time: ";
