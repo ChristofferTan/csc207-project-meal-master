@@ -1,14 +1,13 @@
 package view;
 
 import interface_adapters.ViewManagerModel;
-import interface_adapters.grocery_list.GroceryListState;
-import interface_adapters.grocery_list.GroceryListViewModel;
+import interface_adapters.generate_recipe.GenerateRecipeState;
+import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.grocery_list.GroceryListController;
 import interface_adapters.my_planner.MyPlannerController;
 import interface_adapters.myprofile.MyProfileController;
-import interface_adapters.myprofile.MyProfileViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,10 +37,13 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     private final MyPlannerController myPlannerController;
 
+    private final GenerateRecipeViewModel generateRecipeViewModel;
+
 
     public LoggedInView(LoggedInViewModel loggedInViewModel, ViewManagerModel viewManagerModel, GroceryListController groceryListController,
-                        MyProfileController myProfileController, MyPlannerController myPlannerController) {
+                        MyProfileController myProfileController, MyPlannerController myPlannerController, GenerateRecipeViewModel generateRecipeViewModel) {
         this.loggedInViewModel = loggedInViewModel;
+        this.generateRecipeViewModel = generateRecipeViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
         this.viewManagerModel = viewManagerModel;
@@ -95,6 +97,10 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                     if (e.getSource().equals(generateRecipe)) {
                         LoggedInState currentState = loggedInViewModel.getState();
                         String username = currentState.getUsername();
+
+                        GenerateRecipeState generateRecipeState = generateRecipeViewModel.getState();
+                        generateRecipeState.setUsername(username);
+
                         viewManagerModel.setActiveView("generate recipe");
                         viewManagerModel.firePropertyChanged();
                     }
