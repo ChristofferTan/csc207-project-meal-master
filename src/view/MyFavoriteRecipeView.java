@@ -1,8 +1,6 @@
 package view;
 
 import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeController;
-import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeState;
-import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeViewModel;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeController;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeState;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
@@ -17,18 +15,16 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
     public final String viewName = "my favorite recipe";
     private final MyFavoriteRecipeViewModel myFavoriteRecipeViewModel;
     private final MyFavoriteRecipeController myFavoriteRecipeController;
-    private final DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel;
     private final DeleteFavoriteRecipeController deleteFavoriteRecipeController;
     private final JList favoriteRecipes;
     private final JButton delete;
     private final JButton back;
 
     public MyFavoriteRecipeView(MyFavoriteRecipeController myFavoriteRecipeController, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel,
-                                DeleteFavoriteRecipeController deleteFavoriteRecipeController, DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel) {
+                                DeleteFavoriteRecipeController deleteFavoriteRecipeController) {
         this.myFavoriteRecipeController = myFavoriteRecipeController;
         this.myFavoriteRecipeViewModel = myFavoriteRecipeViewModel;
         this.deleteFavoriteRecipeController = deleteFavoriteRecipeController;
-        this.deleteFavoriteRecipeViewModel = deleteFavoriteRecipeViewModel;
         myFavoriteRecipeViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(myFavoriteRecipeViewModel.TITLE_LABEL);
@@ -53,7 +49,7 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
                             if (favoriteRecipes.getSelectedIndex() != -1) {
                                 String username = myFavoriteRecipeViewModel.getState().getUsername();
                                 deleteFavoriteRecipeController.execute(username, (String)favoriteRecipes.getSelectedValue());
-//                                myFavoriteRecipeController.execute(username);
+                                myFavoriteRecipeController.execute(username);
                             } else {
                                 JOptionPane.showMessageDialog(MyFavoriteRecipeView.this, "Please select a recipe");
                             }

@@ -5,7 +5,6 @@ import data_access.FileUserDataAccessObject;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeController;
 import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipePresenter;
-import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeViewModel;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeController;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipePresenter;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
@@ -22,13 +21,12 @@ import view.MyFavoriteRecipeView;
 public class MyFavoriteRecipeFactory {
     private MyFavoriteRecipeFactory() {}
 
-    public static MyFavoriteRecipeView create(ViewManagerModel viewManagerModel,
-                                              MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel,
+    public static MyFavoriteRecipeView create(ViewManagerModel viewManagerModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel,
                                               FileUserDataAccessObject userDataAccessObject, FileRecipeDataAccessObject recipeDataAccessObject) {
 
         MyFavoriteRecipeController myFavoriteRecipeController = createMyFavoriteRecipeUseCase(viewManagerModel, myFavoriteRecipeViewModel, userDataAccessObject);
-        DeleteFavoriteRecipeController deleteFavoriteRecipeController = createDeleteFavoriteRecipeUseCase(deleteFavoriteRecipeViewModel, myFavoriteRecipeViewModel, viewManagerModel, userDataAccessObject, recipeDataAccessObject);
-        return new MyFavoriteRecipeView(myFavoriteRecipeController, myFavoriteRecipeViewModel, deleteFavoriteRecipeController, deleteFavoriteRecipeViewModel);
+        DeleteFavoriteRecipeController deleteFavoriteRecipeController = createDeleteFavoriteRecipeUseCase(myFavoriteRecipeViewModel, userDataAccessObject, recipeDataAccessObject);
+        return new MyFavoriteRecipeView(myFavoriteRecipeController, myFavoriteRecipeViewModel, deleteFavoriteRecipeController);
     }
 
     private static MyFavoriteRecipeController createMyFavoriteRecipeUseCase(ViewManagerModel viewManagerModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, MyFavoriteRecipeDataAccessInterface dataAccessInterface) {
@@ -38,8 +36,8 @@ public class MyFavoriteRecipeFactory {
         return new MyFavoriteRecipeController(myFavoriteRecipeInteractor);
     }
 
-    private static DeleteFavoriteRecipeController createDeleteFavoriteRecipeUseCase(DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, ViewManagerModel viewManagerModel, DeleteFavoriteRecipeDataAccessInterface dataAccessInterface, FileRecipeDataAccessObject fileRecipeDataAccessObject) {
-        DeleteFavoriteRecipeOutputBoundary deleteFavoriteRecipeOutputBoundary = new DeleteFavoriteRecipePresenter(deleteFavoriteRecipeViewModel, myFavoriteRecipeViewModel, viewManagerModel);
+    private static DeleteFavoriteRecipeController createDeleteFavoriteRecipeUseCase(MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, DeleteFavoriteRecipeDataAccessInterface dataAccessInterface, FileRecipeDataAccessObject fileRecipeDataAccessObject) {
+        DeleteFavoriteRecipeOutputBoundary deleteFavoriteRecipeOutputBoundary = new DeleteFavoriteRecipePresenter(myFavoriteRecipeViewModel);
 
 
         DeleteFavoriteRecipeInputBoundary deleteFavoriteRecipeInteractor = new DeleteFavoriteRecipeInteractor(dataAccessInterface, fileRecipeDataAccessObject, deleteFavoriteRecipeOutputBoundary);
