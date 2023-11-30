@@ -27,8 +27,8 @@ public class MyFavoriteRecipeFactory {
                                               FileUserDataAccessObject userDataAccessObject, FileRecipeDataAccessObject recipeDataAccessObject) {
 
         MyFavoriteRecipeController myFavoriteRecipeController = createMyFavoriteRecipeUseCase(viewManagerModel, myFavoriteRecipeViewModel, userDataAccessObject);
-        DeleteFavoriteRecipeController deleteFavoriteRecipeController = createDeleteFavoriteRecipeUseCase(viewManagerModel, deleteFavoriteRecipeViewModel, userDataAccessObject, recipeDataAccessObject);
-        return new MyFavoriteRecipeView(myFavoriteRecipeController, myFavoriteRecipeViewModel, deleteFavoriteRecipeController, deleteFavoriteRecipeViewModel, viewManagerModel);
+        DeleteFavoriteRecipeController deleteFavoriteRecipeController = createDeleteFavoriteRecipeUseCase(deleteFavoriteRecipeViewModel, myFavoriteRecipeViewModel, viewManagerModel, userDataAccessObject, recipeDataAccessObject);
+        return new MyFavoriteRecipeView(myFavoriteRecipeController, myFavoriteRecipeViewModel, deleteFavoriteRecipeController, deleteFavoriteRecipeViewModel);
     }
 
     private static MyFavoriteRecipeController createMyFavoriteRecipeUseCase(ViewManagerModel viewManagerModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, MyFavoriteRecipeDataAccessInterface dataAccessInterface) {
@@ -38,8 +38,8 @@ public class MyFavoriteRecipeFactory {
         return new MyFavoriteRecipeController(myFavoriteRecipeInteractor);
     }
 
-    private static DeleteFavoriteRecipeController createDeleteFavoriteRecipeUseCase(ViewManagerModel viewManagerModel, DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel, DeleteFavoriteRecipeDataAccessInterface dataAccessInterface, FileRecipeDataAccessObject fileRecipeDataAccessObject) {
-        DeleteFavoriteRecipeOutputBoundary deleteFavoriteRecipeOutputBoundary = new DeleteFavoriteRecipePresenter(viewManagerModel, deleteFavoriteRecipeViewModel);
+    private static DeleteFavoriteRecipeController createDeleteFavoriteRecipeUseCase(DeleteFavoriteRecipeViewModel deleteFavoriteRecipeViewModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, ViewManagerModel viewManagerModel, DeleteFavoriteRecipeDataAccessInterface dataAccessInterface, FileRecipeDataAccessObject fileRecipeDataAccessObject) {
+        DeleteFavoriteRecipeOutputBoundary deleteFavoriteRecipeOutputBoundary = new DeleteFavoriteRecipePresenter(deleteFavoriteRecipeViewModel, myFavoriteRecipeViewModel, viewManagerModel);
 
 
         DeleteFavoriteRecipeInputBoundary deleteFavoriteRecipeInteractor = new DeleteFavoriteRecipeInteractor(dataAccessInterface, fileRecipeDataAccessObject, deleteFavoriteRecipeOutputBoundary);
