@@ -113,6 +113,7 @@ public class MyProfileView extends JPanel implements ActionListener, PropertyCha
                         if (e.getSource().equals(editProfile)) {
                             EditProfileState editProfileState = editProfileViewModel.getState();
                             MyProfileState myProfileState = myProfileViewModel.getState();
+
                             editProfileState.setUsername(myProfileState.getUsername());
                             editProfileState.setName(myProfileState.getName());
                             editProfileState.setAge(myProfileState.getAge());
