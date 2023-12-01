@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class GenerateRecipeState {
     private String username = "";
     private String keyword = "";
+    private String keywordError = null;
     private String[] diet = new String[1];
     private String[] health = new String[1];
     private String[] cuisineType = new String[1];
@@ -16,6 +17,7 @@ public class GenerateRecipeState {
     public GenerateRecipeState(GenerateRecipeState copy) {
         username = copy.username;
         keyword = copy.keyword;
+        copy.keyword = copy.keyword;
         diet = copy.diet;
         health = copy.health;
         cuisineType = copy.cuisineType;
@@ -34,6 +36,9 @@ public class GenerateRecipeState {
     public void setUsername(String username) {
         this.username = username;
     }
+    public String getKeywordError() {return this.keywordError;}
+    public void setKeywordError(String keywordError) {this.keywordError = keywordError;}
+
 
     public String getKeyword() {
         return keyword;
