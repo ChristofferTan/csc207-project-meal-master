@@ -23,7 +23,7 @@ public class CalorieTrackerPresenter implements CalorieTrackerOutputBoundary {
         MyPlannerState state = myPlannerViewModel.getState();
         state.setWeeklyCalories(weeklyCalories);
         state.setAverageDailyCalories(averageDailyCalories);
-        myPlannerViewModel.firePropertyChanged();
+//        myPlannerViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(myPlannerViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
@@ -33,6 +33,6 @@ public class CalorieTrackerPresenter implements CalorieTrackerOutputBoundary {
     public void prepareFailView(String error) {
         MyPlannerState myPlannerState = myPlannerViewModel.getState();
         myPlannerState.setNoCalorieTrackerError(error);
-        myPlannerViewModel.firePropertyChanged();
+//        myPlannerViewModel.firePropertyChanged();
     }
 }

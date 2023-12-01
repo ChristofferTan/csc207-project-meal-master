@@ -17,7 +17,7 @@ public class MyProfileInteractorTest {
         MyProfileDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         UserFactory factory = new CommonUserFactory();
-        User user = factory.create("faraaz", "Passw", "Faraaz", 19, "Man", 60, 170);
+        User user = factory.create("faraaz", "Passw", "Faraaz", 19, "Man", 170, 60);
         ((InMemoryUserDataAccessObject) userRepository).save(user);
 
         MyProfileOutputBoundary successPresenter = new MyProfileOutputBoundary() {

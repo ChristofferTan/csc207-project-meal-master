@@ -148,8 +148,8 @@ public class MyProfileView extends JPanel implements ActionListener, PropertyCha
         this.add(namePanel);
         this.add(agePanel);
         this.add(genderPanel);
-        this.add(weightPanel);
         this.add(heightPanel);
+        this.add(weightPanel);
         this.add(caloriesPanel);
         this.add(buttons);
     }
