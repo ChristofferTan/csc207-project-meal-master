@@ -95,8 +95,8 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                                     currentState.getName(),
                                     currentState.getAge(),
                                     currentState.getGender(),
-                                    currentState.getWeight(),
-                                    currentState.getHeight()
+                                    currentState.getHeight(),
+                                    currentState.getWeight()
                             );
 //                            currentState = editProfileViewModel.getState();
 //
@@ -184,8 +184,8 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
         this.add(nameInfo);
         this.add(ageDropdownPanel);
         this.add(genderDropdownPanel);
-        this.add(weightDropdownPanel);
         this.add(heightDropdownPanel);
+        this.add(weightDropdownPanel);
         this.add(buttons);
     }
 
@@ -204,11 +204,11 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
         weightComboBox.setSelectedIndex(state.getWeight());
 
         if (state.getGender().equals("Man")) {
-            ageComboBox.setSelectedIndex(0);
+            genderComboBox.setSelectedIndex(0);
         } else if (state.getGender().equals("Woman")) {
-            ageComboBox.setSelectedIndex(1);
+            genderComboBox.setSelectedIndex(1);
         } else {
-            ageComboBox.setSelectedIndex(2);
+            genderComboBox.setSelectedIndex(2);
         }
         nameInputField.setText(state.getName());
     }
