@@ -20,6 +20,7 @@ public class SignupViewModel extends ViewModel {
     public static final String ACTIVITY_LEVEL = "Enter your activity level";
 
     public static final String SIGNUP_BUTTON_LABEL = "Sign up";
+    public static final String LOGIN_BUTTON_LABEL = "Log in";
 
     private SignupState state = new SignupState();
 
