@@ -1,9 +1,11 @@
 package interface_adapters.after_generated_recipe;
 
+import entity.MealType;
 import interface_adapters.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.time.DayOfWeek;
 
 public class AfterGeneratedRecipeViewModel extends ViewModel {
     public static final String SUBMIT_BUTTON_LABEL = "Submit";
@@ -14,6 +16,9 @@ public class AfterGeneratedRecipeViewModel extends ViewModel {
     public static final String ADD_TO_PLANNER_DAY_LABEL = "on ";
     public static final String ADD_TO_FAVORITE_LIST_BUTTON_LABEL = "Favorite";
     public static final String BACK_BUTTON_LABEL = "Back";
+
+    public static final String[] MEAL_TYPE_OPTIONS = {MealType.BREAKFAST.name(), MealType.LUNCH.name(), MealType.DINNER.name()};
+    public static final String[] DAY_OPTIONS = {DayOfWeek.MONDAY.name(), DayOfWeek.TUESDAY.name(), DayOfWeek.WEDNESDAY.name(), DayOfWeek.THURSDAY.name(), DayOfWeek.FRIDAY.name(), DayOfWeek.SATURDAY.name(), DayOfWeek.SUNDAY.name()};
 
     private AfterGeneratedRecipeState state = new AfterGeneratedRecipeState();
 

@@ -139,5 +139,20 @@ public class Main {
 
             application.pack();
             application.setVisible(true);
+            toggleFullscreen(application);
     }
+
+        private static void toggleFullscreen(JFrame frame) {
+                GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+                device.setFullScreenWindow(frame);
+//                if (frame.getExtendedState() != JFrame.MAXIMIZED_BOTH) {
+//                        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//                        frame.setUndecorated(true); // Remove window decorations
+//                        device.setFullScreenWindow(frame);
+//                } else {
+//                        frame.setExtendedState(JFrame.NORMAL);
+//                        frame.setUndecorated(false); // Restore window decorations
+//                        device.setFullScreenWindow(null);
+//                }
+        }
 }

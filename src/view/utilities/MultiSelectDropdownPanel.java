@@ -1,5 +1,6 @@
 package view.utilities;
 
+import interface_adapters.after_generated_recipe.AfterGeneratedRecipeState;
 import interface_adapters.generate_recipe.GenerateRecipeState;
 import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 

@@ -11,9 +11,6 @@ public class Planner {
     public Planner(String username) {
         this.username = username;
         this.weeklyRecipes = new HashMap<>();
-        for (DayOfWeek day : DayOfWeek.values()) {
-            this.weeklyRecipes.put(day, new HashMap<>());
-        }
     }
 
     public HashMap<DayOfWeek, HashMap<MealType, Recipe>> getWeeklyRecipes() {

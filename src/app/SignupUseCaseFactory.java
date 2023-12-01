@@ -1,6 +1,7 @@
 package app;
 
 import entity.CommonUserFactory;
+import entity.PlannerFactory;
 import entity.UserFactory;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.generate_recipe.GenerateRecipeController;
@@ -39,9 +40,10 @@ public class SignupUseCaseFactory {
         SignupOutputBoundary signupOutputBoundary = new SignupPresenter(signupViewModel, loginViewModel, viewManagerModel);
 
         UserFactory userFactory = new CommonUserFactory();
+        PlannerFactory plannerFactory = new PlannerFactory();
 
         SignupInputBoundary userSignupInteractor = new SignupInteractor(
-                userDataAccessObject, signupOutputBoundary, userFactory);
+                userDataAccessObject, signupOutputBoundary, userFactory, plannerFactory);
 
         return new SignupController(userSignupInteractor);
     }
