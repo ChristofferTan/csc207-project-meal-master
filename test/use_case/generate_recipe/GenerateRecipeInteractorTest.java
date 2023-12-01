@@ -17,6 +17,11 @@ public class GenerateRecipeInteractorTest {
             public void prepareSuccessView(GenerateRecipeOutputData generateRecipeOutputData) {
                 assertNotNull(generateRecipeOutputData.getRecipe());
             }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case fail is not expected");
+            }
         };
 
         GenerateRecipeInputBoundary interactor = new GenerateRecipeInteractor(repository, successPresenter);
