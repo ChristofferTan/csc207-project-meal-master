@@ -6,13 +6,17 @@ import entity.User;
 import java.util.ArrayList;
 
 public class MyFavoriteRecipeOutputData {
-    private final User user;
+    private ArrayList<String> favoriteRecipes;
 
-    public MyFavoriteRecipeOutputData(User user) {
-        this.user = user;
+    public MyFavoriteRecipeOutputData(ArrayList<String> favoriteRecipes) {
+        this.favoriteRecipes = favoriteRecipes;
     }
 
     public ArrayList<String> getFavoriteRecipes() {
-        return user.getFavoriteRecipes();
+        return favoriteRecipes;
+    }
+
+    public void setFavoriteRecipes(ArrayList<String> favoriteRecipes) {
+        this.favoriteRecipes = favoriteRecipes;
     }
 }

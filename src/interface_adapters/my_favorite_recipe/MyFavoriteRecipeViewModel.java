@@ -6,7 +6,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class MyFavoriteRecipeViewModel extends ViewModel {
-    // Add button labels as necessary here in the future
+    public static final String TITLE_LABEL = "My Favorite Recipe View";
+    public static final String DELETE_LABEL = "Delete";
+    public static final String BACK_LABEL = "Back";
 
     private MyFavoriteRecipeState state = new MyFavoriteRecipeState();
 

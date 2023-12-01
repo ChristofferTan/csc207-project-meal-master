@@ -1,5 +1,6 @@
 package view;
 
+import javax.accessibility.AccessibleEditableText;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,17 +14,18 @@ import interface_adapters.edit_profile.EditProfileController;
 import interface_adapters.edit_profile.EditProfileState;
 import interface_adapters.edit_profile.EditProfileViewModel;
 import interface_adapters.myprofile.MyProfileController;
+import interface_adapters.myprofile.MyProfileState;
 import interface_adapters.myprofile.MyProfileViewModel;
+import interface_adapters.signup.SignupState;
+import interface_adapters.signup.SignupViewModel;
 
 public class EditProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "edit profile";
     private final EditProfileViewModel editProfileViewModel;
     private final JTextField nameInputField = new JTextField(15);
-    private final JTextField ageInputField = new JTextField(15);
-    private final JTextField genderInputField = new JTextField(15);
-    private final JTextField weightInputField = new JTextField(15);
-    private final JTextField heightInputField = new JTextField(15);
+    private final JComboBox<Integer> ageComboBox, weightComboBox, heightComboBox;
+    private final JComboBox<String> genderComboBox;
     private final JTextArea editedProfileOutputField = new JTextArea(15, 15);
 
     private final EditProfileController editProfileController;
@@ -47,14 +49,36 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
 
         LabelTextPanel nameInfo = new LabelTextPanel(
                 new JLabel(EditProfileViewModel.NAME_LABEL), nameInputField);
-        LabelTextPanel ageInfo = new LabelTextPanel(
-                new JLabel(EditProfileViewModel.AGE_LABEL), ageInputField);
-        LabelTextPanel genderInfo = new LabelTextPanel(
-                new JLabel(EditProfileViewModel.GENDER_LABEL), genderInputField);
-        LabelTextPanel weightInfo = new LabelTextPanel(
-                new JLabel(EditProfileViewModel.WEIGHT_LABEL), weightInputField);
-        LabelTextPanel heightInfo = new LabelTextPanel(
-                new JLabel(EditProfileViewModel.HEIGHT_LABEL), heightInputField);
+
+        JPanel ageDropdownPanel = new JPanel();
+        JPanel genderDropdownPanel = new JPanel();
+        JPanel weightDropdownPanel = new JPanel();
+        JPanel heightDropdownPanel = new JPanel();
+
+        ageDropdownPanel.add(new JLabel(EditProfileViewModel.AGE_LABEL));
+        genderDropdownPanel.add(new JLabel(EditProfileViewModel.GENDER_LABEL));
+        weightDropdownPanel.add(new JLabel(EditProfileViewModel.WEIGHT_LABEL));
+        heightDropdownPanel.add(new JLabel(EditProfileViewModel.HEIGHT_LABEL));
+
+        genderComboBox = new JComboBox<>(new String[]{"Man", "Woman", "Prefer not to say"});
+
+        Integer ageRange[] = new Integer[101];
+        Integer weightRange[] = new Integer[250];
+        Integer heighRange[] = new Integer[250];
+
+        for (int i=0;i<=100;i++) ageRange[i] = i;
+        for (int i=10;i<=200;i++) weightRange[i] = i;
+        for (int i=10;i<=200;i++) heighRange[i] = i;
+
+        ageComboBox = new JComboBox<>(ageRange);
+        weightComboBox = new JComboBox<>(weightRange);
+        heightComboBox = new JComboBox<>(heighRange);
+
+        genderDropdownPanel.add(genderComboBox);
+        ageDropdownPanel.add(ageComboBox);
+        heightDropdownPanel.add(heightComboBox);
+        weightDropdownPanel.add(weightComboBox);
+
         JPanel buttons = new JPanel();
         editProfile = new JButton(EditProfileViewModel.EDIT_PROFILE_BUTTON_LABEL);
         buttons.add(editProfile);
@@ -117,107 +141,51 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                 }
         );
 
-        ageInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        EditProfileState currentState = editProfileViewModel.getState();
-                        currentState.setAge(Integer.parseInt(ageInputField.getText() + e.getKeyChar()));
-                        editProfileViewModel.setState(currentState);
-                    }
+        ageComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EditProfileState editProfileState = editProfileViewModel.getState();
+                int selectedValue = (int) ageComboBox.getSelectedItem();
+                editProfileState.setAge(selectedValue);
+                editProfileViewModel.setState(editProfileState);
+            }
+        });
 
-                    @Override
-                    public void keyPressed(KeyEvent e) {
+        genderComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EditProfileState editProfileState = editProfileViewModel.getState();
+                String selectedValue = (String) genderComboBox.getSelectedItem();
+                editProfileState.setGender(selectedValue);
+                editProfileViewModel.setState(editProfileState);
+            }
+        });
 
-                    }
+        heightComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EditProfileState editProfileState = editProfileViewModel.getState();
+                int selectedValue = (int) heightComboBox.getSelectedItem();
+                editProfileState.setHeight(selectedValue);
+                editProfileViewModel.setState(editProfileState);
+            }
+        });
 
-                    @Override
-                    public void keyReleased(KeyEvent e) {
+        weightComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EditProfileState editProfileState = editProfileViewModel.getState();
+                int selectedValue = (int) weightComboBox.getSelectedItem();
+                editProfileState.setWeight(selectedValue);
+                editProfileViewModel.setState(editProfileState);
 
-                    }
-                }
-        );
-
-        genderInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        EditProfileState currentState = editProfileViewModel.getState();
-                        String text = genderInputField.getText();
-                        if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                            if (!text.isEmpty()) {
-                                text = text.substring(0, text.length() - 1);
-                            }
-                        }
-                        else {
-                            text += e.getKeyChar();
-                        }
-                        currentState.setGender(text);
-                        editProfileViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
-
-        weightInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        EditProfileState currentState = editProfileViewModel.getState();
-                        currentState.setWeight(Integer.parseInt(weightInputField.getText() + e.getKeyChar()));
-                        editProfileViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
-
-        heightInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        EditProfileState currentState = editProfileViewModel.getState();
-                        currentState.setHeight(Integer.parseInt(heightInputField.getText() + e.getKeyChar()));
-                        editProfileViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
+            }
+        });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
         this.add(nameInfo);
-        this.add(ageInfo);
-        this.add(genderInfo);
-        this.add(weightInfo);
-        this.add(heightInfo);
+        this.add(ageDropdownPanel);
+        this.add(genderDropdownPanel);
+        this.add(weightDropdownPanel);
+        this.add(heightDropdownPanel);
         this.add(buttons);
     }
 
@@ -230,11 +198,18 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         EditProfileState state = (EditProfileState) evt.getNewValue();
-        // System.out.println("Property berubah " + state.getName());
-        setFields(state);
-    }
-    private void setFields(EditProfileState state) {
+
+        ageComboBox.setSelectedIndex(state.getAge());
+        heightComboBox.setSelectedIndex(state.getHeight());
+        weightComboBox.setSelectedIndex(state.getWeight());
+
+        if (state.getGender().equals("Man")) {
+            ageComboBox.setSelectedIndex(0);
+        } else if (state.getGender().equals("Woman")) {
+            ageComboBox.setSelectedIndex(1);
+        } else {
+            ageComboBox.setSelectedIndex(2);
+        }
         nameInputField.setText(state.getName());
-        genderInputField.setText(state.getGender());
     }
 }
