@@ -51,19 +51,23 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
             assert header.equals("username,day,mealType,recipesLabel");
 
             for (int i=1; i<rows.length; i++) {
+                System.out.println("banyak row: " + rows.length);
                 String row = rows[i].trim();
                 String[] col = row.split(",");
                 String username = String.valueOf(col[headers.get("username")]);
                 String day = String.valueOf(col[headers.get("day")]);
                 String mealType = String.valueOf(col[headers.get("mealType")]);
                 String[] recipesLabel = Arrays.copyOfRange(col, headers.get("recipesLabel"), col.length);
+                System.out.println("mealType: " + mealType);
 
                 if (planners.containsKey(username)) {
+                    System.out.println("planners already");
                     HashMap<MealType, Recipe> dailyRecipes = planners.get(username).getRecipesByDay(DayOfWeek.valueOf(day));
                     for (String recipeLabel : recipesLabel) {
                         Recipe recipe = fileRecipeDataAccessObject.getRecipe(recipeLabel);
                         assert recipe != null : "Recipe " + recipeLabel + " not found in database";
-                        assert !dailyRecipes.containsKey(MealType.valueOf(mealType)) : "Recipe " + mealType + " already exist in planners database, can't overwrite!";
+                        assert !dailyRecipes.containsKey(MealType.fromString(mealType)) : "Recipe " + mealType + " already exist in planners database, can't overwrite!";
+                        System.out.println("mealType pas dalam if: " + MealType.fromString(mealType));
                         dailyRecipes.put(MealType.fromString(mealType), fileRecipeDataAccessObject.getRecipe(recipeLabel));
                     }
                 } else {
@@ -71,9 +75,9 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
                     HashMap<MealType,Recipe> dailyRecipes = planner.getRecipesByDay(DayOfWeek.valueOf(day));
                     for (String recipeLabel : recipesLabel) {
                         Recipe recipe = fileRecipeDataAccessObject.getRecipe(recipeLabel);
-                        System.out.println(recipeLabel);
+//                        System.out.println(recipeLabel);
                         assert recipe != null;
-                        assert !dailyRecipes.containsKey(MealType.valueOf(mealType.toUpperCase()));
+                        assert !dailyRecipes.containsKey(MealType.fromString(mealType.toUpperCase()));
                         dailyRecipes.put(MealType.fromString(mealType), fileRecipeDataAccessObject.getRecipe(recipeLabel));
                     }
                     planners.put(username, planner);
@@ -110,10 +114,9 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
             }
 
             writer.close();
-            System.out.println("Uploading planners.csv to database...");
             UploadCSVFilesAPICaller.call(FILE_PATH);
             HashMap<String,String> listofCSVFiles = GetListofCSVFilesAPICaller.call();
-            System.out.println("Upload success! Download at " + listofCSVFiles.get(FILE_NAME) + ". There's currently " + listofCSVFiles.size() + " files in the database.");
+            System.out.println("Uploaded planners.csv to database! Download at " + listofCSVFiles.get(FILE_NAME) + ". There's currently " + listofCSVFiles.size() + " files in the database.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -127,8 +130,8 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
             Planner planner = this.plannerFactory.create(username);
             planners.put(username, planner);
         }
-        System.out.println("day of week: " + day);
-        System.out.println(planners.get(username));
+//        System.out.println("day of week: " + day);
+//        System.out.println(planners.get(username));
         planners.get(username).getRecipesByDay(day).put(mealType, recipe);
         fileRecipeDataAccessObject.save(recipe);  // updates recipes.csv
         this.save();

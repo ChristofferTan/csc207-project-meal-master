@@ -9,8 +9,8 @@ public class CommonUser implements User {
     private String name;
     private int age;
     private String gender;
-    private int weight;
     private int height;
+    private int weight;
     private final ArrayList<String> favoriteRecipes;
     private final Planner planner;
 
@@ -26,8 +26,8 @@ public class CommonUser implements User {
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.weight = weight;
         this.height = height;
+        this.weight = weight;
         this.favoriteRecipes= new ArrayList<String>();
         this.planner = planner;
     }

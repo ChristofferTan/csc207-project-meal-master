@@ -6,5 +6,6 @@ import use_case.myprofile.MyProfileDataAccessInterface;
 import java.util.ArrayList;
 
 public interface EditProfileDataAccessInterface extends MyProfileDataAccessInterface {
-    void editProfile(String username, String name, int age, String gender, int weight, int height);
+    void editProfile(String username, String name, int age, String gender, int height, int weight);
+    void save(User user);
 }

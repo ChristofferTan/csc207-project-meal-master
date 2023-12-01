@@ -2,11 +2,9 @@ package use_case.after_generated_recipe;
 
 public class AfterGeneratedRecipeInteractor implements AfterGeneratedRecipeInputBoundary{
 
-    final AfterGeneratedRecipeDataAccessInterface afterGeneratedRecipeDataAccessInterface;
     final AfterGeneratedRecipeOutputBoundary afterGeneratedRecipePresenter;
 
-    public AfterGeneratedRecipeInteractor(AfterGeneratedRecipeDataAccessInterface afterGeneratedRecipeDataAccessInterface, AfterGeneratedRecipeOutputBoundary afterGeneratedRecipeOutputBoundary) {
-        this.afterGeneratedRecipeDataAccessInterface = afterGeneratedRecipeDataAccessInterface;
+    public AfterGeneratedRecipeInteractor(AfterGeneratedRecipeOutputBoundary afterGeneratedRecipeOutputBoundary) {
         this.afterGeneratedRecipePresenter = afterGeneratedRecipeOutputBoundary;
     }
 
