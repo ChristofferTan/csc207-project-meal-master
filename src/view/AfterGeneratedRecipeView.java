@@ -13,12 +13,11 @@ import view.utilities.SingleSelectDropdownPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.DayOfWeek;
 
 public class AfterGeneratedRecipeView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -29,10 +28,11 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
     private final AddFavoriteRecipeController addFavoriteRecipeController;
     private final ViewManagerModel viewManagerModel;
 
-    JLabel recipeLabel, recipeURL, servings, calories, preparation;
+    JLabel recipeLabel, servings, calories, preparation;
     private final SingleSelectDropdownPanel mealTypeInputField;
     private final SingleSelectDropdownPanel dayInputField;
     final JButton submit, favorite, back;
+    URI recipeURL;
 
     public AfterGeneratedRecipeView(AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel, GenerateRecipeViewModel generateRecipeViewModel, SaveRecipeController saveRecipeController, AddFavoriteRecipeController addFavoriteRecipeController, ViewManagerModel viewManagerModel) {
         this.afterGeneratedRecipeViewModel = afterGeneratedRecipeViewModel;
@@ -42,11 +42,10 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
         this.viewManagerModel = viewManagerModel;
         afterGeneratedRecipeViewModel.addPropertyChangeListener(this);
 
-        // recipeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         recipeLabel = new JLabel();
-        recipeURL = new JLabel();
-
+        recipeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        recipeLabel.setForeground(Color.BLUE);
+        recipeLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         JLabel servingsInfo = new JLabel(AfterGeneratedRecipeViewModel.SERVINGS_LABEL);
         servings = new JLabel();
@@ -87,6 +86,18 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
         buttons.add(submit);
         buttons.add(favorite);
         buttons.add(back);
+
+
+        recipeLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(recipeURL);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         submit.addActionListener(
                 new ActionListener() {
@@ -217,10 +228,16 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
     public void propertyChange(PropertyChangeEvent evt) {
         AfterGeneratedRecipeState state = (AfterGeneratedRecipeState) evt.getNewValue();
         // System.out.println("After view: " + state.getUsername());
-        recipeLabel.setText(state.getRecipe().getLabel());
-        recipeURL.setText(state.getRecipe().getRecipeUrl());
-        servings.setText(String.valueOf(state.getRecipe().getYield()));
-        calories.setText(String.valueOf(state.getRecipe().getCalories()));
-        preparation.setText(String.valueOf(state.getRecipe().getPreparationTime()));
+        if (state.getRecipe() != null) {
+            recipeLabel.setText(state.getRecipe().getLabel());
+            try {
+                recipeURL = new URI(state.getRecipe().getRecipeUrl());
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+            servings.setText(String.valueOf(state.getRecipe().getYield()));
+            calories.setText(String.valueOf(state.getRecipe().getCalories()));
+            preparation.setText(String.valueOf(state.getRecipe().getPreparationTime()));
+        }
     }
 }
