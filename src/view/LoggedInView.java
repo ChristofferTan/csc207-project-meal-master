@@ -6,6 +6,9 @@ import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.grocery_list.GroceryListController;
+import interface_adapters.my_favorite_recipe.MyFavoriteRecipeController;
+import interface_adapters.my_favorite_recipe.MyFavoriteRecipeState;
+import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
 import interface_adapters.my_planner.MyPlannerController;
 import interface_adapters.myprofile.MyProfileController;
 
@@ -26,6 +29,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     final JButton myPlanner;
 
+    final JButton myFavoriteRecipe;
+
     final JButton logout;
 
     private final ViewManagerModel viewManagerModel;
@@ -39,11 +44,17 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     private final GenerateRecipeViewModel generateRecipeViewModel;
 
+    private final MyFavoriteRecipeController myFavoriteRecipeController;
+
+    private final MyFavoriteRecipeViewModel myFavoriteRecipeViewModel;
+
 
     public LoggedInView(LoggedInViewModel loggedInViewModel, ViewManagerModel viewManagerModel, GroceryListController groceryListController,
-                        MyProfileController myProfileController, MyPlannerController myPlannerController, GenerateRecipeViewModel generateRecipeViewModel) {
+                        MyProfileController myProfileController, MyPlannerController myPlannerController, GenerateRecipeViewModel generateRecipeViewModel, MyFavoriteRecipeController myFavoriteRecipeController, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.generateRecipeViewModel = generateRecipeViewModel;
+        this.myFavoriteRecipeController = myFavoriteRecipeController;
+        this.myFavoriteRecipeViewModel = myFavoriteRecipeViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
         this.viewManagerModel = viewManagerModel;
@@ -72,6 +83,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         groceryList = new JButton(loggedInViewModel.GROCERY_LIST_BUTTON_LABEL);
         buttons.add(groceryList);
+
+        myFavoriteRecipe = new JButton(loggedInViewModel.MY_FAVORITE_RECIPE_BUTTON_LABEL);
+        buttons.add(myFavoriteRecipe);
 
         logout = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logout);
@@ -138,10 +152,32 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
             }
         );
 
+        myFavoriteRecipe.addActionListener(
+            new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource().equals(myFavoriteRecipe)) {
+                        LoggedInState currentState = loggedInViewModel.getState();
+                        String username = currentState.getUsername();
+                        myFavoriteRecipeController.execute(username);
+
+                        MyFavoriteRecipeState myFavoriteRecipeState = myFavoriteRecipeViewModel.getState();
+                        myFavoriteRecipeState.setUsername(username);
+
+                        viewManagerModel.setActiveView("my favorite recipe");
+                        viewManagerModel.firePropertyChanged();
+                    }
+                }
+            }
+        );
+
         logout.addActionListener(
             new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if (e.getSource().equals(logout)) {
+
+                        LoggedInState currentState = loggedInViewModel.getState();
+                        currentState.setUsername("");
+
                         viewManagerModel.setActiveView("log in");
                         viewManagerModel.firePropertyChanged();
                     }

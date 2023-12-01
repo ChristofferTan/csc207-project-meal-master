@@ -13,6 +13,8 @@ import interface_adapters.grocery_list.GroceryListController;
 import interface_adapters.grocery_list.GroceryListViewModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
+import interface_adapters.my_favorite_recipe.MyFavoriteRecipeController;
+import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
 import interface_adapters.my_planner.MyPlannerController;
 import interface_adapters.my_planner.MyPlannerViewModel;
 import interface_adapters.myprofile.MyProfileController;
@@ -88,6 +90,7 @@ public class Main {
             MyProfileViewModel myProfileViewModel = new MyProfileViewModel();
             EditProfileViewModel editProfileViewModel = new EditProfileViewModel();
             MyPlannerViewModel myPlannerViewModel = new MyPlannerViewModel();
+            MyFavoriteRecipeViewModel myFavoriteRecipeViewModel = new MyFavoriteRecipeViewModel();
 
 
             FileUserDataAccessObject userDataAccessObject;
@@ -116,6 +119,10 @@ public class Main {
             views.add(groceryListView, groceryListView.viewName);
             GroceryListController groceryListController = groceryListView.getGroceryListController();
 
+            MyFavoriteRecipeView myFavoriteRecipeView = MyFavoriteRecipeFactory.create(viewManagerModel, myFavoriteRecipeViewModel, userDataAccessObject, frdao);
+            views.add(myFavoriteRecipeView, myFavoriteRecipeView.viewName);
+            MyFavoriteRecipeController myFavoriteRecipeController = myFavoriteRecipeView.getMyFavoriteRecipeController();
+
             MyProfileView myProfileView = MyProfileFactory.create(viewManagerModel, myProfileViewModel, editProfileViewModel, userDataAccessObject);
             views.add(myProfileView, myProfileView.viewName);
             MyProfileController myProfileController = myProfileView.getMyProfileController();
@@ -124,7 +131,7 @@ public class Main {
             views.add(myPlannerView, myPlannerView.viewName);
             MyPlannerController myPlannerController = myPlannerView.getMyPlannerController();
 
-            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListController, myProfileController, myPlannerController, generateRecipeViewModel);
+            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListController, myProfileController, myPlannerController, generateRecipeViewModel, myFavoriteRecipeController, myFavoriteRecipeViewModel);
             views.add(loggedInView, loggedInView.viewName);
 
             EditProfileView editProfileView = EditProfileFactory.create(viewManagerModel, editProfileViewModel,userDataAccessObject, myProfileViewModel);
