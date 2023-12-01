@@ -11,6 +11,7 @@ public interface User {
     int getHeight();
     int getWeight();
     public ArrayList<String> getFavoriteRecipes();
+    Planner getPlanner();
 
     void setName(String name);
 

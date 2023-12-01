@@ -25,11 +25,4 @@ public class MyPlannerPresenter implements MyPlannerOutputBoundary {
         this.viewManagerModel.setActiveView(myPlannerViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
-
-    @Override
-    public void prepareFailView(String error) {
-        MyPlannerState myPlannerState = myPlannerViewModel.getState();
-        myPlannerState.setNoPlannerError(error);
-        myPlannerViewModel.firePropertyChanged();
-    }
 }

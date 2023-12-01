@@ -2,6 +2,7 @@ package use_case.signup;
 
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
+import entity.PlannerFactory;
 import entity.User;
 import entity.UserFactory;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,12 @@ public class SignupInteractorTest {
             public void prepareSuccessView(SignupOutputData user) {
                 // 2 things to check: the output data is correct, and the user has been created in the DAO.
                 assertEquals("Faraaz", user.getUsername());
+                User user1 = userRepository.get("Faraaz");
+                assertEquals("Faraaz", user1.getName());
+                assertEquals(19, user1.getAge());
+                assertEquals("Man", user1.getGender());
+                assertEquals(168, user1.getHeight());
+                assertEquals(60, user1.getWeight());
                 assertTrue(userRepository.existsByName("Faraaz"));
             }
 
@@ -29,7 +36,7 @@ public class SignupInteractorTest {
             }
         };
 
-        SignupInputBoundary interactor = new SignupInteractor(userRepository, successPresenter, new CommonUserFactory());
+        SignupInputBoundary interactor = new SignupInteractor(userRepository, successPresenter, new CommonUserFactory(), new PlannerFactory());
         interactor.execute(inputData);
     }
 
@@ -52,14 +59,15 @@ public class SignupInteractorTest {
             }
         };
 
-        SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory());
+        SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory(), new PlannerFactory());
         interactor.execute(inputData);
     }
 
     @Test
     void failureUserExistsTest() {
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Faraaz", "ganteng", "christoffer", 18, "Man", 170, 68);
+        PlannerFactory plannerFactory = new PlannerFactory();
+        User user1 = factory.create("Faraaz", "ganteng", "christoffer", 18, "Man", 170, 68, plannerFactory.create("Faraaz"));
         SignupInputData inputData = new SignupInputData("Faraaz", "Ahmed", "Ahmed", "Faraaz", 19, "Man", 168, 60);
 
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
@@ -78,7 +86,7 @@ public class SignupInteractorTest {
             }
         };
 
-        SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory());
+        SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory(), new PlannerFactory());
         interactor.execute(inputData);
     }
 }

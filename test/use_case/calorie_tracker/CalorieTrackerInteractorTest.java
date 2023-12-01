@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class CalorieTrackerInteractorTest {
     @Test
@@ -33,6 +34,11 @@ public class CalorieTrackerInteractorTest {
                 Assertions.assertEquals(200, calories.getWeeklyCalories());
                 //checking average daily calories
                 Assertions.assertEquals(29, calories.getAverageDailyCalories());
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case failure is unexpected.");
             }
         };
 

@@ -1,10 +1,16 @@
 package app;
 
 import interface_adapters.ViewManagerModel;
+import interface_adapters.calorie_tracker.CalorieTrackerController;
+import interface_adapters.calorie_tracker.CalorieTrackerPresenter;
 import interface_adapters.my_planner.MyPlannerController;
 import interface_adapters.my_planner.MyPlannerPresenter;
 import interface_adapters.my_planner.MyPlannerViewModel;
 import interface_adapters.show_planner.ShowPlannerViewModel;
+import use_case.calorie_tracker.CalorieTrackerDataAccessInterface;
+import use_case.calorie_tracker.CalorieTrackerInputBoundary;
+import use_case.calorie_tracker.CalorieTrackerInteractor;
+import use_case.calorie_tracker.CalorieTrackerOutputBoundary;
 import use_case.my_planner.MyPlannerDataAccessInterface;
 import use_case.my_planner.MyPlannerInputBoundary;
 import use_case.my_planner.MyPlannerInteractor;
@@ -23,7 +29,10 @@ public class MyPlannerUseCaseFactory {
                 viewManagerModel,
                 myPlannerViewModel,
                 myPlannerDataAccessObject);
-        return new MyPlannerView(viewManagerModel, myPlannerViewModel, myPlannerController);
+        CalorieTrackerController calorieTrackerController = createCalorieTrackerUseCase(
+                viewManagerModel,
+                myPlannerViewModel);
+        return new MyPlannerView(viewManagerModel, myPlannerViewModel, myPlannerController, calorieTrackerController);
     }
 
     private static MyPlannerController createMyPlannerUseCase(
@@ -33,5 +42,13 @@ public class MyPlannerUseCaseFactory {
         MyPlannerOutputBoundary myPlannerPresenter = new MyPlannerPresenter(viewManagerModel, myPlannerViewModel);
         MyPlannerInputBoundary myPlannerInteractor = new MyPlannerInteractor(myPlannerDataAccessObject, myPlannerPresenter);
         return new MyPlannerController(myPlannerInteractor);
+    }
+
+    private static CalorieTrackerController createCalorieTrackerUseCase(
+            ViewManagerModel viewManagerModel,
+            MyPlannerViewModel myPlannerViewModel) {
+        CalorieTrackerOutputBoundary calorieTrackerPresenter = new CalorieTrackerPresenter(viewManagerModel, myPlannerViewModel);
+        CalorieTrackerInputBoundary calorieTrackerInteractor = new CalorieTrackerInteractor(null, calorieTrackerPresenter);
+        return new CalorieTrackerController(calorieTrackerInteractor);
     }
 }

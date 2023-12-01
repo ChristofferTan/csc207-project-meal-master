@@ -4,6 +4,8 @@ import interface_adapters.ViewManagerModel;
 import use_case.save_recipe.SaveRecipeOutputData;
 import use_case.save_recipe.SaveRecipeOutputBoundary;
 
+import javax.swing.*;
+
 public class SaveRecipePresenter implements SaveRecipeOutputBoundary {
     private final SaveRecipeViewModel saveRecipeViewModel;
     private ViewManagerModel viewManagerModel;
@@ -15,5 +17,6 @@ public class SaveRecipePresenter implements SaveRecipeOutputBoundary {
 
     public void prepareSuccessView(SaveRecipeOutputData saveRecipeOutputData) {
         System.out.println(saveRecipeOutputData.getUsername() + " have added the " +  saveRecipeOutputData.getRecipe().getLabel() + " to the planner successfully");
+        JOptionPane.showConfirmDialog(null, saveRecipeOutputData.getUsername() + " have added the " +  saveRecipeOutputData.getRecipe().getLabel() + " to the planner successfully", "Add succeeded", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
     }
 }
