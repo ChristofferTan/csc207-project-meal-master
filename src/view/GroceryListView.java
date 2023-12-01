@@ -64,6 +64,9 @@ public class GroceryListView extends JPanel implements ActionListener, PropertyC
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         GroceryListState state = (GroceryListState) evt.getNewValue();
+        if (state.getGroceryList() == null) {
+            return;
+        }
         grocery.setListData(state.getGroceryList());
     }
 

@@ -125,6 +125,8 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
     @Override
     public void save(String username, DayOfWeek day, MealType mealType, Recipe recipe) {
         System.out.println("Downloading planners.csv from database... (removing planners.csv from the database)");
+        System.out.println("THE RECIPE IS: " + recipe.getLabel());
+        System.out.println("Save the recipe to day " + day + " and mealType " + mealType);
         DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));  // remove planners.csv from the database, since we'll save a new one
         if (!planners.containsKey(username)) {
             Planner planner = this.plannerFactory.create(username);
@@ -133,6 +135,7 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
 //        System.out.println("day of week: " + day);
 //        System.out.println(planners.get(username));
         planners.get(username).getRecipesByDay(day).put(mealType, recipe);
+        System.out.println(planners.get(username).getRecipesByDay(day).get(mealType));
         fileRecipeDataAccessObject.save(recipe);  // updates recipes.csv
         this.save();
     }
