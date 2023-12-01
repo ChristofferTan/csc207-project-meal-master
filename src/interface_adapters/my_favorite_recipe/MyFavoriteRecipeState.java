@@ -5,7 +5,7 @@ import entity.Recipe;
 import java.util.ArrayList;
 
 public class MyFavoriteRecipeState {
-    private ArrayList<String> favoriteRecipes;
+    private ArrayList<String> favoriteRecipes = new ArrayList<>();
     private String username;
     private String labelError;
 
@@ -15,8 +15,10 @@ public class MyFavoriteRecipeState {
 
     public MyFavoriteRecipeState() {}
 
-    public ArrayList<String> getFavoriteRecipes() {
-        return favoriteRecipes;
+    public String[] getFavoriteRecipes() {
+        String[] grocery = new String[favoriteRecipes.size()];
+
+        return favoriteRecipes.toArray(grocery);
     }
 
     public void setFavoriteRecipes(ArrayList<String> favoriteRecipes) {
