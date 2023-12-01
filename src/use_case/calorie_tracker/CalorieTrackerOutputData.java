@@ -9,28 +9,24 @@ import java.util.HashMap;
 
 public class CalorieTrackerOutputData {
     private final Planner planner;
+    private final int weeklyCalories;
+    private final int averageDailyCalories;
 
-    public CalorieTrackerOutputData(Planner planner) {
+    public CalorieTrackerOutputData(Planner planner, int weeklyCalories, int averageDailyCalories) {
         this.planner = planner;
+        this.weeklyCalories = weeklyCalories;
+        this.averageDailyCalories = averageDailyCalories;
     }
 
     public int getWeeklyCalories() {
-        float calories = 0;
-        for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
-            for (Recipe recipe: recipes.values()) {
-                calories += recipe.getCalories();
-            }
-        }
-        return Math.round(calories);
+        return weeklyCalories;
     }
 
     public int getAverageDailyCalories() {
-        float calories = 0;
-        for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
-            for (Recipe recipe: recipes.values()) {
-                calories += recipe.getCalories();
-            }
-        }
-        return Math.round(calories / 7);
+        return averageDailyCalories;
+    }
+
+    public Planner getPlanner() {
+        return planner;
     }
 }
