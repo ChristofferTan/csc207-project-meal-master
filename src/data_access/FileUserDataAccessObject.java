@@ -65,7 +65,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 int height = Integer.parseInt(col[headers.get("height")]);
                 int weight = Integer.parseInt(col[headers.get("weight")]);
 
-                User user = userFactory.create(username, password, name, age, gender, height, weight);
+                Planner planner = plannerDataAccessObject.getPlanner(username);
+                User user = userFactory.create(username, password, name, age, gender, height, weight, planner);
                 ArrayList<String> favoriteRecipes = user.getFavoriteRecipes();
                 int idx = headers.get("favoriteRecipes");
                 while(idx < col.length) {
@@ -94,6 +95,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
         accounts.put(user.getUsername(), user);
         this.save();
+        // save this new user's planner to planners.csv
+        plannerDataAccessObject.saveNewPlanner(user.getPlanner());
     }
     private void save() {
         BufferedWriter writer;

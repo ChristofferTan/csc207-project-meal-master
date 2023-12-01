@@ -16,13 +16,9 @@ public class MyPlannerInteractor implements MyPlannerInputBoundary {
     @Override
     public void execute(MyPlannerInputData myPlannerInputData) {
         String username = myPlannerInputData.getUsername();
-        if (!myPlannerDataAccessObject.isPlannerExistsByUsername(username)) {
-            myPlannerPresenter.prepareFailView(username + "'s planner does not exist.");
-        } else {
-            Planner planner = myPlannerDataAccessObject.getPlanner(username);
+        Planner planner = myPlannerDataAccessObject.getPlanner(username);
 
-            MyPlannerOutputData myPlannerOutputData = new MyPlannerOutputData(planner, false);
-            myPlannerPresenter.prepareSuccessView(myPlannerOutputData);
-        }
+        MyPlannerOutputData myPlannerOutputData = new MyPlannerOutputData(planner, false);
+        myPlannerPresenter.prepareSuccessView(myPlannerOutputData);
     }
 }

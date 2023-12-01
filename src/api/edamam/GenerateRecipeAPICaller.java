@@ -27,16 +27,24 @@ public class GenerateRecipeAPICaller {
         StringBuilder requestUrl = new StringBuilder(API_URL + "?type=" + type + "&app_id=" + APP_ID + "&app_key=" + APP_KEY);
         requestUrl.append("&q=").append(inputData.getQ());
         for (String item : inputData.getDiet()) {
-            requestUrl.append("&diet=").append(item);
+            if (item != null) {
+                requestUrl.append("&diet=").append(item);
+            }
         }
         for (String item : inputData.getHealth()) {
-            requestUrl.append("&health=").append(item);
+            if (item != null) {
+                requestUrl.append("&health=").append(item);
+            }
         }
         for (String item : inputData.getCuisineType()) {
-            requestUrl.append("&cuisineType=").append(item);
+            if (item != null) {
+                requestUrl.append("&cuisineType=").append(item);
+            }
         }
         for (String item : inputData.getMealType()) {
-            requestUrl.append("&mealType=").append(item);
+            if (item != null) {
+                requestUrl.append("&mealType=").append(item);
+            }
         }
         requestUrl.append("&calories=").append(inputData.getCalories());
         requestUrl.append("&time=").append(inputData.getPreparationTime());

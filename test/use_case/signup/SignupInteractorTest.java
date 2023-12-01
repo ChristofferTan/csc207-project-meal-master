@@ -2,6 +2,7 @@ package use_case.signup;
 
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
+import entity.PlannerFactory;
 import entity.User;
 import entity.UserFactory;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ public class SignupInteractorTest {
             }
         };
 
-        SignupInputBoundary interactor = new SignupInteractor(userRepository, successPresenter, new CommonUserFactory());
+        SignupInputBoundary interactor = new SignupInteractor(userRepository, successPresenter, new CommonUserFactory(), new PlannerFactory());
         interactor.execute(inputData);
     }
 
@@ -58,14 +59,15 @@ public class SignupInteractorTest {
             }
         };
 
-        SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory());
+        SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory(), new PlannerFactory());
         interactor.execute(inputData);
     }
 
     @Test
     void failureUserExistsTest() {
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Faraaz", "ganteng", "christoffer", 18, "Man", 170, 68);
+        PlannerFactory plannerFactory = new PlannerFactory();
+        User user1 = factory.create("Faraaz", "ganteng", "christoffer", 18, "Man", 170, 68, plannerFactory.create("Faraaz"));
         SignupInputData inputData = new SignupInputData("Faraaz", "Ahmed", "Ahmed", "Faraaz", 19, "Man", 168, 60);
 
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
@@ -84,7 +86,7 @@ public class SignupInteractorTest {
             }
         };
 
-        SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory());
+        SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory(), new PlannerFactory());
         interactor.execute(inputData);
     }
 }

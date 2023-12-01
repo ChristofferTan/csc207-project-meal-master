@@ -3,9 +3,7 @@ package entity;
 public enum MealType {
     BREAKFAST("Breakfast"),
     LUNCH("Lunch"),
-    DINNER("Dinner"),
-    SNACK("Snack"),
-    TEATIME("Teatime");
+    DINNER("Dinner");
 
     private final String stringValue;
 
@@ -19,7 +17,7 @@ public enum MealType {
 
     public static MealType fromString(String stringValue) {
         for (MealType mealType : MealType.values()) {
-            if (mealType.stringValue.equals(stringValue)) {
+            if (mealType.name().equals(stringValue)) {
                 return mealType;
             }
         }

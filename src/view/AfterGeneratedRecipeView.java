@@ -8,6 +8,8 @@ import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
 import interface_adapters.generate_recipe.GenerateRecipeState;
 import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 import interface_adapters.save_recipe.SaveRecipeController;
+import view.utilities.MultiSelectDropdownPanel;
+import view.utilities.SingleSelectDropdownPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,8 +30,8 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
     private final ViewManagerModel viewManagerModel;
 
     JLabel recipeLabel, recipeURL, servings, calories, preparation;
-    private final JTextField mealTypeInputField = new JTextField(15);
-    private final JTextField dayInputField = new JTextField(15);
+    private final SingleSelectDropdownPanel mealTypeInputField;
+    private final SingleSelectDropdownPanel dayInputField;
     final JButton submit, favorite, back;
 
     public AfterGeneratedRecipeView(AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel, GenerateRecipeViewModel generateRecipeViewModel, SaveRecipeController saveRecipeController, AddFavoriteRecipeController addFavoriteRecipeController, ViewManagerModel viewManagerModel) {
@@ -70,6 +72,8 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
         preparationPanel.add(preparationInfo);
         preparationPanel.add(preparation);
 
+        mealTypeInputField = new SingleSelectDropdownPanel(null, AfterGeneratedRecipeViewModel.MEAL_TYPE_OPTIONS);
+        dayInputField = new SingleSelectDropdownPanel(null, AfterGeneratedRecipeViewModel.DAY_OPTIONS);
         JPanel addToPlannerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         addToPlannerPanel.add(addToPlannerInfo);
         addToPlannerPanel.add(mealTypeInputField);
@@ -90,8 +94,13 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(submit)) {
                             AfterGeneratedRecipeState currentState = afterGeneratedRecipeViewModel.getState();
-                            // System.out.println("Hari " + currentState.getMealType());
-                            // System.out.println("Tipe makanan " + currentState.getMealType());
+//                            System.out.println("Tipe makanan " + MealType.fromString(mealTypeInputField.getSelectedOption()));
+//                            System.out.println("Hari " + fromStringToDayofWeek(dayInputField.getSelectedOption()));
+                            currentState.setMealType(MealType.fromString(mealTypeInputField.getSelectedOption()));
+                            currentState.setDayInPlanner(fromStringToDayofWeek(dayInputField.getSelectedOption()));
+                            afterGeneratedRecipeViewModel.setState(currentState);
+//                            System.out.println("Hari " + currentState.getMealType());
+//                            System.out.println("Tipe makanan " + currentState.getMealType());
 
                             saveRecipeController.execute(
                                     currentState.getUsername(),
@@ -136,50 +145,50 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
                 }
         );
 
-        mealTypeInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        AfterGeneratedRecipeState currentState = afterGeneratedRecipeViewModel.getState();
-                        String text = mealTypeInputField.getText();
-                        // System.out.print("Ketikan " + text);
-                        currentState.setMealType(MealType.fromString(text));
-                        afterGeneratedRecipeViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
-        dayInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        AfterGeneratedRecipeState currentState = afterGeneratedRecipeViewModel.getState();
-                        String text = dayInputField.getText();
-                        System.out.println(text);
-                        currentState.setDayInPlanner(fromStringToDayofWeek(text));
-                        afterGeneratedRecipeViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
+//        mealTypeInputField.addKeyListener(
+//                new KeyListener() {
+//                    @Override
+//                    public void keyTyped(KeyEvent e) {
+//                        AfterGeneratedRecipeState currentState = afterGeneratedRecipeViewModel.getState();
+//                        String text = mealTypeInputField.getText();
+//                        System.out.print("Ketikan " + text);
+//                        currentState.setMealType(MealType.fromString(text));
+//                        afterGeneratedRecipeViewModel.setState(currentState);
+//                    }
+//
+//                    @Override
+//                    public void keyPressed(KeyEvent e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void keyReleased(KeyEvent e) {
+//
+//                    }
+//                }
+//        );
+//        dayInputField.addKeyListener(
+//                new KeyListener() {
+//                    @Override
+//                    public void keyTyped(KeyEvent e) {
+//                        AfterGeneratedRecipeState currentState = afterGeneratedRecipeViewModel.getState();
+//                        String text = dayInputField.getText();
+//                        System.out.println(text);
+//                        currentState.setDayInPlanner(fromStringToDayofWeek(text));
+//                        afterGeneratedRecipeViewModel.setState(currentState);
+//                    }
+//
+//                    @Override
+//                    public void keyPressed(KeyEvent e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void keyReleased(KeyEvent e) {
+//
+//                    }
+//                }
+//        );
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(recipeLabel);
@@ -191,7 +200,7 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
     }
 
     public static DayOfWeek fromStringToDayofWeek(String stringValue) {
-        // System.out.println("Hasil ketikan: " + stringValue);
+//        System.out.println("Hasil ketikan: " + stringValue);
         for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
             if (dayOfWeek.toString().equals(stringValue)) {
                 return dayOfWeek;

@@ -3,6 +3,7 @@ package entity;
 import java.util.ArrayList;
 
 public class CommonUser implements User {
+    private final PlannerFactory plannerFactory = new PlannerFactory();
     private final String username;
     private final String password;
     private String name;
@@ -17,9 +18,9 @@ public class CommonUser implements User {
         this.username = username;
         this.password = password;
         this.favoriteRecipes = new ArrayList<String>();
-        this.planner = new Planner(username);
+        this.planner = plannerFactory.create(username);
     }
-    CommonUser(String username, String password, String name, int age, String gender, int height, int weight) {
+    CommonUser(String username, String password, String name, int age, String gender, int weight, int height, Planner planner) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -28,7 +29,7 @@ public class CommonUser implements User {
         this.height = height;
         this.weight = weight;
         this.favoriteRecipes= new ArrayList<String>();
-        this.planner = new Planner(username);
+        this.planner = planner;
     }
 
     public String getUsername() {
