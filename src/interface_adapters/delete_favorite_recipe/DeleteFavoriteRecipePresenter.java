@@ -6,6 +6,8 @@ import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
 import use_case.delete_favorite_recipe.DeleteFavoriteRecipeOutputBoundary;
 import use_case.delete_favorite_recipe.DeleteFavoriteRecipeOutputData;
 
+import javax.swing.*;
+
 public class DeleteFavoriteRecipePresenter implements DeleteFavoriteRecipeOutputBoundary {
     private final MyFavoriteRecipeViewModel myFavoriteRecipeViewModel;
 
@@ -19,6 +21,7 @@ public class DeleteFavoriteRecipePresenter implements DeleteFavoriteRecipeOutput
         myFavoriteRecipeState.setLabelError(null);
         this.myFavoriteRecipeViewModel.setState(myFavoriteRecipeState);
         this.myFavoriteRecipeViewModel.firePropertyChanged();
+        JOptionPane.showConfirmDialog(null, response.getUsername() + " have deleted " +  response.getLabel() + " from my favorite recipes successfully", "Delete succeeded", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
     }
 
     @Override

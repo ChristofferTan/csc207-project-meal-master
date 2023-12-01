@@ -26,7 +26,7 @@ public class MyFavoriteRecipeFactory {
 
         MyFavoriteRecipeController myFavoriteRecipeController = createMyFavoriteRecipeUseCase(viewManagerModel, myFavoriteRecipeViewModel, userDataAccessObject);
         DeleteFavoriteRecipeController deleteFavoriteRecipeController = createDeleteFavoriteRecipeUseCase(myFavoriteRecipeViewModel, userDataAccessObject, recipeDataAccessObject);
-        return new MyFavoriteRecipeView(myFavoriteRecipeController, myFavoriteRecipeViewModel, deleteFavoriteRecipeController);
+        return new MyFavoriteRecipeView(myFavoriteRecipeController, myFavoriteRecipeViewModel, deleteFavoriteRecipeController, viewManagerModel);
     }
 
     private static MyFavoriteRecipeController createMyFavoriteRecipeUseCase(ViewManagerModel viewManagerModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, MyFavoriteRecipeDataAccessInterface dataAccessInterface) {
