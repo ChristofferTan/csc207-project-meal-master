@@ -19,8 +19,6 @@ public class EditProfileInteractor implements EditProfileInputBoundary {
         int height = editProfileInputData.getHeight();
         int weight = editProfileInputData.getWeight();
 
-        System.out.println("interactor : " + height + " " + weight);
-
         userDataAccessObject.editProfile(username, name, age, gender, height, weight);
 
         EditProfileOutputData editProfileOutputData = new EditProfileOutputData(name, age, gender, height, weight);

@@ -135,7 +135,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
         if (existsByName(username)) {
             User user = accounts.get(username);
-            // DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
             user.setName(name);
             user.setAge(age);
             user.setGender(gender);

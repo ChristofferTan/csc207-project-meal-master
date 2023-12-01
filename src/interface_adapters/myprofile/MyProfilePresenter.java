@@ -16,7 +16,6 @@ public class MyProfilePresenter implements MyProfileOutputBoundary{
 
     @Override
     public void prepareSuccessView(MyProfileOutputData myProfileOutputData) {
-        System.out.println("Output data " +  myProfileOutputData.getUsername());
         MyProfileState myProfileState = myProfileViewModel.getState();
         myProfileState.setUsername(myProfileOutputData.getUsername());
         myProfileState.setName(myProfileOutputData.getName());
