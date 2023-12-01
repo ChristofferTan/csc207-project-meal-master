@@ -5,16 +5,16 @@ public class EditProfileInputData {
     private final String name;
     private final int age;
     private final String gender;
-    private final int weight;
     private final int height;
+    private final int weight;
 
-    public EditProfileInputData(String username, String name, int age, String gender, int weight, int height) {
+    public EditProfileInputData(String username, String name, int age, String gender, int height, int weight) {
         this.username = username;
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.weight = weight;
         this.height = height;
+        this.weight = weight;
     }
 
     public String getUsername() {
