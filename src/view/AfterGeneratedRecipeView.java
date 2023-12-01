@@ -9,6 +9,7 @@ import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
 import interface_adapters.generate_recipe.GenerateRecipeState;
 import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 import interface_adapters.save_recipe.SaveRecipeController;
+import view.utilities.SingleSelectDropdownPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
