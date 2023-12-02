@@ -1,5 +1,6 @@
 package use_case.after_generated_recipe;
 
+import data_access.FilePlannerDataAccessObject;
 import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
 import entity.*;
@@ -25,6 +26,12 @@ public class AfterGeneratedRecipeTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        FilePlannerDataAccessObject plannerDAO = new FilePlannerDataAccessObject(new PlannerFactory(), recipeDAO);
+
+        PlannerFactory plannerfactory = new PlannerFactory();
+        Planner planner = plannerfactory.create("Budi");
+        plannerDAO.saveNewPlanner(planner);
         User user = userFactory.create("Budi", "Andi", "Budi anak bu desi", 8, "Man", 180, 68, plannerFactory.create("Budi"));
         Recipe recipe = recipeFactory.create("Asian-Style Chicken and Rice",
                 "https://www.marthastewart.com/973886/asian-style-chicken-and-rice",
