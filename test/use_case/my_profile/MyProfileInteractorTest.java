@@ -1,9 +1,8 @@
-package use_case.myprofile;
+package use_case.my_profile;
 
 import data_access.InMemoryUserDataAccessObject;
 import entity.*;
 import org.junit.jupiter.api.Test;
-import use_case.signup.SignupInputData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

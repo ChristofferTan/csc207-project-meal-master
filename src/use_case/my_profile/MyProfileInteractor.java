@@ -1,6 +1,5 @@
-package use_case.myprofile;
+package use_case.my_profile;
 
-import data_access.FileUserDataAccessObject;
 import entity.User;
 
 public class MyProfileInteractor implements MyProfileInputBoundary {

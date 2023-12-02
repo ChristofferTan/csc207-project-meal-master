@@ -6,8 +6,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class SignupViewModel extends ViewModel {
-
-    public static final String CLEAR_BUTTON_LABEL = "Clear";
     public static final String TITLE_LABEL = "Sign Up View";
     public static final String USERNAME_LABEL = "Choose username";
     public static final String PASSWORD_LABEL = "Choose password";
@@ -17,8 +15,6 @@ public class SignupViewModel extends ViewModel {
     public static final String GENDER_LABEL = "Enter your gender";
     public static final String HEIGHT_LABEL = "Enter your height in cm";
     public static final String WEIGHT_LABEL = "Enter your weight in kg";
-    public static final String ACTIVITY_LEVEL = "Enter your activity level";
-
     public static final String SIGNUP_BUTTON_LABEL = "Sign up";
     public static final String LOGIN_BUTTON_LABEL = "Log in";
 
