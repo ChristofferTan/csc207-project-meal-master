@@ -19,6 +19,7 @@ public class DeleteFavoriteRecipeInteractorTest {
         RecipeFactory recipeFactory = new RecipeFactory();
         FileRecipeDataAccessObject recipeDataAccessObject;
         DeleteFavoriteRecipeDataAccessInterface userDataAccessObject;
+        PlannerFactory plannerFactory = new PlannerFactory();
 
         recipeDataAccessObject = new FileRecipeDataAccessObject(recipeFactory);
         try {
@@ -26,7 +27,7 @@ public class DeleteFavoriteRecipeInteractorTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        User user1 = userFactory.create("Janis", "joplin", "Jantod", 38, "Man", 190, 78);
+        User user1 = userFactory.create("Janis", "joplin", "Jantod", 38, "Man", 190, 78, plannerFactory.create("Janis"));
         userDataAccessObject.save(user1);
 
         Recipe recipe = new Recipe("Asian-Style Chicken and Rice",
@@ -59,6 +60,7 @@ public class DeleteFavoriteRecipeInteractorTest {
         RecipeFactory recipeFactory = new RecipeFactory();
         FileRecipeDataAccessObject recipeDataAccessObject;
         DeleteFavoriteRecipeDataAccessInterface userDataAccessObject;
+        PlannerFactory plannerFactory = new PlannerFactory();
 
         recipeDataAccessObject = new FileRecipeDataAccessObject(recipeFactory);
         try {
@@ -66,7 +68,7 @@ public class DeleteFavoriteRecipeInteractorTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        User user1 = userFactory.create("Janis", "joplin", "Jantod", 38, "Man", 90, 168);
+        User user1 = userFactory.create("Janis", "joplin", "Jantod", 38, "Man", 90, 168, plannerFactory.create("Janis"));
         userDataAccessObject.save(user1);
 
         Recipe recipe = new Recipe("Indomie Goreng","github.com/ChristofferTan/csc207-project","github.com/elidle",350,new ArrayList<String>(Arrays.asList("1 bungkus Indomie Goreng")),5,1);
