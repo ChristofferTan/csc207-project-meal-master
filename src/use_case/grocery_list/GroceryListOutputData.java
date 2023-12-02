@@ -4,6 +4,7 @@ import entity.MealType;
 import entity.Planner;
 import entity.Recipe;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,11 +24,17 @@ public class GroceryListOutputData {
     }
 
     public ArrayList<String> getGroceryList() {
+        if (planner == null) {
+            return null;
+        }
         ArrayList<String> groceryList = new ArrayList<>();
         for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
             for (Recipe recipe: recipes.values()) {
-                for (String ingredient: recipe.getIngredients()) {
-                    groceryList.add(ingredient);
+                if (recipe != null) {
+                    System.out.println(recipe.getLabel());
+                    for (String ingredient: recipe.getIngredients()) {
+                        groceryList.add(ingredient);
+                    }
                 }
             }
         }

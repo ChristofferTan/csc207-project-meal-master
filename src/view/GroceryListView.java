@@ -32,6 +32,7 @@ public class GroceryListView extends JPanel implements ActionListener, PropertyC
         JLabel groceryInfo = new JLabel("Grocery List: ");
 
         grocery = new JList();
+        grocery.setListData(groceryListViewModel.getState().getGroceryList());
 
         JPanel buttons = new JPanel();
         back = new JButton(groceryListViewModel.BACK_BUTTON_LABEL);
@@ -55,7 +56,7 @@ public class GroceryListView extends JPanel implements ActionListener, PropertyC
 
         this.add(title);
         //this.add(groceryInfo);
-        this.add(grocery);
+        this.add(new JScrollPane(grocery));
         this.add(buttons);
     }
 
@@ -63,6 +64,9 @@ public class GroceryListView extends JPanel implements ActionListener, PropertyC
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         GroceryListState state = (GroceryListState) evt.getNewValue();
+        if (state.getGroceryList() == null) {
+            return;
+        }
         grocery.setListData(state.getGroceryList());
     }
 

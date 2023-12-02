@@ -14,6 +14,7 @@ public class GroceryListInteractor implements GroceryListInputBoundary{
     public void execute(GroceryListInputData groceryListInputData) {
         String username = groceryListInputData.getUsername();
         Planner planner = dataAccessInterface.getPlanner(username);
+        System.out.println(username);
         GroceryListOutputData groceryListOutputData = new GroceryListOutputData(planner);
         groceryListPresenter.prepareSuccessView(groceryListOutputData);
     }

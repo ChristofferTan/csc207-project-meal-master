@@ -19,6 +19,8 @@ public class LoggedInViewModel extends ViewModel {
 
     public static final String MY_PLANNER = "My Planner";
     public static final String GROCERY_LIST_BUTTON_LABEL = "Grocery List";
+
+    public static final String MY_FAVORITE_RECIPE_BUTTON_LABEL = "My Favorite Recipes";
     private String loggedInUser;
 
     public LoggedInViewModel() {
