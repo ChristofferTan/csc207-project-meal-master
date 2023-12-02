@@ -18,22 +18,25 @@ public class CalorieTrackerInteractor implements CalorieTrackerInputBoundary{
 
     @Override
     public void execute(CalorieTrackerInputData calorieTrackerInputData) {
-        try {
-            Planner planner = calorieTrackerInputData.getPlanner();
-            int weeklyCalories = calculateWeeklyCalories(planner);
-            int averageDailyCalories = calculateAverageDailyCalories(planner);
+        Planner planner = calorieTrackerInputData.getPlanner();
+        int weeklyCalories = calculateWeeklyCalories(planner);
+        int averageDailyCalories = calculateAverageDailyCalories(planner);
 
-            CalorieTrackerOutputData outputData = new CalorieTrackerOutputData(planner, weeklyCalories, averageDailyCalories);
-        } catch (Exception e) {
-            calorieTrackerPresenter.prepareFailView(e.getMessage());
-        }
+        CalorieTrackerOutputData outputData = new CalorieTrackerOutputData(planner, weeklyCalories, averageDailyCalories);
+        calorieTrackerPresenter.prepareSuccessView(outputData);
     }
 
     private int calculateWeeklyCalories(Planner planner) {
         float calories = 0;
         for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
             for (Recipe recipe: recipes.values()) {
-                calories += recipe.getCalories();
+                if (recipe != null) {
+                    if (recipe.getYield() != 0) {
+                        calories += (float) recipe.getCalories() / recipe.getYield();
+                    } else {
+                        calories += recipe.getCalories();
+                    }
+                }
             }
         }
         return Math.round(calories);
@@ -43,7 +46,13 @@ public class CalorieTrackerInteractor implements CalorieTrackerInputBoundary{
         float calories = 0;
         for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
             for (Recipe recipe: recipes.values()) {
-                calories += recipe.getCalories();
+                if (recipe != null) {
+                    if (recipe.getYield() != 0) {
+                        calories += (float) recipe.getCalories() / recipe.getYield();
+                    } else {
+                        calories += recipe.getCalories();
+                    }
+                }
             }
         }
         return Math.round(calories / 7);
