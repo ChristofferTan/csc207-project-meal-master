@@ -36,7 +36,7 @@ public class MyFavoriteRecipeFactory {
         return new MyFavoriteRecipeController(myFavoriteRecipeInteractor);
     }
 
-    private static DeleteFavoriteRecipeController createDeleteFavoriteRecipeUseCase(MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, DeleteFavoriteRecipeDataAccessInterface dataAccessInterface, FileRecipeDataAccessObject fileRecipeDataAccessObject) {
+    public static DeleteFavoriteRecipeController createDeleteFavoriteRecipeUseCase(MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, DeleteFavoriteRecipeDataAccessInterface dataAccessInterface, FileRecipeDataAccessObject fileRecipeDataAccessObject) {
         DeleteFavoriteRecipeOutputBoundary deleteFavoriteRecipeOutputBoundary = new DeleteFavoriteRecipePresenter(myFavoriteRecipeViewModel);
 
 

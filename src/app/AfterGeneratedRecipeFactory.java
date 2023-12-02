@@ -46,7 +46,7 @@ public class AfterGeneratedRecipeFactory {
         SaveRecipeInputBoundary saveRecipeInteractor = new SaveRecipeInteractor(recipeDataAccessObject, saveRecipePresenter);
         return new SaveRecipeController(saveRecipeInteractor);
     }
-    private static AddFavoriteRecipeController createAddFavoriteUseCase(ViewManagerModel viewManagerModel,
+    public static AddFavoriteRecipeController createAddFavoriteUseCase(ViewManagerModel viewManagerModel,
                                                                         AddFavoriteRecipeViewModel addFavoriteRecipeViewModel,
                                                                         AddFavoriteRecipeUserDataAccessInterface userDAO,
                                                                         GenerateRecipeDataAccessInterface recipeDAO) {
