@@ -10,7 +10,6 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class CalorieTrackerInteractorTest {

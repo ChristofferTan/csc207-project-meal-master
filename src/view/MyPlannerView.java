@@ -1,8 +1,5 @@
 package view;
 
-import app.MyPlannerUseCaseFactory;
-import data_access.FilePlannerDataAccessObject;
-import data_access.FileRecipeDataAccessObject;
 import entity.*;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.calorie_tracker.CalorieTrackerController;
@@ -14,8 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URISyntaxException;

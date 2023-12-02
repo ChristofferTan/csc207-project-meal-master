@@ -6,13 +6,12 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class EditProfileViewModel extends ViewModel {
-
     public static final String TITLE_LABEL = "Edit Profile View";
     public static final String NAME_LABEL = "Name";
     public static final String AGE_LABEL = "Age";
     public static final String GENDER_LABEL = "Gender";
-    public static final String WEIGHT_LABEL = "Weight";
     public static final String HEIGHT_LABEL = "Height";
+    public static final String WEIGHT_LABEL = "Weight";
 
     public static final String EDIT_PROFILE_BUTTON_LABEL = "Save";
 

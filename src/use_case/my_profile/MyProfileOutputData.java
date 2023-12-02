@@ -1,10 +1,6 @@
-package use_case.myprofile;
+package use_case.my_profile;
 
-import entity.Recipe;
 import entity.User;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class MyProfileOutputData {
     private final User user;

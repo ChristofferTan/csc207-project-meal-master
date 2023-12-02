@@ -1,42 +1,41 @@
-package interface_adapters.generate_recipe;
+package interface_adapters.add_favorite_recipe;
 
-import app.MyFavoriteRecipeFactory;
+import app.AfterGeneratedRecipeFactory;
 import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
 import entity.*;
 import interface_adapters.ViewManagerModel;
-import interface_adapters.delete_favorite_recipe.DeleteFavoriteRecipeController;
-import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_case.delete_favorite_recipe.DeleteFavoriteRecipeDataAccessInterface;
+import use_case.add_favorite_recipe.AddFavoriteRecipeUserDataAccessInterface;
+import use_case.generate_recipe.GenerateRecipeDataAccessInterface;
 
-import javax.swing.text.View;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DeleteFavoriteRecipeTest {
-    private MyFavoriteRecipeViewModel myFavoriteRecipeViewModel;
-    private DeleteFavoriteRecipeDataAccessInterface userDAO;
-    private FileRecipeDataAccessObject recipeDAO;
-    private DeleteFavoriteRecipeController controller;
+public class AddFavoriteRecipeTest {
+    private ViewManagerModel viewManagerModel;
+    private AddFavoriteRecipeViewModel addFavoriteRecipeViewModel;
+    private AddFavoriteRecipeUserDataAccessInterface userDAO;
+    private GenerateRecipeDataAccessInterface recipeDAO;
+    private AddFavoriteRecipeController controller;
 
     @BeforeEach
     void init() {
-        myFavoriteRecipeViewModel = new MyFavoriteRecipeViewModel();
+        viewManagerModel = new ViewManagerModel();
+        addFavoriteRecipeViewModel = new AddFavoriteRecipeViewModel();
         try {
             userDAO = new FileUserDataAccessObject(new CommonUserFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         recipeDAO = new FileRecipeDataAccessObject(new RecipeFactory());
-        controller = MyFavoriteRecipeFactory.createDeleteFavoriteRecipeUseCase(myFavoriteRecipeViewModel, userDAO, recipeDAO);
+        controller = AfterGeneratedRecipeFactory.createAddFavoriteUseCase(viewManagerModel, addFavoriteRecipeViewModel, userDAO, recipeDAO);
     }
-
     @Test
-    public void testDeleteFavoriteRecipe() {
+    public void testAddFavoriteRecipe() {
         // make the input data
         String label = "bebek goreng";
         String recipeUrl = "https://";
@@ -61,12 +60,9 @@ public class DeleteFavoriteRecipeTest {
         User newUser = new CommonUserFactory().create(username, password, name, age, gender, height, weight, new Planner("andi"));
         userDAO.save(newUser);
 
-        userDAO.saveFavoriteRecipe("andi", "bebek goreng");
         controller.execute("andi", "bebek goreng");
 
-        Assertions.assertFalse(userDAO.isExists("andi", "bebek goreng"));
+        Assertions.assertTrue(userDAO.isExists("andi", "bebek goreng"));
     }
-
-
 
 }

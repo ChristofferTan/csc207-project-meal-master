@@ -1,10 +1,8 @@
-package interface_adapters.myprofile;
+package interface_adapters.my_profile;
 
 import interface_adapters.ViewManagerModel;
-import interface_adapters.edit_profile.EditProfileState;
-import interface_adapters.edit_profile.EditProfileViewModel;
-import use_case.myprofile.MyProfileOutputBoundary;
-import use_case.myprofile.MyProfileOutputData;
+import use_case.my_profile.MyProfileOutputBoundary;
+import use_case.my_profile.MyProfileOutputData;
 
 public class MyProfilePresenter implements MyProfileOutputBoundary{
     private final MyProfileViewModel myProfileViewModel;

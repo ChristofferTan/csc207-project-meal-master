@@ -1,11 +1,10 @@
-package use_case.myprofile;
+package use_case.my_profile;
 
 import data_access.FilePlannerDataAccessObject;
 import data_access.FileRecipeDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
 import entity.*;
 import org.junit.jupiter.api.Test;
-import use_case.signup.SignupInputData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -36,8 +35,8 @@ public class MyProfileInteractorTest {
                 assertEquals("Faraaz", output.getName());
                 assertEquals(19, output.getAge());
                 assertEquals("Man", output.getGender());
-                //assertEquals(170, output.getHeight());
-                //assertEquals(60, output.getWeight());
+                assertEquals(170, output.getHeight());
+                assertEquals(60, output.getWeight());
                 assertEquals(user, output.getUser());
             }
         };

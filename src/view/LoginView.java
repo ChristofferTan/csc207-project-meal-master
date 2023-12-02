@@ -7,7 +7,6 @@ import interface_adapters.login.LoginViewModel;
 import interface_adapters.signup.SignupViewModel;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

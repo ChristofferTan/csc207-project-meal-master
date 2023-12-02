@@ -1,6 +1,5 @@
 package use_case.add_favorite_recipe;
 
-import data_access.FileRecipeDataAccessObject;
 import use_case.generate_recipe.GenerateRecipeDataAccessInterface;
 
 public class AddFavoriteRecipeInteractor implements AddFavoriteRecipeInputBoundary{

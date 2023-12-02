@@ -1,11 +1,8 @@
 package interface_adapters.my_favorite_recipe;
 
-import entity.Recipe;
 import interface_adapters.ViewManagerModel;
 import use_case.my_favorite_recipes.MyFavoriteRecipeOutputBoundary;
 import use_case.my_favorite_recipes.MyFavoriteRecipeOutputData;
-
-import java.util.ArrayList;
 
 public class MyFavoriteRecipePresenter implements MyFavoriteRecipeOutputBoundary {
     private final MyFavoriteRecipeViewModel myFavoriteRecipeViewModel;

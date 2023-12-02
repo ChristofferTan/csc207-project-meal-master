@@ -5,7 +5,6 @@ import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
 import entity.*;
 import org.junit.jupiter.api.Test;
-import use_case.add_favorite_recipe.AddFavoriteRecipeUserDataAccessInterface;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class GroceryListInteractorTest {
     @Test

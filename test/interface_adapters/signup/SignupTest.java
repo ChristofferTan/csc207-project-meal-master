@@ -1,7 +1,6 @@
-package interface_adapters.generate_recipe;
+package interface_adapters.signup;
 
 import app.SignupUseCaseFactory;
-import data_access.FileUserDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
 import entity.Planner;
@@ -9,17 +8,9 @@ import entity.User;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.login.LoginState;
 import interface_adapters.login.LoginViewModel;
-import interface_adapters.signup.SignupController;
-import interface_adapters.signup.SignupState;
-import interface_adapters.signup.SignupViewModel;
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.signup.SignupUserDataAccessInterface;
-
-import javax.swing.text.View;
-import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -88,5 +79,4 @@ public class SignupTest {
         assertEquals(newUser.getHeight(), actualSavedUser.getHeight());
         assertEquals(newUser.getWeight(), actualSavedUser.getWeight());
     }
-
 }

@@ -1,24 +1,18 @@
-package interface_adapters.generate_recipe;
+package interface_adapters.login;
 
 import app.LoginUseCaseFactory;
 import data_access.FileUserDataAccessObject;
-import data_access.InMemoryUserDataAccessObject;
-import entity.CommonUser;
 import entity.CommonUserFactory;
 import entity.Planner;
 import entity.User;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
-import interface_adapters.login.LoginController;
-import interface_adapters.login.LoginViewModel;
-import interface_adapters.signup.SignupViewModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.login.LoginUserDataAccessInterface;
 
-import javax.swing.text.View;
 import java.io.IOException;
 
 public class LogInTest {
@@ -31,7 +25,6 @@ public class LogInTest {
     @BeforeEach
     void init() {
         viewManagerModel = new ViewManagerModel();
-        viewManagerModel = new ViewManagerModel();
         loggedInViewModel = new LoggedInViewModel();
         loginViewModel = new LoginViewModel();
         try {
@@ -41,7 +34,6 @@ public class LogInTest {
         }
         String username = "andi";
         String password = "haihai";
-        String repeatPassword = "haihai";
         String name = "Christoffer Tan";
         int age = 19;
         String gender = "Man";
@@ -71,5 +63,4 @@ public class LogInTest {
         Assertions.assertEquals(user.getUsername(), loggedInState.getUsername());
         Assertions.assertEquals(viewManagerModel.getActiveView(), loggedInViewModel.getViewName());
     }
-
 }

@@ -12,7 +12,6 @@ import interface_adapters.ViewManagerModel;
 import interface_adapters.save_recipe.SaveRecipeController;
 import interface_adapters.save_recipe.SaveRecipeViewModel;
 import use_case.generate_recipe.GenerateRecipeInputData;
-import view.SaveRecipeView;
 
 import java.time.DayOfWeek;
 

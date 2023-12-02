@@ -13,13 +13,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
 import interface_adapters.after_generated_recipe.AfterGeneratedRecipeState;
 import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
-import interface_adapters.generate_recipe.GenerateRecipeController;
-import interface_adapters.generate_recipe.GenerateRecipeState;
-import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 
 public class GenerateRecipeView extends JPanel implements ActionListener, PropertyChangeListener {
 

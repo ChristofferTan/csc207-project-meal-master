@@ -1,6 +1,5 @@
 package interface_adapters.add_favorite_recipe;
 
-import entity.Recipe;
 import use_case.add_favorite_recipe.AddFavoriteRecipeInputBoundary;
 import use_case.add_favorite_recipe.AddFavoriteRecipeInputData;
 

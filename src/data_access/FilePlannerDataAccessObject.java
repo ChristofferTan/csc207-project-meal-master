@@ -132,8 +132,6 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
             Planner planner = this.plannerFactory.create(username);
             planners.put(username, planner);
         }
-//        System.out.println("day of week: " + day);
-//        System.out.println(planners.get(username));
         planners.get(username).getRecipesByDay(day).put(mealType, recipe);
         System.out.println(planners.get(username).getRecipesByDay(day).get(mealType));
         fileRecipeDataAccessObject.save(recipe);  // updates recipes.csv

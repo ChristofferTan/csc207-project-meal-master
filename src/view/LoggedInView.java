@@ -10,7 +10,7 @@ import interface_adapters.my_favorite_recipe.MyFavoriteRecipeController;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeState;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
 import interface_adapters.my_planner.MyPlannerController;
-import interface_adapters.myprofile.MyProfileController;
+import interface_adapters.my_profile.MyProfileController;
 
 import javax.swing.*;
 import java.awt.*;

@@ -138,13 +138,9 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(submit)) {
                             AfterGeneratedRecipeState currentState = afterGeneratedRecipeViewModel.getState();
-//                            System.out.println("Tipe makanan " + MealType.fromString(mealTypeInputField.getSelectedOption()));
-//                            System.out.println("Hari " + fromStringToDayofWeek(dayInputField.getSelectedOption()));
                             currentState.setMealType(MealType.fromString(mealTypeInputField.getSelectedOption()));
                             currentState.setDayInPlanner(fromStringToDayofWeek(dayInputField.getSelectedOption()));
                             afterGeneratedRecipeViewModel.setState(currentState);
-//                            System.out.println("Hari " + currentState.getMealType());
-//                            System.out.println("Tipe makanan " + currentState.getMealType());
 
                             saveRecipeController.execute(
                                     currentState.getUsername(),

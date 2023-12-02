@@ -1,6 +1,4 @@
-package interface_adapters.myprofile;
-
-import java.util.StringJoiner;
+package interface_adapters.my_profile;
 
 public class MyProfileState {
     private String username = "";
@@ -30,71 +28,71 @@ public class MyProfileState {
         return username;
     }
 
-    public String getUsernameError() {
-        return usernameError;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getNameError() {
-        return nameError;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getUsernameError() {
+        return usernameError;
     }
 
     public void setUsernameError(String usernameError) {
         this.usernameError = usernameError;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public String getNameError() {
+        return nameError;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setNameError(String nameError) {
+        this.nameError = nameError;
+    }
+
+    public int getAge() {
+        return age;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public int getWeight() {
         return weight;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    public void setNameError(String nameError) {
-        this.nameError = nameError;
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 }

@@ -4,17 +4,17 @@ import interface_adapters.ViewManagerModel;
 import interface_adapters.edit_profile.EditProfileController;
 import interface_adapters.edit_profile.EditProfilePresenter;
 import interface_adapters.edit_profile.EditProfileViewModel;
-import interface_adapters.myprofile.MyProfileController;
-import interface_adapters.myprofile.MyProfilePresenter;
-import interface_adapters.myprofile.MyProfileViewModel;
+import interface_adapters.my_profile.MyProfileController;
+import interface_adapters.my_profile.MyProfilePresenter;
+import interface_adapters.my_profile.MyProfileViewModel;
 import use_case.edit_profile.EditProfileDataAccessInterface;
 import use_case.edit_profile.EditProfileInputBoundary;
 import use_case.edit_profile.EditProfileInteractor;
 import use_case.edit_profile.EditProfileOutputBoundary;
-import use_case.myprofile.MyProfileDataAccessInterface;
-import use_case.myprofile.MyProfileInputBoundary;
-import use_case.myprofile.MyProfileInteractor;
-import use_case.myprofile.MyProfileOutputBoundary;
+import use_case.my_profile.MyProfileDataAccessInterface;
+import use_case.my_profile.MyProfileInputBoundary;
+import use_case.my_profile.MyProfileInteractor;
+import use_case.my_profile.MyProfileOutputBoundary;
 import view.MyProfileView;
 
 public class MyProfileFactory {
