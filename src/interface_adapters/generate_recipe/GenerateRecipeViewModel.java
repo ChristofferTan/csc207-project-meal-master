@@ -18,7 +18,7 @@ public class GenerateRecipeViewModel extends ViewModel {
     public static final String CUISINE_TYPE_LABEL = "Cuisine Type";
     public static final String[] CUISINE_TYPE_OPTIONS = {"American", "British", "Caribbean", "Chinese", "French", "Indian", "Italian", "Japanese", "Mediterranean"};
     public static final String MEAL_TYPE_LABEL = "Meal Type";
-    public static final String[] MEAL_TYPE_OPTIONS = {MealType.BREAKFAST.name(), MealType.LUNCH.name(), MealType.DINNER.name()};
+    public static final String[] MEAL_TYPE_OPTIONS = {MealType.BREAKFAST.toString(), MealType.LUNCH.toString(), MealType.DINNER.toString()};
     public static final String MIN_CALORIES_LABEL = "Min Calories";
     public static final String MAX_CALORIES_LABEL = "Max Calories";
     public static final String MAX_PREPARATION_TIME_LABEL = "Max Preparation Time";
