@@ -1,8 +1,5 @@
 package use_case.my_favorite_recipes;
 
-import entity.Recipe;
-import entity.User;
-
 import java.util.ArrayList;
 
 public class MyFavoriteRecipeOutputData {

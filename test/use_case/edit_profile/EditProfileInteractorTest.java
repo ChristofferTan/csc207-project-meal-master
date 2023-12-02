@@ -1,7 +1,6 @@
 package use_case.edit_profile;
 
 import data_access.FileUserDataAccessObject;
-import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
 import entity.PlannerFactory;
 import entity.User;

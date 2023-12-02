@@ -1,7 +1,6 @@
 package interface_adapters.my_favorite_recipe;
 
 import entity.MealType;
-import entity.Recipe;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;

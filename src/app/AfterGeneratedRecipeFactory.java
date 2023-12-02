@@ -19,9 +19,6 @@ import use_case.save_recipe.SaveRecipeInputBoundary;
 import use_case.save_recipe.SaveRecipeInteractor;
 import use_case.save_recipe.SaveRecipeOutputBoundary;
 import view.AfterGeneratedRecipeView;
-import view.GenerateRecipeView;
-
-import javax.swing.text.View;
 
 public class AfterGeneratedRecipeFactory {
     public AfterGeneratedRecipeFactory() {}

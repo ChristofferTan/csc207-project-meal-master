@@ -2,7 +2,6 @@ package interface_adapters.add_friend;
 
 import interface_adapters.ViewModel;
 
-import javax.swing.text.View;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 

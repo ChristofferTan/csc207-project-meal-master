@@ -35,8 +35,8 @@ public class MyProfileInteractorTest {
                 assertEquals("Faraaz", output.getName());
                 assertEquals(19, output.getAge());
                 assertEquals("Man", output.getGender());
-                //assertEquals(170, output.getHeight());
-                //assertEquals(60, output.getWeight());
+                assertEquals(170, output.getHeight());
+                assertEquals(60, output.getWeight());
                 assertEquals(user, output.getUser());
             }
         };

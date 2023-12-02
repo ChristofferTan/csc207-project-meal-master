@@ -2,7 +2,6 @@ package entity;
 
 import java.time.DayOfWeek;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Planner {
     private final String username;

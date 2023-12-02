@@ -5,20 +5,15 @@ import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
 import entity.*;
 import interface_adapters.ViewManagerModel;
-import interface_adapters.add_favorite_recipe.AddFavoriteRecipeController;
-import interface_adapters.add_favorite_recipe.AddFavoriteRecipeViewModel;
-import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.add_favorite_recipe.AddFavoriteRecipeUserDataAccessInterface;
 import use_case.generate_recipe.GenerateRecipeDataAccessInterface;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class AddFavoriteRecipeTest {
     private ViewManagerModel viewManagerModel;

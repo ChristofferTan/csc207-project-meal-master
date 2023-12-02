@@ -94,12 +94,9 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                                     currentState.getHeight(),
                                     currentState.getWeight()
                             );
-//                            currentState = editProfileViewModel.getState();
-//
-//                            System.out.println(currentState.getUsername());
                             myProfileController.execute(currentState.getUsername());
                             myProfileViewModel.firePropertyChanged();
-//
+
                             viewManagerModel.setActiveView(myProfileViewModel.getViewName());
                             viewManagerModel.firePropertyChanged();
                         }
