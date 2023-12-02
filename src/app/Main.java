@@ -148,6 +148,15 @@ public class Main {
             viewManagerModel.firePropertyChanged();
 
             application.pack();
+            toggleFullscreen(application);
             application.setVisible(true);
+    }
+
+    private static void toggleFullscreen(JFrame application) {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsDevice gd = ge.getDefaultScreenDevice();
+            int screenWidth = gd.getDisplayMode().getWidth();
+            int screenHeight = gd.getDisplayMode().getHeight();
+            application.setSize(screenWidth, screenHeight);
     }
 }
