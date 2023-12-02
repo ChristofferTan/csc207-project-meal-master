@@ -141,6 +141,7 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
     }
 
     public void saveNewPlanner(Planner planner) {
+        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));  // remove planners.csv from the database
         planners.put(planner.getUsername(), planner);
         this.save();
     }
