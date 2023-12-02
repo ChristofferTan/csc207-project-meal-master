@@ -20,7 +20,7 @@ public class CommonUser implements User {
         this.favoriteRecipes = new ArrayList<String>();
         this.planner = plannerFactory.create(username);
     }
-    CommonUser(String username, String password, String name, int age, String gender, int weight, int height, Planner planner) {
+    CommonUser(String username, String password, String name, int age, String gender, int height, int weight, Planner planner) {
         this.username = username;
         this.password = password;
         this.name = name;
