@@ -119,7 +119,7 @@ public class Main {
             views.add(groceryListView, groceryListView.viewName);
             GroceryListController groceryListController = groceryListView.getGroceryListController();
 
-            MyFavoriteRecipeView myFavoriteRecipeView = MyFavoriteRecipeFactory.create(viewManagerModel, myFavoriteRecipeViewModel, userDataAccessObject, frdao);
+            MyFavoriteRecipeView myFavoriteRecipeView = MyFavoriteRecipeFactory.create(viewManagerModel, myFavoriteRecipeViewModel, userDataAccessObject, frdao, saveRecipeViewModel, fpdao);
             views.add(myFavoriteRecipeView, myFavoriteRecipeView.viewName);
             MyFavoriteRecipeController myFavoriteRecipeController = myFavoriteRecipeView.getMyFavoriteRecipeController();
 
