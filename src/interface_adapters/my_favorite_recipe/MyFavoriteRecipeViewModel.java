@@ -15,7 +15,7 @@ public class MyFavoriteRecipeViewModel extends ViewModel {
     public static final String SHOW_LABEL = "Open recipe URL";
     public static final String DELETE_LABEL = "Delete";
     public static final String BACK_LABEL = "Back";
-    public static final String[] MEAL_TYPE_OPTIONS = {MealType.BREAKFAST.name(), MealType.LUNCH.name(), MealType.DINNER.name()};
+    public static final String[] MEAL_TYPE_OPTIONS = {MealType.BREAKFAST.toString(), MealType.LUNCH.toString(), MealType.DINNER.toString()};
     public static final String[] DAY_OPTIONS = {DayOfWeek.MONDAY.name(), DayOfWeek.TUESDAY.name(), DayOfWeek.WEDNESDAY.name(), DayOfWeek.THURSDAY.name(), DayOfWeek.FRIDAY.name(), DayOfWeek.SATURDAY.name(), DayOfWeek.SUNDAY.name()};
 
     private MyFavoriteRecipeState state = new MyFavoriteRecipeState();
