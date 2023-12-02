@@ -21,6 +21,7 @@ public class MyFavoriteRecipeInteractorTest {
         RecipeFactory recipeFactory = new RecipeFactory();
         FileRecipeDataAccessObject recipeDAO;
         MyFavoriteRecipeDataAccessInterface userDAO;
+        PlannerFactory plannerFactory = new PlannerFactory();
 
         try {
             recipeDAO = new FileRecipeDataAccessObject(recipeFactory);
@@ -29,7 +30,7 @@ public class MyFavoriteRecipeInteractorTest {
             throw new RuntimeException(e);
         }
 
-        User user = userFactory.create("RazanAr", "admin", "Razan", 17, "Male", 70, 177);
+        User user = userFactory.create("RazanAr", "admin", "Razan", 17, "Male", 70, 177, plannerFactory.create("RazanAr"));
         ((FileUserDataAccessObject) userDAO).save(user);
         Recipe recipe = recipeFactory.create("Indomie Goreng", "github.com/ChristofferTan/csc207-project",
                 "github.com/elidle", 350, new ArrayList<String>(Arrays.asList("1 bungkus Indomie Goreng")),

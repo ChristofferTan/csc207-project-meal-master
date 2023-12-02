@@ -2,6 +2,7 @@ package use_case.add_friend;
 
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
+import entity.PlannerFactory;
 import entity.User;
 import entity.UserFactory;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,9 @@ public class AddFriendInteractorTest{
         AddFriendUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68);
-        User user2 = factory.create("Janis", "jelek", "janis", 19, "Woman", 175, 90);
+        PlannerFactory plannerFactory = new PlannerFactory();
+        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68, plannerFactory.create("Christoffer"));
+        User user2 = factory.create("Janis", "jelek", "janis", 19, "Woman", 175, 90, plannerFactory.create("Janis"));
         ((InMemoryUserDataAccessObject) userRepository).save(user1);
         ((InMemoryUserDataAccessObject) userRepository).save(user2);
         AddFriendOutputBoundary successPresenter = new AddFriendOutputBoundary() {
@@ -41,7 +43,9 @@ public class AddFriendInteractorTest{
         AddFriendUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68);
+        PlannerFactory plannerFactory = new PlannerFactory();
+        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68, plannerFactory.create("Christoffer"));
+        ((InMemoryUserDataAccessObject) userRepository).save(user1);
         ((InMemoryUserDataAccessObject) userRepository).save(user1);
         AddFriendOutputBoundary failurePresenter = new AddFriendOutputBoundary() {
 
@@ -65,8 +69,9 @@ public class AddFriendInteractorTest{
         AddFriendUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         UserFactory factory = new CommonUserFactory();
-        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68);
-        User user2 = factory.create("Janis", "jelek", "janis", 19, "Woman", 175, 90);
+        PlannerFactory plannerFactory = new PlannerFactory();
+        User user1 = factory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68, plannerFactory.create("Christoffer"));
+        User user2 = factory.create("Janis", "jelek", "janis", 19, "Woman", 175, 90, plannerFactory.create("Janis"));
         ((InMemoryUserDataAccessObject) userRepository).save(user1);
         ((InMemoryUserDataAccessObject) userRepository).save(user2);
         userRepository.addFriend("Christoffer", "Janis");

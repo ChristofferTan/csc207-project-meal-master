@@ -17,7 +17,7 @@ public enum MealType {
 
     public static MealType fromString(String stringValue) {
         for (MealType mealType : MealType.values()) {
-            if (mealType.name().equals(stringValue)) {
+            if (mealType.toString().equals(stringValue)) {
                 return mealType;
             }
         }

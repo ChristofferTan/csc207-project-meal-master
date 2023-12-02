@@ -2,6 +2,7 @@ package use_case.login;
 
 import data_access.FileUserDataAccessObject;
 import entity.CommonUserFactory;
+import entity.PlannerFactory;
 import entity.User;
 import entity.UserFactory;
 import org.junit.jupiter.api.Test;
@@ -16,12 +17,13 @@ public class LoginInteractorTest {
     void successTest() {
         UserFactory userFactory = new CommonUserFactory();
         LoginUserDataAccessInterface userDAO;
+        PlannerFactory plannerFactory = new PlannerFactory();
         try {
             userDAO = new FileUserDataAccessObject(userFactory);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        User user1 = userFactory.create("Budi", "pekerti", "Budiman", 58, "Man", 91, 150);
+        User user1 = userFactory.create("Budi", "pekerti", "Budiman", 58, "Man", 91, 150, plannerFactory.create("Budi"));
         userDAO.save(user1);
 
         LoginInputData inputData = new LoginInputData("Budi", "pekerti");

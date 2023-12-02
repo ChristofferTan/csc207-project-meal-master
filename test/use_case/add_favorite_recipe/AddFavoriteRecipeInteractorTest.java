@@ -1,5 +1,6 @@
 package use_case.add_favorite_recipe;
 
+import data_access.FilePlannerDataAccessObject;
 import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
 import entity.*;
@@ -20,6 +21,7 @@ public class AddFavoriteRecipeInteractorTest {
         AddFavoriteRecipeUserDataAccessInterface userDAO;
 
         recipeDAO = new FileRecipeDataAccessObject(recipeFactory);
+        FilePlannerDataAccessObject plannerDAO = new FilePlannerDataAccessObject(new PlannerFactory(), recipeDAO);
         try {
             userDAO = new FileUserDataAccessObject(userFactory);
         } catch (IOException e) {
@@ -27,7 +29,7 @@ public class AddFavoriteRecipeInteractorTest {
         }
 
 
-        User user1 = userFactory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68);
+        User user1 = userFactory.create("Christoffer", "ganteng", "christoffer", 18, "Man", 170, 68, plannerDAO.getPlanner("Christoffer"));
         userDAO.save(user1);
 
         Recipe recipe = new Recipe("Asian-Style Chicken and Rice",
@@ -61,12 +63,14 @@ public class AddFavoriteRecipeInteractorTest {
         AddFavoriteRecipeUserDataAccessInterface userDAO;
 
         recipeDAO = new FileRecipeDataAccessObject(recipeFactory);
+        FilePlannerDataAccessObject plannerDAO = new FilePlannerDataAccessObject(new PlannerFactory(), recipeDAO);
+
         try {
             userDAO = new FileUserDataAccessObject(userFactory);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        User user1 = userFactory.create("Janis", "joplin", "Jantod", 38, "Man", 90, 168);
+        User user1 = userFactory.create("Janis", "joplin", "Jantod", 38, "Man", 90, 168, plannerDAO.getPlanner("Janis"));
         userDAO.save(user1);
 
         Recipe recipe = new Recipe("Asian-Style Chicken and Rice",

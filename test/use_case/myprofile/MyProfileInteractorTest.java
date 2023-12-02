@@ -1,10 +1,7 @@
 package use_case.myprofile;
 
 import data_access.InMemoryUserDataAccessObject;
-import entity.CommonUser;
-import entity.CommonUserFactory;
-import entity.User;
-import entity.UserFactory;
+import entity.*;
 import org.junit.jupiter.api.Test;
 import use_case.signup.SignupInputData;
 
@@ -17,7 +14,8 @@ public class MyProfileInteractorTest {
         MyProfileDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         UserFactory factory = new CommonUserFactory();
-        User user = factory.create("faraaz", "Passw", "Faraaz", 19, "Man", 170, 60);
+        PlannerFactory plannerFactory = new PlannerFactory();
+        User user = factory.create("faraaz", "Passw", "Faraaz", 19, "Man", 170, 60, plannerFactory.create("faraaz"));
         ((InMemoryUserDataAccessObject) userRepository).save(user);
 
         MyProfileOutputBoundary successPresenter = new MyProfileOutputBoundary() {
