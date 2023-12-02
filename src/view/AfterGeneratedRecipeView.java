@@ -78,6 +78,7 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
         } else {
             imageLabel = new JLabel("Image Not Available");
         }
+        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel servingsInfo = new JLabel(AfterGeneratedRecipeViewModel.SERVINGS_LABEL);
         servings = new JLabel();
