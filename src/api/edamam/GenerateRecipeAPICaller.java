@@ -79,11 +79,13 @@ public class GenerateRecipeAPICaller {
                         recipe.getInt("yield"))
                 );
             } else {
-                throw new RuntimeException(responseBody.getString("message"));
+                return null;
+                // throw new RuntimeException(responseBody.getString("message"));
             }
         }
         catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
+            return null;
+           // throw new RuntimeException(e);
         }
     }
 }

@@ -66,7 +66,6 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
                     @Override
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(back)) {
-//                            JOptionPane.showConfirmDialog(null, "Back not implemented", "Back clicked", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
                             if (evt.getSource().equals(back)) {
                                 viewManagerModel.setActiveView("logged in");
                                 viewManagerModel.firePropertyChanged();
