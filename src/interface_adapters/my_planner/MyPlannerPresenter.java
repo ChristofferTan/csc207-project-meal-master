@@ -17,9 +17,9 @@ public class MyPlannerPresenter implements MyPlannerOutputBoundary {
     @Override
     public void prepareSuccessView(MyPlannerOutputData response) {
         // On success,switch to the show planner view
-        MyPlannerState showPlannerState = myPlannerViewModel.getState();
-        showPlannerState.setPlanner(response.getPlanner());
-        this.myPlannerViewModel.setState(showPlannerState);
+        MyPlannerState myPlannerState = myPlannerViewModel.getState();
+        myPlannerState.setPlanner(response.getPlanner());
+        this.myPlannerViewModel.setState(myPlannerState);
         this.myPlannerViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(myPlannerViewModel.getViewName());

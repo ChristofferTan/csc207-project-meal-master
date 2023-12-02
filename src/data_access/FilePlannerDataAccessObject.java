@@ -147,6 +147,11 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
     }
 
     public Planner getPlanner(String username) {
+        Planner userPlanner = planners.get(username);
+        if (userPlanner == null) {
+            PlannerFactory plannerFactory = new PlannerFactory();
+            return plannerFactory.create(username);
+        }
         return planners.get(username);
     }
 
