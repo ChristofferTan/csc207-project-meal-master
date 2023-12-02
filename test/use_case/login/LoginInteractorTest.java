@@ -1,10 +1,9 @@
 package use_case.login;
 
+import data_access.FilePlannerDataAccessObject;
+import data_access.FileRecipeDataAccessObject;
 import data_access.FileUserDataAccessObject;
-import entity.CommonUserFactory;
-import entity.PlannerFactory;
-import entity.User;
-import entity.UserFactory;
+import entity.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -23,6 +22,16 @@ public class LoginInteractorTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        RecipeFactory recipeFactory = new RecipeFactory();
+        FileRecipeDataAccessObject recipeDAO;
+
+        recipeDAO = new FileRecipeDataAccessObject(recipeFactory);
+        FilePlannerDataAccessObject plannerDAO = new FilePlannerDataAccessObject(new PlannerFactory(), recipeDAO);
+        PlannerFactory plannerfactory = new PlannerFactory();
+        Planner planner = plannerfactory.create("Budi");
+        plannerDAO.saveNewPlanner(planner);
+
         User user1 = userFactory.create("Budi", "pekerti", "Budiman", 58, "Man", 91, 150, plannerFactory.create("Budi"));
         userDAO.save(user1);
 
@@ -61,7 +70,7 @@ public class LoginInteractorTest {
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals(error,  "Andi: Account does not exist.");
+                assertEquals(error,  "Account does not exist: Andi");
             }
         };
         LoginInputBoundary interactor = new LoginInteractor(userDAO, failPresenter);
