@@ -51,4 +51,9 @@ public class GenerateRecipePresenter implements GenerateRecipeOutputBoundary {
         viewManagerModel.setActiveView(afterGeneratedRecipeViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
+    public void prepareFailView(String error) {
+        GenerateRecipeState state = generateRecipeViewModel.getState();
+        state.setKeywordError(error);
+        generateRecipeViewModel.firePropertyChanged();
+    }
 }

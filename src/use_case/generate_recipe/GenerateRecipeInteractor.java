@@ -1,6 +1,7 @@
 package use_case.generate_recipe;
 
 import api.edamam.GenerateRecipeAPICaller;
+import api.edamam.GenerateRecipeAPIData;
 import entity.Recipe;
 
 public class GenerateRecipeInteractor implements GenerateRecipeInputBoundary {
@@ -15,9 +16,15 @@ public class GenerateRecipeInteractor implements GenerateRecipeInputBoundary {
 
     @Override
     public void execute(GenerateRecipeInputData generateRecipeInputData) {
-        Recipe generatedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
-        GenerateRecipeOutputData generateRecipeOutputData = new GenerateRecipeOutputData(generatedRecipe);
-        recipeDAO.save(generatedRecipe);
-        generateRecipePresenter.prepareSuccessView(generateRecipeOutputData);
+        GenerateRecipeAPIData recipeAPIData = GenerateRecipeAPICaller.call(generateRecipeInputData);
+        if (recipeAPIData == null) {
+            generateRecipePresenter.prepareFailView("There is no recipe based on your preferences");
+        }
+        else {
+            Recipe generatedRecipe = recipeAPIData.getRecipe();
+            GenerateRecipeOutputData generateRecipeOutputData = new GenerateRecipeOutputData(generatedRecipe);
+            recipeDAO.save(generatedRecipe);
+            generateRecipePresenter.prepareSuccessView(generateRecipeOutputData);
+        }
     }
 }

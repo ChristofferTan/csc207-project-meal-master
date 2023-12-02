@@ -34,7 +34,7 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 
         favoriteRecipes = new JList();
-        favoriteRecipes.setListData(myFavoriteRecipeViewModel.getState().getFavoriteRecipes().toArray());
+        favoriteRecipes.setListData(myFavoriteRecipeViewModel.getState().getFavoriteRecipes());
 
         JPanel buttons = new JPanel();
         delete = new JButton(MyFavoriteRecipeViewModel.DELETE_LABEL);
@@ -66,7 +66,6 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
                     @Override
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(back)) {
-//                            JOptionPane.showConfirmDialog(null, "Back not implemented", "Back clicked", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
                             if (evt.getSource().equals(back)) {
                                 viewManagerModel.setActiveView("logged in");
                                 viewManagerModel.firePropertyChanged();
@@ -92,6 +91,10 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
         if (state.getLabelError() != null) {
             JOptionPane.showConfirmDialog(null, state.getLabelError(), "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
         }
-        favoriteRecipes.setListData(state.getFavoriteRecipes().toArray());
+        favoriteRecipes.setListData(state.getFavoriteRecipes());
+    }
+
+    public MyFavoriteRecipeController getMyFavoriteRecipeController() {
+        return myFavoriteRecipeController;
     }
 }

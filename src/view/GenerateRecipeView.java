@@ -228,6 +228,9 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         GenerateRecipeState state = (GenerateRecipeState) evt.getNewValue();
+        if (state.getKeywordError() != null) {
+            JOptionPane.showMessageDialog(this, state.getKeywordError());
+        }
     }
 
     public GenerateRecipeController getGenerateRecipeController() {

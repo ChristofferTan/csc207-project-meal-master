@@ -16,10 +16,10 @@ public class GroceryListPresenter implements GroceryListOutputBoundary {
 
     @Override
     public void prepareSuccessView(GroceryListOutputData groceryListOutputData) {
-        System.out.println("Grocery list for " + groceryListOutputData.getUsername() + ":");
-        for (String item : groceryListOutputData.getGroceryList()) {
-            System.out.println(item);
-        }
+//        System.out.println("Grocery list for " + groceryListOutputData.getUsername() + ":");
+//        for (String item : groceryListOutputData.getGroceryList()) {
+//            System.out.println(item);
+//        }
 
         GroceryListState groceryListState = groceryListViewModel.getState();
         groceryListState.setGroceryList(groceryListOutputData.getGroceryList());

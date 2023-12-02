@@ -13,6 +13,10 @@ public class GroceryListState {
     }
 
     public String[] getGroceryList() {
+        if (groceryList == null) {
+            return null;
+        }
+
         String[] grocery = new String[groceryList.size()];
 
         return groceryList.toArray(grocery);
