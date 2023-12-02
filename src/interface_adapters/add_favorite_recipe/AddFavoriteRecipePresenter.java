@@ -19,7 +19,7 @@ public class AddFavoriteRecipePresenter implements AddFavoriteRecipeOutputBounda
     @Override
     public void prepareSuccessView(AddFavoriteRecipeOutputData addFavoriteRecipeOutputData) {
         System.out.println(addFavoriteRecipeOutputData.getUsername() + " have successfully added " + addFavoriteRecipeOutputData.getLabel() + " to the favourite list");
-        JOptionPane.showConfirmDialog(null, addFavoriteRecipeOutputData.getUsername() + " has added the " +  addFavoriteRecipeOutputData.getLabel() + " to the favorite list successfully", "Message", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showConfirmDialog(null, addFavoriteRecipeOutputData.getUsername() + " has added " +  addFavoriteRecipeOutputData.getLabel() + " to the favorite list successfully", "Message", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
     }
 
     @Override
