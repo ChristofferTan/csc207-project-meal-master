@@ -1,8 +1,5 @@
 package interface_adapters.add_favorite_recipe;
 
-import entity.Recipe;
-import entity.User;
-
 public class AddFavoriteRecipeState {
     private final String username;
     private final String label;

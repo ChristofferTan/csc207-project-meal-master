@@ -5,7 +5,6 @@ import interface_adapters.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
 
 public class GenerateRecipeViewModel extends ViewModel {
 

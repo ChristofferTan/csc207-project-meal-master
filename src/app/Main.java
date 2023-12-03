@@ -17,8 +17,8 @@ import interface_adapters.my_favorite_recipe.MyFavoriteRecipeController;
 import interface_adapters.my_favorite_recipe.MyFavoriteRecipeViewModel;
 import interface_adapters.my_planner.MyPlannerController;
 import interface_adapters.my_planner.MyPlannerViewModel;
-import interface_adapters.myprofile.MyProfileController;
-import interface_adapters.myprofile.MyProfileViewModel;
+import interface_adapters.my_profile.MyProfileController;
+import interface_adapters.my_profile.MyProfileViewModel;
 import interface_adapters.save_recipe.SaveRecipeViewModel;
 import interface_adapters.signup.SignupViewModel;
 import view.*;
@@ -63,21 +63,6 @@ public class Main {
 
 
             FileRecipeDataAccessObject frdao = new FileRecipeDataAccessObject(new RecipeFactory());
-//            SaveRecipeController saveRecipeController = saveRecipeView.getSaveRecipeController();
-//            GenerateRecipeInputData generateRecipeInputData = new GenerateRecipeInputData(
-//                    "chicken",
-//                    new String[]{"balanced"},
-//                    new String[]{"alcohol-free"},
-//                    new String[]{"Asian"},
-//                    new String[]{"Lunch"},
-//                    "100-1000",
-//                    "0-100"
-//            );
-//            Recipe expectedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
-//            saveRecipeController.execute("bb", DayOfWeek.MONDAY, MealType.LUNCH, expectedRecipe);
-//            Recipe actualRecipe = fpdao.getPlanner("bob").getRecipesByDay(DayOfWeek.MONDAY).get(MealType.LUNCH);
-
-
             GroceryListViewModel groceryListViewModel = new GroceryListViewModel();
             GenerateRecipeViewModel generateRecipeViewModel = new GenerateRecipeViewModel();
             AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel = new AfterGeneratedRecipeViewModel();
@@ -85,7 +70,6 @@ public class Main {
             LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
             SignupViewModel signupViewModel = new SignupViewModel();
             SaveRecipeViewModel saveRecipeViewModel = new SaveRecipeViewModel();
-            // AfterGeneratedRecipeViewModel afterGeneratedRecipeViewModel1 = new AfterGeneratedRecipeViewModel();
             AddFavoriteRecipeViewModel addFavoriteRecipeViewModel = new AddFavoriteRecipeViewModel();
             MyProfileViewModel myProfileViewModel = new MyProfileViewModel();
             EditProfileViewModel editProfileViewModel = new EditProfileViewModel();
@@ -102,12 +86,9 @@ public class Main {
 
             SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
             views.add(signupView, signupView.viewName);
-//
+
             LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, signupViewModel, userDataAccessObject);
             views.add(loginView, loginView.viewName);
-//
-//            LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel, groceryListViewModel, new GroceryListController(groceryListViewModel)
-//            views.add(loggedInView, loggedInView.viewName);
 
             GenerateRecipeView generateRecipeView = GenerateRecipeUseCaseFactory.create(viewManagerModel, generateRecipeViewModel, afterGeneratedRecipeViewModel, frdao);
             views.add(generateRecipeView, generateRecipeView.viewName);
@@ -136,13 +117,6 @@ public class Main {
 
             EditProfileView editProfileView = EditProfileFactory.create(viewManagerModel, editProfileViewModel,userDataAccessObject, myProfileViewModel);
             views.add(editProfileView, editProfileView.viewName);
-
-
-//            GroceryListController groceryListController = groceryListView.getGroceryListController();
-//            groceryListController.execute("budi");
-
-//            viewManagerModel.setActiveView(generateRecipeView.viewName);
-//            viewManagerModel.firePropertyChanged();
 
             viewManagerModel.setActiveView(signupView.viewName);
             viewManagerModel.firePropertyChanged();

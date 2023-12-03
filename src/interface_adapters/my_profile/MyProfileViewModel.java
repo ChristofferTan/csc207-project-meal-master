@@ -1,4 +1,4 @@
-package interface_adapters.myprofile;
+package interface_adapters.my_profile;
 
 import interface_adapters.ViewModel;
 
@@ -6,7 +6,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class MyProfileViewModel extends ViewModel {
-    public static final String CLEAR_BUTTON_LABEL = "Clear";
     public static final String TITLE_LABEL = "My Profile";
     public static final String USERNAME_LABEL = "Username: ";
     public static final String NAME_LABEL = "Name: ";

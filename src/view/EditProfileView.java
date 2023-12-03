@@ -1,6 +1,5 @@
 package view;
 
-import javax.accessibility.AccessibleEditableText;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,18 +12,15 @@ import interface_adapters.ViewManagerModel;
 import interface_adapters.edit_profile.EditProfileController;
 import interface_adapters.edit_profile.EditProfileState;
 import interface_adapters.edit_profile.EditProfileViewModel;
-import interface_adapters.myprofile.MyProfileController;
-import interface_adapters.myprofile.MyProfileState;
-import interface_adapters.myprofile.MyProfileViewModel;
-import interface_adapters.signup.SignupState;
-import interface_adapters.signup.SignupViewModel;
+import interface_adapters.my_profile.MyProfileController;
+import interface_adapters.my_profile.MyProfileViewModel;
 
 public class EditProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "edit profile";
     private final EditProfileViewModel editProfileViewModel;
     private final JTextField nameInputField = new JTextField(15);
-    private final JComboBox<Integer> ageComboBox, weightComboBox, heightComboBox;
+    private final JComboBox<Integer> ageComboBox, heightComboBox, weightComboBox;
     private final JComboBox<String> genderComboBox;
     private final JTextArea editedProfileOutputField = new JTextArea(15, 15);
 
@@ -52,27 +48,27 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
 
         JPanel ageDropdownPanel = new JPanel();
         JPanel genderDropdownPanel = new JPanel();
-        JPanel weightDropdownPanel = new JPanel();
         JPanel heightDropdownPanel = new JPanel();
+        JPanel weightDropdownPanel = new JPanel();
 
         ageDropdownPanel.add(new JLabel(EditProfileViewModel.AGE_LABEL));
         genderDropdownPanel.add(new JLabel(EditProfileViewModel.GENDER_LABEL));
-        weightDropdownPanel.add(new JLabel(EditProfileViewModel.WEIGHT_LABEL));
         heightDropdownPanel.add(new JLabel(EditProfileViewModel.HEIGHT_LABEL));
+        weightDropdownPanel.add(new JLabel(EditProfileViewModel.WEIGHT_LABEL));
 
         genderComboBox = new JComboBox<>(new String[]{"Man", "Woman", "Prefer not to say"});
 
         Integer ageRange[] = new Integer[101];
+        Integer heightRange[] = new Integer[250];
         Integer weightRange[] = new Integer[250];
-        Integer heighRange[] = new Integer[250];
 
         for (int i=0;i<=100;i++) ageRange[i] = i;
+        for (int i=10;i<=200;i++) heightRange[i] = i;
         for (int i=10;i<=200;i++) weightRange[i] = i;
-        for (int i=10;i<=200;i++) heighRange[i] = i;
 
         ageComboBox = new JComboBox<>(ageRange);
+        heightComboBox = new JComboBox<>(heightRange);
         weightComboBox = new JComboBox<>(weightRange);
-        heightComboBox = new JComboBox<>(heighRange);
 
         genderDropdownPanel.add(genderComboBox);
         ageDropdownPanel.add(ageComboBox);
@@ -98,12 +94,9 @@ public class EditProfileView extends JPanel implements ActionListener, PropertyC
                                     currentState.getHeight(),
                                     currentState.getWeight()
                             );
-//                            currentState = editProfileViewModel.getState();
-//
-//                            System.out.println(currentState.getUsername());
                             myProfileController.execute(currentState.getUsername());
                             myProfileViewModel.firePropertyChanged();
-//
+
                             viewManagerModel.setActiveView(myProfileViewModel.getViewName());
                             viewManagerModel.firePropertyChanged();
                         }

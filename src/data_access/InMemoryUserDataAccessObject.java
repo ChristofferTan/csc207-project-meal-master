@@ -6,8 +6,7 @@ import use_case.my_favorite_recipes.MyFavoriteRecipeDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.add_friend.AddFriendUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
-import use_case.myprofile.MyProfileDataAccessInterface;
-import use_case.signup.SignupUserDataAccessInterface;
+import use_case.my_profile.MyProfileDataAccessInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;

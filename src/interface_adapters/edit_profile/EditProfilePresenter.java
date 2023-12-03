@@ -1,8 +1,7 @@
 package interface_adapters.edit_profile;
 
 import interface_adapters.ViewManagerModel;
-import interface_adapters.myprofile.MyProfileState;
-import interface_adapters.myprofile.MyProfileViewModel;
+import interface_adapters.my_profile.MyProfileViewModel;
 import use_case.edit_profile.EditProfileOutputData;
 import use_case.edit_profile.EditProfileOutputBoundary;
 

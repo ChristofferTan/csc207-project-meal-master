@@ -1,6 +1,5 @@
 package use_case.add_favorite_recipe;
 
-import entity.Recipe;
 import entity.User;
 
 public interface AddFavoriteRecipeUserDataAccessInterface {

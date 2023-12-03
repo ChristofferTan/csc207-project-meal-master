@@ -7,7 +7,6 @@ import entity.Recipe;
 import entity.RecipeFactory;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

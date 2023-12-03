@@ -1,6 +1,5 @@
 package use_case.delete_favorite_recipe;
 
-import entity.Recipe;
 import entity.User;
 
 public interface DeleteFavoriteRecipeDataAccessInterface {

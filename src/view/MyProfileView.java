@@ -4,12 +4,11 @@ import interface_adapters.ViewManagerModel;
 import interface_adapters.edit_profile.EditProfileController;
 import interface_adapters.edit_profile.EditProfileState;
 import interface_adapters.edit_profile.EditProfileViewModel;
-import interface_adapters.myprofile.MyProfileController;
-import interface_adapters.myprofile.MyProfileState;
-import interface_adapters.myprofile.MyProfileViewModel;
+import interface_adapters.my_profile.MyProfileController;
+import interface_adapters.my_profile.MyProfileState;
+import interface_adapters.my_profile.MyProfileViewModel;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

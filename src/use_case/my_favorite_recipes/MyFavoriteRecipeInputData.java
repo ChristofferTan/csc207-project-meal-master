@@ -1,7 +1,5 @@
 package use_case.my_favorite_recipes;
 
-import entity.User;
-
 public class MyFavoriteRecipeInputData {
     final private String username;
 

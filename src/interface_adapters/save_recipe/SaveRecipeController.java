@@ -6,7 +6,6 @@ import use_case.save_recipe.SaveRecipeInputBoundary;
 import use_case.save_recipe.SaveRecipeInputData;
 
 import java.time.DayOfWeek;
-import java.util.ArrayList;
 
 public class SaveRecipeController {
     final SaveRecipeInputBoundary saveRecipeInteractor;

@@ -37,7 +37,7 @@ public class MyFavoriteRecipeFactory {
         return new MyFavoriteRecipeView(myFavoriteRecipeController, myFavoriteRecipeViewModel, saveRecipeController, deleteFavoriteRecipeController, viewManagerModel, fileRecipeDataAccessObject);
     }
 
-    private static MyFavoriteRecipeController createMyFavoriteRecipeUseCase(ViewManagerModel viewManagerModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, MyFavoriteRecipeDataAccessInterface dataAccessInterface) {
+    public static MyFavoriteRecipeController createMyFavoriteRecipeUseCase(ViewManagerModel viewManagerModel, MyFavoriteRecipeViewModel myFavoriteRecipeViewModel, MyFavoriteRecipeDataAccessInterface dataAccessInterface) {
         MyFavoriteRecipeOutputBoundary myFavoriteRecipeOutputBoundary = new MyFavoriteRecipePresenter(viewManagerModel, myFavoriteRecipeViewModel);
 
         MyFavoriteRecipeInputBoundary myFavoriteRecipeInteractor = new MyFavoriteRecipeInteractor(dataAccessInterface, myFavoriteRecipeOutputBoundary);

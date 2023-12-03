@@ -1,7 +1,6 @@
 package interface_adapters.add_favorite_recipe;
 
 import interface_adapters.ViewManagerModel;
-import interface_adapters.generate_recipe.GenerateRecipeViewModel;
 import use_case.add_favorite_recipe.AddFavoriteRecipeOutputBoundary;
 import use_case.add_favorite_recipe.AddFavoriteRecipeOutputData;
 
