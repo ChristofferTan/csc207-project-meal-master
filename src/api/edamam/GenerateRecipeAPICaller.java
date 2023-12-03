@@ -17,6 +17,12 @@ public class GenerateRecipeAPICaller {
     private static final String APP_ID = "97884852";
     private static final String APP_KEY = "29ec3f53238d1c6ec3c16c6412bc91ea";
 
+
+    /**
+     * Used in GenerateRecipeInteractor, to generate a recipe based on the user's input
+     * @param inputData
+     * @return GenerateRecipeAPIData with a generated recipe inside it
+     */
     public static GenerateRecipeAPIData call(GenerateRecipeInputData inputData) {
         final RecipeFactory recipeFactory = new RecipeFactory();
 
