@@ -73,7 +73,6 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
                     HashMap<MealType,Recipe> dailyRecipes = planner.getRecipesByDay(DayOfWeek.valueOf(day));
                     for (String recipeLabel : recipesLabel) {
                         Recipe recipe = fileRecipeDataAccessObject.getRecipe(recipeLabel);
-//                        System.out.println(recipeLabel);
                         assert recipe != null;
                         assert !dailyRecipes.containsKey(MealType.fromString(mealType.toUpperCase()));
                         dailyRecipes.put(MealType.fromString(mealType), fileRecipeDataAccessObject.getRecipe(recipeLabel));
@@ -88,6 +87,9 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
         }
     }
 
+    /**
+     * Save (push) the latest version of planners.csv from planners into the database
+     */
     private void save() {
         BufferedWriter writer;
         try {
@@ -110,7 +112,6 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
                     }
                 }
             }
-
             writer.close();
             UploadCSVFilesAPICaller.call(FILE_PATH);
             HashMap<String,String> listofCSVFiles = GetListofCSVFilesAPICaller.call();
@@ -120,6 +121,10 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
         }
     }
 
+    /**
+     * Save a new recipe to username's planner at day and mealType, write to planners.csv, and push to the database
+     * @param username, day, mealType, recipe
+     */
     @Override
     public void save(String username, DayOfWeek day, MealType mealType, Recipe recipe) {
         System.out.println("Downloading planners.csv from database... (removing planners.csv from the database)");
@@ -148,6 +153,7 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
         }
         return planners.get(username);
     }
+
 
     public boolean isPlannerExistsByUsername(String username) {
         return planners.containsKey(username);
