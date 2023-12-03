@@ -55,7 +55,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
             for (int i=1;i<rows.length;i++) {
                 String row = rows[i].trim();
-                System.out.println(row);
                 String[] col = row.split(",");
                 String username = String.valueOf(col[headers.get("username")]);
                 String password = String.valueOf(col[headers.get("password")]);

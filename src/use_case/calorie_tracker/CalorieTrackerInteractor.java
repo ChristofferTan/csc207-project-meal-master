@@ -20,9 +20,9 @@ public class CalorieTrackerInteractor implements CalorieTrackerInputBoundary{
     public void execute(CalorieTrackerInputData calorieTrackerInputData) {
         Planner planner = calorieTrackerInputData.getPlanner();
         int weeklyCalories = calculateWeeklyCalories(planner);
-        int averageDailyCalories = calculateAverageDailyCalories(planner);
+        int averageMealCalories = calculateAverageMealCalories(planner);
 
-        CalorieTrackerOutputData outputData = new CalorieTrackerOutputData(planner, weeklyCalories, averageDailyCalories);
+        CalorieTrackerOutputData outputData = new CalorieTrackerOutputData(planner, weeklyCalories, averageMealCalories);
         calorieTrackerPresenter.prepareSuccessView(outputData);
     }
 
@@ -42,11 +42,13 @@ public class CalorieTrackerInteractor implements CalorieTrackerInputBoundary{
         return Math.round(calories);
     }
 
-    private int calculateAverageDailyCalories(Planner planner) {
+    private int calculateAverageMealCalories(Planner planner) {
         float calories = 0;
+        int numOfRecipes = 0;
         for (HashMap<MealType, Recipe> recipes: planner.getWeeklyRecipes().values()) {
             for (Recipe recipe: recipes.values()) {
                 if (recipe != null) {
+                    numOfRecipes++;
                     if (recipe.getYield() != 0) {
                         calories += (float) recipe.getCalories() / recipe.getYield();
                     } else {
@@ -55,6 +57,6 @@ public class CalorieTrackerInteractor implements CalorieTrackerInputBoundary{
                 }
             }
         }
-        return Math.round(calories / 7);
+        return Math.round(calories / numOfRecipes);
     }
 }

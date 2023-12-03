@@ -6,7 +6,7 @@ public class MyPlannerState {
     private String username = "";
     private Planner planner = null;
     private int weeklyCalories = 0;
-    private int averageDailyCalories = 0;
+    private int averageMealCalories = 0;
     private boolean noPlanner = false;
     private String noCalorieTrackerError = null;
 
@@ -29,8 +29,8 @@ public class MyPlannerState {
         return weeklyCalories;
     }
 
-    public int getAverageDailyCalories() {
-        return averageDailyCalories;
+    public int getAverageMealCalories() {
+        return averageMealCalories;
     }
 
     public void setUsername(String username) {
@@ -45,8 +45,8 @@ public class MyPlannerState {
         this.weeklyCalories = weeklyCalories;
     }
 
-    public void setAverageDailyCalories(int averageDailyCalories) {
-        this.averageDailyCalories = averageDailyCalories;
+    public void setAverageMealCalories(int averageMealCalories) {
+        this.averageMealCalories = averageMealCalories;
     }
 
     public void setNoPlanner(boolean noPlanner) {
