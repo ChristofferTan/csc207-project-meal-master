@@ -16,7 +16,8 @@ public class GenerateRecipeInteractor implements GenerateRecipeInputBoundary {
 
     @Override
     public void execute(GenerateRecipeInputData generateRecipeInputData) {
-        GenerateRecipeAPIData recipeAPIData = GenerateRecipeAPICaller.call(generateRecipeInputData);
+        GenerateRecipeAPICallerInterface generateRecipeAPICaller = new GenerateRecipeAPICaller();
+        GenerateRecipeAPIData recipeAPIData = generateRecipeAPICaller.call(generateRecipeInputData);
         if (recipeAPIData == null) {
             generateRecipePresenter.prepareFailView("There is no recipe based on your preferences");
         }

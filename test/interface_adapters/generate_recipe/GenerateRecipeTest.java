@@ -10,6 +10,7 @@ import interface_adapters.after_generated_recipe.AfterGeneratedRecipeViewModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import use_case.generate_recipe.GenerateRecipeAPICallerInterface;
 import use_case.generate_recipe.GenerateRecipeDataAccessInterface;
 import use_case.generate_recipe.GenerateRecipeInputData;
 
@@ -81,7 +82,8 @@ public class GenerateRecipeTest {
         String maxCalories = "1000";
         String maxPreparationTime = "100";
 
-        Recipe generatedRecipe = GenerateRecipeAPICaller.call(new GenerateRecipeInputData(q, diet, health, cuisineType, mealType, minCalories + "-" + maxCalories, "0-" + maxPreparationTime)).getRecipe();
+        GenerateRecipeAPICallerInterface generateRecipeAPICaller = new GenerateRecipeAPICaller();
+        Recipe generatedRecipe = generateRecipeAPICaller.call(new GenerateRecipeInputData(q, diet, health, cuisineType, mealType, minCalories + "-" + maxCalories, "0-" + maxPreparationTime)).getRecipe();
         recipeDAO.save(generatedRecipe);
 
         // check that the recipe saved is correct
