@@ -121,7 +121,7 @@ public class MyPlannerView extends JPanel implements ActionListener, PropertyCha
         MyPlannerState state = (MyPlannerState) evt.getNewValue();
         Planner planner = state.getPlanner();
         int weeklyCalories = state.getWeeklyCalories();
-        int averageDailyCalories = state.getAverageDailyCalories();
+        int averageMealCalories = state.getAverageMealCalories();
 
         // Fill in the buttons with hyperlinks for available recipes
         for (MealType mealType : MealType.values()) {
@@ -138,6 +138,6 @@ public class MyPlannerView extends JPanel implements ActionListener, PropertyCha
         }
         // Fill in the panel for the calorie tracker
         calorieTrackersPlaceholder[0].setText("Weekly calories: " + weeklyCalories);
-        calorieTrackersPlaceholder[1].setText("Average daily calories: " + averageDailyCalories);
+        calorieTrackersPlaceholder[1].setText("Average calories per meal: " + averageMealCalories);
     }
 }

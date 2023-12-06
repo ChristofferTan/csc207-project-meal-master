@@ -30,6 +30,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     private final String FILE_NAME = "users.csv";
     private final String FILE_PATH = "./" + FILE_NAME;
 
+
     public FileUserDataAccessObject(UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;
 
@@ -53,7 +54,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
             for (int i=1;i<rows.length;i++) {
                 String row = rows[i].trim();
-                System.out.println(row);
                 String[] col = row.split(",");
                 String username = String.valueOf(col[headers.get("username")]);
                 String password = String.valueOf(col[headers.get("password")]);
@@ -87,6 +87,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         return accounts.containsKey(identifier);
     }
 
+    /**
+     * Save a new user to accounts, write to users.csv, and push to the database
+     * @param user
+     */
     @Override
     public void save(User user) {
         System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
@@ -96,6 +100,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         // save this new user's planner to planners.csv
         plannerDataAccessObject.saveNewPlanner(user.getPlanner());
     }
+
+    /**
+     * Write accounts to users.csv and push to the database
+     */
     private void save() {
         BufferedWriter writer;
         try {

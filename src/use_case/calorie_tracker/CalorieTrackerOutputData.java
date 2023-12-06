@@ -5,20 +5,20 @@ import entity.Planner;
 public class CalorieTrackerOutputData {
     private final Planner planner;
     private final int weeklyCalories;
-    private final int averageDailyCalories;
+    private final int averageMealCalories;
 
-    public CalorieTrackerOutputData(Planner planner, int weeklyCalories, int averageDailyCalories) {
+    public CalorieTrackerOutputData(Planner planner, int weeklyCalories, int averageMealCalories) {
         this.planner = planner;
         this.weeklyCalories = weeklyCalories;
-        this.averageDailyCalories = averageDailyCalories;
+        this.averageMealCalories = averageMealCalories;
     }
 
     public int getWeeklyCalories() {
         return weeklyCalories;
     }
 
-    public int getAverageDailyCalories() {
-        return averageDailyCalories;
+    public int getAverageMealCalories() {
+        return averageMealCalories;
     }
 
     public Planner getPlanner() {

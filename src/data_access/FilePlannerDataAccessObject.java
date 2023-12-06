@@ -51,14 +51,12 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
             assert header.equals("username,day,mealType,recipesLabel");
 
             for (int i=1; i<rows.length; i++) {
-                System.out.println("banyak row: " + rows.length);
                 String row = rows[i].trim();
                 String[] col = row.split(",");
                 String username = String.valueOf(col[headers.get("username")]);
                 String day = String.valueOf(col[headers.get("day")]);
                 String mealType = String.valueOf(col[headers.get("mealType")]);
                 String[] recipesLabel = Arrays.copyOfRange(col, headers.get("recipesLabel"), col.length);
-                System.out.println("mealType: " + mealType);
 
                 if (planners.containsKey(username)) {
                     System.out.println("planners already");
@@ -75,7 +73,6 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
                     HashMap<MealType,Recipe> dailyRecipes = planner.getRecipesByDay(DayOfWeek.valueOf(day));
                     for (String recipeLabel : recipesLabel) {
                         Recipe recipe = fileRecipeDataAccessObject.getRecipe(recipeLabel);
-//                        System.out.println(recipeLabel);
                         assert recipe != null;
                         assert !dailyRecipes.containsKey(MealType.fromString(mealType.toUpperCase()));
                         dailyRecipes.put(MealType.fromString(mealType), fileRecipeDataAccessObject.getRecipe(recipeLabel));
@@ -90,6 +87,9 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
         }
     }
 
+    /**
+     * Save (push) the latest version of planners.csv from planners into the database
+     */
     private void save() {
         BufferedWriter writer;
         try {
@@ -112,7 +112,6 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
                     }
                 }
             }
-
             writer.close();
             UploadCSVFilesAPICaller.call(FILE_PATH);
             HashMap<String,String> listofCSVFiles = GetListofCSVFilesAPICaller.call();
@@ -122,11 +121,13 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
         }
     }
 
+    /**
+     * Save a new recipe to username's planner at day and mealType, write to planners.csv, and push to the database
+     * @param username, day, mealType, recipe
+     */
     @Override
     public void save(String username, DayOfWeek day, MealType mealType, Recipe recipe) {
         System.out.println("Downloading planners.csv from database... (removing planners.csv from the database)");
-        System.out.println("THE RECIPE IS: " + recipe.getLabel());
-        System.out.println("Save the recipe to day " + day + " and mealType " + mealType);
         DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));  // remove planners.csv from the database, since we'll save a new one
         if (!planners.containsKey(username)) {
             Planner planner = this.plannerFactory.create(username);
@@ -152,6 +153,7 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
         }
         return planners.get(username);
     }
+
 
     public boolean isPlannerExistsByUsername(String username) {
         return planners.containsKey(username);

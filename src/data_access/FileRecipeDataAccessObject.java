@@ -71,6 +71,9 @@ public class FileRecipeDataAccessObject implements GenerateRecipeDataAccessInter
         }
     }
 
+    /**
+     * Write recipes to recipes.csv and push to the database
+     */
     public void save() {
         BufferedWriter writer;
         try {
@@ -98,6 +101,10 @@ public class FileRecipeDataAccessObject implements GenerateRecipeDataAccessInter
         }
     }
 
+    /**
+     * Save a new recipe to recipes, write to recipes.csv, and push to the database
+     * @param recipe the recipe to be saved
+     */
     public void save (Recipe recipe) {
         System.out.println("Downloading recipes.csv from database... (removing recipes.csv from the database)");
         DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME)); // remove recipes.csv from the database

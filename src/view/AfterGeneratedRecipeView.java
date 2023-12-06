@@ -175,7 +175,7 @@ public class AfterGeneratedRecipeView extends JPanel implements ActionListener, 
                             generateRecipeState.setUsername(currentState.getUsername());
 
                             generateRecipeViewModel.setState(generateRecipeState);
-                            generateRecipeViewModel.firePropertyChanged();
+
                             viewManagerModel.setActiveView(generateRecipeViewModel.getViewName());
                             viewManagerModel.firePropertyChanged();
                         }

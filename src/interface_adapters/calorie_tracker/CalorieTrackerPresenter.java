@@ -18,11 +18,11 @@ public class CalorieTrackerPresenter implements CalorieTrackerOutputBoundary {
     @Override
     public void prepareSuccessView(CalorieTrackerOutputData calorieTrackerOutputData) {
         int weeklyCalories = calorieTrackerOutputData.getWeeklyCalories();
-        int averageDailyCalories = calorieTrackerOutputData.getAverageDailyCalories();
+        int averageMealCalories = calorieTrackerOutputData.getAverageMealCalories();
 
         MyPlannerState state = myPlannerViewModel.getState();
         state.setWeeklyCalories(weeklyCalories);
-        state.setAverageDailyCalories(averageDailyCalories);
+        state.setAverageMealCalories(averageMealCalories);
 //        myPlannerViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(myPlannerViewModel.getViewName());

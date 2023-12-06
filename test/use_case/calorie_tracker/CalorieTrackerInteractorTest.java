@@ -32,7 +32,7 @@ public class CalorieTrackerInteractorTest {
                 //checking weekly calories
                 Assertions.assertEquals(200, calories.getWeeklyCalories());
                 //checking average daily calories
-                Assertions.assertEquals(29, calories.getAverageDailyCalories());
+                Assertions.assertEquals(100, calories.getAverageMealCalories());
             }
 
             @Override
