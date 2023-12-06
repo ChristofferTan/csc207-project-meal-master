@@ -196,4 +196,8 @@ public class MyFavoriteRecipeView extends JPanel implements ActionListener, Prop
     public MyFavoriteRecipeController getMyFavoriteRecipeController() {
         return myFavoriteRecipeController;
     }
+
+    public JButton getBackButton() {
+        return back;
+    }
 }

@@ -204,4 +204,28 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     public void actionPerformed(ActionEvent e) {
 
     }
+
+    public JButton getMyProfileButton() {
+        return myProfile;
+    }
+
+    public JButton getGenerateRecipeButton() {
+        return generateRecipe;
+    }
+
+    public JButton getMyPlannerButton() {
+        return myPlanner;
+    }
+
+    public JButton getGroceryListButton() {
+        return groceryList;
+    }
+
+    public JButton getMyFavoriteRecipeButton() {
+        return myFavoriteRecipe;
+    }
+
+    public JButton getLogoutButton() {
+        return logout;
+    }
 }
