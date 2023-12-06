@@ -5,14 +5,13 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import use_case.generate_recipe.GenerateRecipeAPICallerInterface;
 import use_case.generate_recipe.GenerateRecipeInputData;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GenerateRecipeAPICaller {
-    private GenerateRecipeAPICaller() {}
-
+public class GenerateRecipeAPICaller implements GenerateRecipeAPICallerInterface {
     private static final String API_URL = "https://api.edamam.com/api/recipes/v2";
     private static final String APP_ID = "97884852";
     private static final String APP_KEY = "29ec3f53238d1c6ec3c16c6412bc91ea";
@@ -20,15 +19,14 @@ public class GenerateRecipeAPICaller {
 
     /**
      * Used in GenerateRecipeInteractor, to generate a recipe based on the user's input
-     * @param inputData
+     * @param inputData the user's input
      * @return GenerateRecipeAPIData with a generated recipe inside it
      */
-    public static GenerateRecipeAPIData call(GenerateRecipeInputData inputData) {
+    public GenerateRecipeAPIData call(GenerateRecipeInputData inputData) {
         final RecipeFactory recipeFactory = new RecipeFactory();
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         String type = "public";
-        MediaType mediaType = MediaType.parse("application/json");
 
         StringBuilder requestUrl = new StringBuilder(API_URL + "?type=" + type + "&app_id=" + APP_ID + "&app_key=" + APP_KEY);
         requestUrl.append("&q=").append(inputData.getQ());

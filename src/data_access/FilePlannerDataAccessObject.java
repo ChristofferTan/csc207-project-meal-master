@@ -1,8 +1,6 @@
 package data_access;
 
-import api.file.io.DownloadCSVFilesAPICaller;
-import api.file.io.GetListofCSVFilesAPICaller;
-import api.file.io.UploadCSVFilesAPICaller;
+import api.file.io.FileIOFacade;
 import entity.*;
 import use_case.my_planner.MyPlannerDataAccessInterface;
 import use_case.grocery_list.GroceryListDataAccessInterface;
@@ -15,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterface, MyPlannerDataAccessInterface, GroceryListDataAccessInterface {
+    private final OnlineFileStorageManager onlineFileStorageManager = new FileIOFacade();
     private final LinkedHashMap<String, Integer> headers = new LinkedHashMap<>();
     private final HashMap<String, Planner> planners = new HashMap<>();  // username -> planner
     private final PlannerFactory plannerFactory;
@@ -39,11 +38,11 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
      */
     public void fetch() {
         // check if planners.csv exist in the database
-        HashMap<String, String> filesNameInDatabase = GetListofCSVFilesAPICaller.call();
+        HashMap<String, String> filesNameInDatabase = onlineFileStorageManager.getFileList();
         if (filesNameInDatabase.containsKey(FILE_NAME)) {
             // if exist, get the latest version of planners.csv
             System.out.println("Downloading planners.csv from database... (removing planners.csv from the database)");
-            String plannersData = DownloadCSVFilesAPICaller.call(filesNameInDatabase.get(FILE_NAME));
+            String plannersData = onlineFileStorageManager.download(filesNameInDatabase.get(FILE_NAME));
             String[] rows = plannersData.split("\n");
             String header = rows[0].trim();
 
@@ -113,8 +112,8 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
                 }
             }
             writer.close();
-            UploadCSVFilesAPICaller.call(FILE_PATH);
-            HashMap<String,String> listofCSVFiles = GetListofCSVFilesAPICaller.call();
+            onlineFileStorageManager.upload(FILE_PATH);
+            HashMap<String,String> listofCSVFiles = onlineFileStorageManager.getFileList();
             System.out.println("Uploaded planners.csv to database! Download at " + listofCSVFiles.get(FILE_NAME) + ". There's currently " + listofCSVFiles.size() + " files in the database.");
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -128,7 +127,7 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
     @Override
     public void save(String username, DayOfWeek day, MealType mealType, Recipe recipe) {
         System.out.println("Downloading planners.csv from database... (removing planners.csv from the database)");
-        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));  // remove planners.csv from the database, since we'll save a new one
+        onlineFileStorageManager.download(onlineFileStorageManager.getFileList().get(FILE_NAME));  // remove planners.csv from the database, since we'll save a new one
         if (!planners.containsKey(username)) {
             Planner planner = this.plannerFactory.create(username);
             planners.put(username, planner);
@@ -140,7 +139,7 @@ public class FilePlannerDataAccessObject implements SaveRecipeDataAccessInterfac
     }
 
     public void saveNewPlanner(Planner planner) {
-        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));  // remove planners.csv from the database
+        onlineFileStorageManager.download(onlineFileStorageManager.getFileList().get(FILE_NAME));  // remove planners.csv from the database
         planners.put(planner.getUsername(), planner);
         this.save();
     }

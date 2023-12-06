@@ -4,6 +4,7 @@ import api.edamam.GenerateRecipeAPICaller;
 import entity.MealType;
 import entity.Recipe;
 import entity.RecipeFactory;
+import use_case.generate_recipe.GenerateRecipeAPICallerInterface;
 import use_case.generate_recipe.GenerateRecipeInputData;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class FileDataAccessObjectTest {
                 new String[]{MealType.LUNCH.toString()},
                 "0-1000",
                 "0-100");
-        return GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
+        GenerateRecipeAPICallerInterface generateRecipeAPICaller = new GenerateRecipeAPICaller();
+        return generateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
     }
 
     @org.junit.Test

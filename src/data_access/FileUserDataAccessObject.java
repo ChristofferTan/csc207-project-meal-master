@@ -1,8 +1,6 @@
 package data_access;
 
-import api.file.io.DownloadCSVFilesAPICaller;
-import api.file.io.GetListofCSVFilesAPICaller;
-import api.file.io.UploadCSVFilesAPICaller;
+import api.file.io.FileIOFacade;
 import entity.*;
 import use_case.add_favorite_recipe.AddFavoriteRecipeUserDataAccessInterface;
 import use_case.delete_favorite_recipe.DeleteFavoriteRecipeDataAccessInterface;
@@ -20,13 +18,13 @@ import java.util.*;
 
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, AddFavoriteRecipeUserDataAccessInterface, EditProfileDataAccessInterface,
         MyProfileDataAccessInterface, MyFavoriteRecipeDataAccessInterface, DeleteFavoriteRecipeDataAccessInterface {
+    private final OnlineFileStorageManager onlineFileStorageManager = new FileIOFacade();
     private final PlannerFactory plannerFactory = new PlannerFactory();
     private final FilePlannerDataAccessObject plannerDataAccessObject = new FilePlannerDataAccessObject(plannerFactory, new FileRecipeDataAccessObject(new RecipeFactory()));
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
-    private final Map<String, ArrayList<String>> friends = new HashMap<>();
-    private UserFactory userFactory;
+    private final UserFactory userFactory;
     private final String FILE_NAME = "users.csv";
     private final String FILE_PATH = "./" + FILE_NAME;
 
@@ -43,10 +41,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         headers.put("weight", 6);
         headers.put("favoriteRecipes", 7);
 
-        HashMap<String, String> filesNameInDatabase = GetListofCSVFilesAPICaller.call();
+        HashMap<String, String> filesNameInDatabase = onlineFileStorageManager.getFileList();
         if (filesNameInDatabase.containsKey(FILE_NAME)) {
             System.out.println("Downloading users.csv from database...");
-            String usersData = DownloadCSVFilesAPICaller.call(filesNameInDatabase.get(FILE_NAME));
+            String usersData = onlineFileStorageManager.download(filesNameInDatabase.get(FILE_NAME));
             String[] rows = usersData.split("\n");
             String header = rows[0].trim();
 
@@ -89,12 +87,12 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     /**
      * Save a new user to accounts, write to users.csv, and push to the database
-     * @param user
+     * @param user the new user to be saved
      */
     @Override
     public void save(User user) {
         System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
-        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+        onlineFileStorageManager.download(onlineFileStorageManager.getFileList().get(FILE_NAME));
         accounts.put(user.getUsername(), user);
         this.save();
         // save this new user's planner to planners.csv
@@ -128,8 +126,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             }
             writer.close();
             System.out.println("Uploading users.csv to database...");
-            UploadCSVFilesAPICaller.call(FILE_PATH);
-            HashMap<String,String> listOfCSVFiles = GetListofCSVFilesAPICaller.call();
+            onlineFileStorageManager.upload(FILE_PATH);
+            HashMap<String,String> listOfCSVFiles = onlineFileStorageManager.getFileList();
             System.out.println("Upload success! Download at " + listOfCSVFiles.get(FILE_NAME) + ". There's currently " + listOfCSVFiles.size() + " files in the database.");
 
 
@@ -141,7 +139,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     @Override
     public void editProfile(String username, String name, int age, String gender, int height, int weight) {
         System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
-        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+        onlineFileStorageManager.download(onlineFileStorageManager.getFileList().get(FILE_NAME));
         if (existsByName(username)) {
             User user = accounts.get(username);
             user.setName(name);
@@ -170,7 +168,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     @Override
     public void deleteFavoriteRecipe(String username, String label) {
         System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
-        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+        onlineFileStorageManager.download(onlineFileStorageManager.getFileList().get(FILE_NAME));
         if (existsByName(username)) {
             User user = accounts.get(username);
             if (user.getFavoriteRecipes().contains(label)) {
@@ -183,7 +181,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     @Override
     public void saveFavoriteRecipe(String username, String label) {
         System.out.println("Downloading users.csv from database... (removing users.csv from the database)");
-        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME));
+        onlineFileStorageManager.download(onlineFileStorageManager.getFileList().get(FILE_NAME));
         if (existsByName(username)) {
             User user = accounts.get(username);
             if (!user.getFavoriteRecipes().contains(label)) {

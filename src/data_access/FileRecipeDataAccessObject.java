@@ -1,8 +1,6 @@
 package data_access;
 
-import api.file.io.DownloadCSVFilesAPICaller;
-import api.file.io.GetListofCSVFilesAPICaller;
-import api.file.io.UploadCSVFilesAPICaller;
+import api.file.io.FileIOFacade;
 import entity.*;
 import use_case.generate_recipe.GenerateRecipeDataAccessInterface;
 
@@ -13,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class FileRecipeDataAccessObject implements GenerateRecipeDataAccessInterface {
+    private final OnlineFileStorageManager onlineFileStorageManager = new FileIOFacade();
     private final LinkedHashMap<String, Integer> headers = new LinkedHashMap<>();
     private final HashMap<String, Recipe> recipes = new HashMap<>();  // label -> recipe
     private final RecipeFactory recipeFactory;
@@ -39,11 +38,11 @@ public class FileRecipeDataAccessObject implements GenerateRecipeDataAccessInter
      */
     public void fetch() {
         // check if recipes.csv exist in the database
-        HashMap<String, String> filesNameInDatabase = GetListofCSVFilesAPICaller.call();
+        HashMap<String, String> filesNameInDatabase = onlineFileStorageManager.getFileList();
         if (filesNameInDatabase.containsKey(FILE_NAME)) {
             // if exist, get the latest version of recipes.csv
             System.out.println("Downloading recipes.csv from database... (removing recipes.csv from the database)");
-            String recipesData = DownloadCSVFilesAPICaller.call(filesNameInDatabase.get(FILE_NAME));
+            String recipesData = onlineFileStorageManager.download(filesNameInDatabase.get(FILE_NAME));
             String[] rows = recipesData.split("\n");
             String header = rows[0].trim();
 
@@ -93,8 +92,8 @@ public class FileRecipeDataAccessObject implements GenerateRecipeDataAccessInter
 
             writer.close();
             System.out.println("Uploading recipes.csv to database...");
-            UploadCSVFilesAPICaller.call(FILE_PATH);
-            HashMap<String,String> listOfCSVFiles = GetListofCSVFilesAPICaller.call();
+            onlineFileStorageManager.upload(FILE_PATH);
+            HashMap<String,String> listOfCSVFiles = onlineFileStorageManager.getFileList();
             System.out.println("Upload success! Download at " + listOfCSVFiles.get(FILE_NAME) + ". There's currently " + listOfCSVFiles.size() + " files in the database.");
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -107,7 +106,7 @@ public class FileRecipeDataAccessObject implements GenerateRecipeDataAccessInter
      */
     public void save (Recipe recipe) {
         System.out.println("Downloading recipes.csv from database... (removing recipes.csv from the database)");
-        DownloadCSVFilesAPICaller.call(GetListofCSVFilesAPICaller.call().get(FILE_NAME)); // remove recipes.csv from the database
+        onlineFileStorageManager.download(onlineFileStorageManager.getFileList().get(FILE_NAME)); // remove recipes.csv from the database
         recipes.put(recipe.getLabel(), recipe);
         this.save();
     }

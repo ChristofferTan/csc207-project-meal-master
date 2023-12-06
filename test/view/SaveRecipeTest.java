@@ -11,6 +11,7 @@ import entity.RecipeFactory;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.save_recipe.SaveRecipeController;
 import interface_adapters.save_recipe.SaveRecipeViewModel;
+import use_case.generate_recipe.GenerateRecipeAPICallerInterface;
 import use_case.generate_recipe.GenerateRecipeInputData;
 
 import java.time.DayOfWeek;
@@ -34,7 +35,8 @@ public class SaveRecipeTest {
                 "100-1000",
                 "0-100"
         );
-        Recipe expectedRecipe = GenerateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
+        GenerateRecipeAPICallerInterface generateRecipeAPICaller = new GenerateRecipeAPICaller();
+        Recipe expectedRecipe = generateRecipeAPICaller.call(generateRecipeInputData).getRecipe();
         saveRecipeController.execute("budi", DayOfWeek.MONDAY, MealType.LUNCH, expectedRecipe);
         Recipe actualRecipe = fpdao.getPlanner("budi").getRecipesByDay(DayOfWeek.MONDAY).get(MealType.LUNCH);
         assert expectedRecipe == actualRecipe;
