@@ -177,4 +177,8 @@ public class MyProfileView extends JPanel implements ActionListener, PropertyCha
     public EditProfileController getEditProfileController() {
         return editProfileController;
     }
+
+    public JButton getBackButton() {
+        return back;
+    }
 }

@@ -140,4 +140,8 @@ public class MyPlannerView extends JPanel implements ActionListener, PropertyCha
         calorieTrackersPlaceholder[0].setText("Weekly calories: " + weeklyCalories);
         calorieTrackersPlaceholder[1].setText("Average calories per meal: " + averageMealCalories);
     }
+
+    public JButton getBackButton() {
+        return back;
+    }
 }

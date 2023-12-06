@@ -232,4 +232,8 @@ public class GenerateRecipeView extends JPanel implements ActionListener, Proper
     public GenerateRecipeController getGenerateRecipeController() {
         return generateRecipeController;
     }
+
+    public JButton getBackButton() {
+        return back;
+    }
 }

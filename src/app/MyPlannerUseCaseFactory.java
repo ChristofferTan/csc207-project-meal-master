@@ -33,7 +33,7 @@ public class MyPlannerUseCaseFactory {
         return new MyPlannerView(viewManagerModel, myPlannerViewModel, myPlannerController, calorieTrackerController);
     }
 
-    private static MyPlannerController createMyPlannerUseCase(
+    public static MyPlannerController createMyPlannerUseCase(
             ViewManagerModel viewManagerModel,
             MyPlannerViewModel myPlannerViewModel,
             MyPlannerDataAccessInterface myPlannerDataAccessObject) {

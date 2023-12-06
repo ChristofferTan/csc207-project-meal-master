@@ -275,5 +275,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     public void actionPerformed(ActionEvent e) {
 
     }
+
+    public JButton getLogInButton() {
+        return logIn;
+    }
 }
 

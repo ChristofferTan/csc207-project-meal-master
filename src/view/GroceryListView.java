@@ -78,5 +78,9 @@ public class GroceryListView extends JPanel implements ActionListener, PropertyC
     public GroceryListController getGroceryListController() {
         return groceryListController;
     }
+
+    public JButton getBackButton() {
+        return back;
+    }
 }
 
